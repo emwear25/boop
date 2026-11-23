@@ -1,0 +1,67 @@
+skip heart-hug-1
+ok   puffy-1 {"input_images":1,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   heart-hug-3 {"input_images":1,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   heart-hug-2 {"input_images":1,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+skip pudding-2
+ok   puffy-2 {"input_images":1,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   puffy-3 {"input_images":1,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   pudding-1 {"input_images":1,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   pudding-3 {"input_images":1,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+skip braid-1
+skip braid-2
+ok   snowy-log-1 {"input_images":1,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   snowy-log-2 {"input_images":1,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   snowy-log-3 {"input_images":1,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   braid-3 {"input_images":1,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   gift-sack-1 {"input_images":1,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   gift-sack-2 {"input_images":1,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   gift-sack-3 {"input_images":1,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   dipped-2 {"input_images":1,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   dipped-1 {"input_images":1,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   dipped-3 {"input_images":1,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   yarn-1 {"input_images":1,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   wrapped-present-1 {"input_images":1,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   yarn-2 {"input_images":1,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   yarn-3 {"input_images":1,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   wrapped-present-2 {"input_images":1,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   wrapped-present-3 {"input_images":1,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   chimney-1 {"input_images":1,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   chimney-2 {"input_images":1,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   gingerbread-1 {"input_images":1,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   chimney-3 {"input_images":1,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   gingerbread-2 {"input_images":1,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   gingerbread-3 {"input_images":1,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   knit-heart-1 {"input_images":1,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   knit-heart-3 {"input_images":1,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   knit-heart-2 {"input_images":1,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   modern-1 {"input_images":1,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   paw-cloud-1 {"input_images":1,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   modern-3 {"input_images":1,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   modern-2 {"input_images":1,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   paw-cloud-2 {"input_images":1,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   paw-cloud-3 {"input_images":1,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   soft-serve-2 {"input_images":1,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   soft-serve-3 {"input_images":1,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   soft-serve-1 {"input_images":1,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   loop-2 {"input_images":1,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   loop-1 {"input_images":1,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   loop-3 {"input_images":1,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   pancake-1 {"input_images":1,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   pancake-2 {"input_images":1,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   pancake-3 {"input_images":1,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   bone-depot-2 {"input_images":1,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   bone-depot-1 {"input_images":1,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   bone-depot-3 {"input_images":1,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   happy-camper-2 {"input_images":1,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   walk-club-1 {"input_images":1,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   happy-camper-1 {"input_images":1,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   happy-camper-3 {"input_images":1,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   tail-trail-1 {"input_images":1,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   walk-club-3 {"input_images":1,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   tail-trail-2 {"input_images":1,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   walk-club-2 {"input_images":1,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   scene-lineup {"input_images":4,"generated_images":1,"output_tokens":14400,"total_tokens":14400}
+ok   scene-making {"input_images":0,"generated_images":1,"output_tokens":14400,"total_tokens":14400}
+ok   scene-holiday {"input_images":4,"generated_images":1,"output_tokens":14400,"total_tokens":14400}
+ok   tail-trail-3 {"input_images":1,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+Ledger: 67 images, est. max $2.94 of $12 cap

@@ -1,0 +1,470 @@
+[
+ {
+  "out": "heart-hug-1",
+  "refs": [
+   "heart-hug.jpg"
+  ],
+  "prompt": "Edit this photo: remove ALL text and lettering from the wall so the wall is clean. Keep the product exactly identical: a round cream pet bowl with two soft sculpted arms hugging a glossy red heart at the front, removable stainless steel insert. Same shape, colours, fine matte 3D-printed layer-line texture and kibble. Keep the warm sunlit wall with soft dappled leaf shadows and the oak table. Premium editorial photography, photorealistic, natural light, sharp focus, no text, no logos, no watermark."
+ },
+ {
+  "out": "heart-hug-2",
+  "refs": [
+   "heart-hug.jpg"
+  ],
+  "prompt": "Image 1 shows a product: a round cream pet bowl with two soft sculpted arms hugging a glossy red heart at the front, removable stainless steel insert. Create a new lifestyle photograph using the EXACT same product from image 1 (identical shape, colours, details and matte 3D-printed texture). It stands on a light oak floor in a bright, calm, modern European apartment; a small white Maltese dog eating from it.  Soft warm window light with gentle leaf shadows on a warm beige wall, shallow depth of field. Premium editorial photography, photorealistic, natural light, sharp focus, no text, no logos, no watermark."
+ },
+ {
+  "out": "heart-hug-3",
+  "refs": [
+   "heart-hug.jpg"
+  ],
+  "prompt": "Image 1 shows a product: a round cream pet bowl with two soft sculpted arms hugging a glossy red heart at the front, removable stainless steel insert. Create a close-up detail photograph of the EXACT same product from image 1, seen from slightly above at three-quarter angle, filling most of the frame, empty steel insert without food so the polished steel reflects light. Emphasise the fine matte 3D-printed layer-line texture and soft rounded edges. Warm low sunlight with dappled leaf shadows on an oak table, shallow depth of field. Premium editorial photography, photorealistic, natural light, sharp focus, no text, no logos, no watermark."
+ },
+ {
+  "out": "puffy-1",
+  "refs": [
+   "puffy.jpg"
+  ],
+  "prompt": "Edit this photo: remove ALL text and lettering from the wall so the wall is clean. Keep the product exactly identical: a puffy coral-terracotta pet bowl with soft pumpkin-like lobes, removable stainless steel insert. Same shape, colours, fine matte 3D-printed layer-line texture and kibble. Keep the warm sunlit wall with soft dappled leaf shadows and the oak table. Premium editorial photography, photorealistic, natural light, sharp focus, no text, no logos, no watermark."
+ },
+ {
+  "out": "puffy-2",
+  "refs": [
+   "puffy.jpg"
+  ],
+  "prompt": "Image 1 shows a product: a puffy coral-terracotta pet bowl with soft pumpkin-like lobes, removable stainless steel insert. Create a new lifestyle photograph using the EXACT same product from image 1 (identical shape, colours, details and matte 3D-printed texture). It stands on a light oak floor in a bright, calm, modern European apartment; a ginger tabby cat eating from it.  Soft warm window light with gentle leaf shadows on a warm beige wall, shallow depth of field. Premium editorial photography, photorealistic, natural light, sharp focus, no text, no logos, no watermark."
+ },
+ {
+  "out": "puffy-3",
+  "refs": [
+   "puffy.jpg"
+  ],
+  "prompt": "Image 1 shows a product: a puffy coral-terracotta pet bowl with soft pumpkin-like lobes, removable stainless steel insert. Create a close-up detail photograph of the EXACT same product from image 1, seen from slightly above at three-quarter angle, filling most of the frame, empty steel insert without food so the polished steel reflects light. Emphasise the fine matte 3D-printed layer-line texture and soft rounded edges. Warm low sunlight with dappled leaf shadows on an oak table, shallow depth of field. Premium editorial photography, photorealistic, natural light, sharp focus, no text, no logos, no watermark."
+ },
+ {
+  "out": "pudding-1",
+  "refs": [
+   "pudding.jpg"
+  ],
+  "prompt": "Edit this photo: remove ALL text and lettering from the wall so the wall is clean. Keep the product exactly identical: a cream scalloped pudding-shaped pet bowl with a caramel-coloured dripping top rim, removable stainless steel insert. Same shape, colours, fine matte 3D-printed layer-line texture and kibble. Keep the warm sunlit wall with soft dappled leaf shadows and the oak table. Premium editorial photography, photorealistic, natural light, sharp focus, no text, no logos, no watermark."
+ },
+ {
+  "out": "pudding-2",
+  "refs": [
+   "pudding.jpg"
+  ],
+  "prompt": "Image 1 shows a product: a cream scalloped pudding-shaped pet bowl with a caramel-coloured dripping top rim, removable stainless steel insert. Create a new lifestyle photograph using the EXACT same product from image 1 (identical shape, colours, details and matte 3D-printed texture). It stands on a light oak floor in a bright, calm, modern European apartment; a happy beagle eating from it.  Soft warm window light with gentle leaf shadows on a warm beige wall, shallow depth of field. Premium editorial photography, photorealistic, natural light, sharp focus, no text, no logos, no watermark."
+ },
+ {
+  "out": "pudding-3",
+  "refs": [
+   "pudding.jpg"
+  ],
+  "prompt": "Image 1 shows a product: a cream scalloped pudding-shaped pet bowl with a caramel-coloured dripping top rim, removable stainless steel insert. Create a close-up detail photograph of the EXACT same product from image 1, seen from slightly above at three-quarter angle, filling most of the frame, empty steel insert without food so the polished steel reflects light. Emphasise the fine matte 3D-printed layer-line texture and soft rounded edges. Warm low sunlight with dappled leaf shadows on an oak table, shallow depth of field. Premium editorial photography, photorealistic, natural light, sharp focus, no text, no logos, no watermark."
+ },
+ {
+  "out": "snowy-log-1",
+  "refs": [
+   "snowy-log.jpg"
+  ],
+  "prompt": "Edit this photo: remove ALL text and lettering from the wall so the wall is clean. Keep the product exactly identical: a pet bowl shaped like a brown tree-bark log with a thick white snow-drip rim and a small light wooden plaque with a red heart, removable stainless steel insert. Same shape, colours, fine matte 3D-printed layer-line texture and kibble. Keep the warm sunlit wall with soft dappled leaf shadows and the oak table. Premium editorial photography, photorealistic, natural light, sharp focus, no text, no logos, no watermark."
+ },
+ {
+  "out": "snowy-log-2",
+  "refs": [
+   "snowy-log.jpg"
+  ],
+  "prompt": "Image 1 shows a product: a pet bowl shaped like a brown tree-bark log with a thick white snow-drip rim and a small light wooden plaque with a red heart, removable stainless steel insert. Create a new lifestyle photograph using the EXACT same product from image 1 (identical shape, colours, details and matte 3D-printed texture). It stands on a light oak floor in a bright, calm, modern European apartment; a fluffy border collie puppy eating from it. A softly blurred Christmas tree with warm lights in the background. Soft warm window light with gentle leaf shadows on a warm beige wall, shallow depth of field. Premium editorial photography, photorealistic, natural light, sharp focus, no text, no logos, no watermark."
+ },
+ {
+  "out": "snowy-log-3",
+  "refs": [
+   "snowy-log.jpg"
+  ],
+  "prompt": "Image 1 shows a product: a pet bowl shaped like a brown tree-bark log with a thick white snow-drip rim and a small light wooden plaque with a red heart, removable stainless steel insert. Create a close-up detail photograph of the EXACT same product from image 1, seen from slightly above at three-quarter angle, filling most of the frame, empty steel insert without food so the polished steel reflects light. Emphasise the fine matte 3D-printed layer-line texture and soft rounded edges. Warm low sunlight with dappled leaf shadows on an oak table, shallow depth of field. Premium editorial photography, photorealistic, natural light, sharp focus, no text, no logos, no watermark."
+ },
+ {
+  "out": "braid-1",
+  "refs": [
+   "braid.jpg"
+  ],
+  "prompt": "Edit this photo: remove ALL text and lettering from the wall so the wall is clean. Keep the product exactly identical: a sage-green pet bowl wrapped in a thick braided rope shape, removable stainless steel insert. Same shape, colours, fine matte 3D-printed layer-line texture and kibble. Keep the warm sunlit wall with soft dappled leaf shadows and the oak table. Premium editorial photography, photorealistic, natural light, sharp focus, no text, no logos, no watermark."
+ },
+ {
+  "out": "braid-2",
+  "refs": [
+   "braid.jpg"
+  ],
+  "prompt": "Image 1 shows a product: a sage-green pet bowl wrapped in a thick braided rope shape, removable stainless steel insert. Create a new lifestyle photograph using the EXACT same product from image 1 (identical shape, colours, details and matte 3D-printed texture). It stands on a light oak floor in a bright, calm, modern European apartment; a grey tabby cat eating from it.  Soft warm window light with gentle leaf shadows on a warm beige wall, shallow depth of field. Premium editorial photography, photorealistic, natural light, sharp focus, no text, no logos, no watermark."
+ },
+ {
+  "out": "braid-3",
+  "refs": [
+   "braid.jpg"
+  ],
+  "prompt": "Image 1 shows a product: a sage-green pet bowl wrapped in a thick braided rope shape, removable stainless steel insert. Create a close-up detail photograph of the EXACT same product from image 1, seen from slightly above at three-quarter angle, filling most of the frame, empty steel insert without food so the polished steel reflects light. Emphasise the fine matte 3D-printed layer-line texture and soft rounded edges. Warm low sunlight with dappled leaf shadows on an oak table, shallow depth of field. Premium editorial photography, photorealistic, natural light, sharp focus, no text, no logos, no watermark."
+ },
+ {
+  "out": "gift-sack-1",
+  "refs": [
+   "gift-sack.jpg"
+  ],
+  "prompt": "Edit this photo: remove ALL text and lettering from the wall so the wall is clean. Keep the product exactly identical: a red pet bowl shaped like Santa's gift sack, tied with a cream twisted rope and a small blank cream gift tag, removable stainless steel insert. Same shape, colours, fine matte 3D-printed layer-line texture and kibble. Keep the warm sunlit wall with soft dappled leaf shadows and the oak table. Premium editorial photography, photorealistic, natural light, sharp focus, no text, no logos, no watermark."
+ },
+ {
+  "out": "gift-sack-2",
+  "refs": [
+   "gift-sack.jpg"
+  ],
+  "prompt": "Image 1 shows a product: a red pet bowl shaped like Santa's gift sack, tied with a cream twisted rope and a small blank cream gift tag, removable stainless steel insert. Create a new lifestyle photograph using the EXACT same product from image 1 (identical shape, colours, details and matte 3D-printed texture). It stands on a light oak floor in a bright, calm, modern European apartment; a Jack Russell terrier eating from it. Subtle Christmas decorations, warm fairy-light bokeh. Soft warm window light with gentle leaf shadows on a warm beige wall, shallow depth of field. Premium editorial photography, photorealistic, natural light, sharp focus, no text, no logos, no watermark."
+ },
+ {
+  "out": "gift-sack-3",
+  "refs": [
+   "gift-sack.jpg"
+  ],
+  "prompt": "Image 1 shows a product: a red pet bowl shaped like Santa's gift sack, tied with a cream twisted rope and a small blank cream gift tag, removable stainless steel insert. Create a close-up detail photograph of the EXACT same product from image 1, seen from slightly above at three-quarter angle, filling most of the frame, empty steel insert without food so the polished steel reflects light. Emphasise the fine matte 3D-printed layer-line texture and soft rounded edges. Warm low sunlight with dappled leaf shadows on an oak table, shallow depth of field. Premium editorial photography, photorealistic, natural light, sharp focus, no text, no logos, no watermark."
+ },
+ {
+  "out": "dipped-1",
+  "refs": [
+   "dipped.jpg"
+  ],
+  "prompt": "Edit this photo: remove ALL text and lettering from the wall so the wall is clean. Keep the product exactly identical: a pet bowl with a cream base and a chocolate-brown top that drips down the sides like a dipped dessert, removable stainless steel insert. Same shape, colours, fine matte 3D-printed layer-line texture and kibble. Keep the warm sunlit wall with soft dappled leaf shadows and the oak table. Premium editorial photography, photorealistic, natural light, sharp focus, no text, no logos, no watermark."
+ },
+ {
+  "out": "dipped-2",
+  "refs": [
+   "dipped.jpg"
+  ],
+  "prompt": "Image 1 shows a product: a pet bowl with a cream base and a chocolate-brown top that drips down the sides like a dipped dessert, removable stainless steel insert. Create a new lifestyle photograph using the EXACT same product from image 1 (identical shape, colours, details and matte 3D-printed texture). It stands on a light oak floor in a bright, calm, modern European apartment; a black-and-white tuxedo cat eating from it.  Soft warm window light with gentle leaf shadows on a warm beige wall, shallow depth of field. Premium editorial photography, photorealistic, natural light, sharp focus, no text, no logos, no watermark."
+ },
+ {
+  "out": "dipped-3",
+  "refs": [
+   "dipped.jpg"
+  ],
+  "prompt": "Image 1 shows a product: a pet bowl with a cream base and a chocolate-brown top that drips down the sides like a dipped dessert, removable stainless steel insert. Create a close-up detail photograph of the EXACT same product from image 1, seen from slightly above at three-quarter angle, filling most of the frame, empty steel insert without food so the polished steel reflects light. Emphasise the fine matte 3D-printed layer-line texture and soft rounded edges. Warm low sunlight with dappled leaf shadows on an oak table, shallow depth of field. Premium editorial photography, photorealistic, natural light, sharp focus, no text, no logos, no watermark."
+ },
+ {
+  "out": "yarn-1",
+  "refs": [
+   "yarn.jpg"
+  ],
+  "prompt": "Edit this photo: remove ALL text and lettering from the wall so the wall is clean. Keep the product exactly identical: a sage-green pet bowl shaped like a ball of yarn with thick wound strands, removable stainless steel insert. Same shape, colours, fine matte 3D-printed layer-line texture and kibble. Keep the warm sunlit wall with soft dappled leaf shadows and the oak table. Premium editorial photography, photorealistic, natural light, sharp focus, no text, no logos, no watermark."
+ },
+ {
+  "out": "yarn-2",
+  "refs": [
+   "yarn.jpg"
+  ],
+  "prompt": "Image 1 shows a product: a sage-green pet bowl shaped like a ball of yarn with thick wound strands, removable stainless steel insert. Create a new lifestyle photograph using the EXACT same product from image 1 (identical shape, colours, details and matte 3D-printed texture). It stands on a light oak floor in a bright, calm, modern European apartment; a British shorthair kitten eating from it.  Soft warm window light with gentle leaf shadows on a warm beige wall, shallow depth of field. Premium editorial photography, photorealistic, natural light, sharp focus, no text, no logos, no watermark."
+ },
+ {
+  "out": "yarn-3",
+  "refs": [
+   "yarn.jpg"
+  ],
+  "prompt": "Image 1 shows a product: a sage-green pet bowl shaped like a ball of yarn with thick wound strands, removable stainless steel insert. Create a close-up detail photograph of the EXACT same product from image 1, seen from slightly above at three-quarter angle, filling most of the frame, empty steel insert without food so the polished steel reflects light. Emphasise the fine matte 3D-printed layer-line texture and soft rounded edges. Warm low sunlight with dappled leaf shadows on an oak table, shallow depth of field. Premium editorial photography, photorealistic, natural light, sharp focus, no text, no logos, no watermark."
+ },
+ {
+  "out": "wrapped-present-1",
+  "refs": [
+   "wrapped-present.jpg"
+  ],
+  "prompt": "Edit this photo: remove ALL text and lettering from the wall so the wall is clean. Keep the product exactly identical: a square forest-green pet bowl shaped like a wrapped present with a cream ribbon and bow, removable stainless steel insert. Same shape, colours, fine matte 3D-printed layer-line texture and kibble. Keep the warm sunlit wall with soft dappled leaf shadows and the oak table. Premium editorial photography, photorealistic, natural light, sharp focus, no text, no logos, no watermark."
+ },
+ {
+  "out": "wrapped-present-2",
+  "refs": [
+   "wrapped-present.jpg"
+  ],
+  "prompt": "Image 1 shows a product: a square forest-green pet bowl shaped like a wrapped present with a cream ribbon and bow, removable stainless steel insert. Create a new lifestyle photograph using the EXACT same product from image 1 (identical shape, colours, details and matte 3D-printed texture). It stands on a light oak floor in a bright, calm, modern European apartment; a French bulldog eating from it. Subtle Christmas decorations, warm fairy-light bokeh. Soft warm window light with gentle leaf shadows on a warm beige wall, shallow depth of field. Premium editorial photography, photorealistic, natural light, sharp focus, no text, no logos, no watermark."
+ },
+ {
+  "out": "wrapped-present-3",
+  "refs": [
+   "wrapped-present.jpg"
+  ],
+  "prompt": "Image 1 shows a product: a square forest-green pet bowl shaped like a wrapped present with a cream ribbon and bow, removable stainless steel insert. Create a close-up detail photograph of the EXACT same product from image 1, seen from slightly above at three-quarter angle, filling most of the frame, empty steel insert without food so the polished steel reflects light. Emphasise the fine matte 3D-printed layer-line texture and soft rounded edges. Warm low sunlight with dappled leaf shadows on an oak table, shallow depth of field. Premium editorial photography, photorealistic, natural light, sharp focus, no text, no logos, no watermark."
+ },
+ {
+  "out": "chimney-1",
+  "refs": [
+   "chimney.jpg"
+  ],
+  "prompt": "Edit this photo: remove ALL text and lettering from the wall so the wall is clean. Keep the product exactly identical: a square pet bowl shaped like a red brick chimney with a white snow top dripping over the edges and a blank cream nameplate, removable stainless steel insert. Same shape, colours, fine matte 3D-printed layer-line texture and kibble. Keep the warm sunlit wall with soft dappled leaf shadows and the oak table. Premium editorial photography, photorealistic, natural light, sharp focus, no text, no logos, no watermark."
+ },
+ {
+  "out": "chimney-2",
+  "refs": [
+   "chimney.jpg"
+  ],
+  "prompt": "Image 1 shows a product: a square pet bowl shaped like a red brick chimney with a white snow top dripping over the edges and a blank cream nameplate, removable stainless steel insert. Create a new lifestyle photograph using the EXACT same product from image 1 (identical shape, colours, details and matte 3D-printed texture). It stands on a light oak floor in a bright, calm, modern European apartment; a Welsh corgi eating from it. Subtle Christmas decorations, warm fairy-light bokeh. Soft warm window light with gentle leaf shadows on a warm beige wall, shallow depth of field. Premium editorial photography, photorealistic, natural light, sharp focus, no text, no logos, no watermark."
+ },
+ {
+  "out": "chimney-3",
+  "refs": [
+   "chimney.jpg"
+  ],
+  "prompt": "Image 1 shows a product: a square pet bowl shaped like a red brick chimney with a white snow top dripping over the edges and a blank cream nameplate, removable stainless steel insert. Create a close-up detail photograph of the EXACT same product from image 1, seen from slightly above at three-quarter angle, filling most of the frame, empty steel insert without food so the polished steel reflects light. Emphasise the fine matte 3D-printed layer-line texture and soft rounded edges. Warm low sunlight with dappled leaf shadows on an oak table, shallow depth of field. Premium editorial photography, photorealistic, natural light, sharp focus, no text, no logos, no watermark."
+ },
+ {
+  "out": "gingerbread-1",
+  "refs": [
+   "gingerbread.jpg"
+  ],
+  "prompt": "Edit this photo: remove ALL text and lettering from the wall so the wall is clean. Keep the product exactly identical: a round pet bowl shaped like a gingerbread house with cream icing trim, an arched brown door, two small windows and a red heart, removable stainless steel insert. Same shape, colours, fine matte 3D-printed layer-line texture and kibble. Keep the warm sunlit wall with soft dappled leaf shadows and the oak table. Premium editorial photography, photorealistic, natural light, sharp focus, no text, no logos, no watermark."
+ },
+ {
+  "out": "gingerbread-2",
+  "refs": [
+   "gingerbread.jpg"
+  ],
+  "prompt": "Image 1 shows a product: a round pet bowl shaped like a gingerbread house with cream icing trim, an arched brown door, two small windows and a red heart, removable stainless steel insert. Create a new lifestyle photograph using the EXACT same product from image 1 (identical shape, colours, details and matte 3D-printed texture). It stands on a light oak floor in a bright, calm, modern European apartment; a dachshund eating from it. Subtle Christmas decorations, warm fairy-light bokeh. Soft warm window light with gentle leaf shadows on a warm beige wall, shallow depth of field. Premium editorial photography, photorealistic, natural light, sharp focus, no text, no logos, no watermark."
+ },
+ {
+  "out": "gingerbread-3",
+  "refs": [
+   "gingerbread.jpg"
+  ],
+  "prompt": "Image 1 shows a product: a round pet bowl shaped like a gingerbread house with cream icing trim, an arched brown door, two small windows and a red heart, removable stainless steel insert. Create a close-up detail photograph of the EXACT same product from image 1, seen from slightly above at three-quarter angle, filling most of the frame, empty steel insert without food so the polished steel reflects light. Emphasise the fine matte 3D-printed layer-line texture and soft rounded edges. Warm low sunlight with dappled leaf shadows on an oak table, shallow depth of field. Premium editorial photography, photorealistic, natural light, sharp focus, no text, no logos, no watermark."
+ },
+ {
+  "out": "knit-heart-1",
+  "refs": [
+   "knit-heart.jpg"
+  ],
+  "prompt": "Edit this photo: remove ALL text and lettering from the wall so the wall is clean. Keep the product exactly identical: two joined round pet bowls with cable-knit sweater texture, one cream and one soft pink, connected by a red heart split in two halves, each with a removable stainless steel insert. Same shape, colours, fine matte 3D-printed layer-line texture and kibble. Keep the warm sunlit wall with soft dappled leaf shadows and the oak table. Premium editorial photography, photorealistic, natural light, sharp focus, no text, no logos, no watermark."
+ },
+ {
+  "out": "knit-heart-2",
+  "refs": [
+   "knit-heart.jpg"
+  ],
+  "prompt": "Image 1 shows a product: two joined round pet bowls with cable-knit sweater texture, one cream and one soft pink, connected by a red heart split in two halves, each with a removable stainless steel insert. Create a new lifestyle photograph using the EXACT same product from image 1 (identical shape, colours, details and matte 3D-printed texture). It stands on a light oak floor in a bright, calm, modern European apartment; two cats, one cream and one ginger, eating side by side from them.  Soft warm window light with gentle leaf shadows on a warm beige wall, shallow depth of field. Premium editorial photography, photorealistic, natural light, sharp focus, no text, no logos, no watermark."
+ },
+ {
+  "out": "knit-heart-3",
+  "refs": [
+   "knit-heart.jpg"
+  ],
+  "prompt": "Image 1 shows a product: two joined round pet bowls with cable-knit sweater texture, one cream and one soft pink, connected by a red heart split in two halves, each with a removable stainless steel insert. Create a close-up detail photograph of the EXACT same product from image 1, seen from slightly above at three-quarter angle, filling most of the frame, empty steel insert without food so the polished steel reflects light. Emphasise the fine matte 3D-printed layer-line texture and soft rounded edges. Warm low sunlight with dappled leaf shadows on an oak table, shallow depth of field. Premium editorial photography, photorealistic, natural light, sharp focus, no text, no logos, no watermark."
+ },
+ {
+  "out": "modern-1",
+  "refs": [
+   "modern.jpg"
+  ],
+  "prompt": "Edit this photo: remove ALL text and lettering from the wall so the wall is clean. Keep the product exactly identical: a minimal pastel sage-green rounded-square pet bowl with a recessed handle slot on the side, removable stainless steel insert. Same shape, colours, fine matte 3D-printed layer-line texture and kibble. Keep the warm sunlit wall with soft dappled leaf shadows and the oak table. Premium editorial photography, photorealistic, natural light, sharp focus, no text, no logos, no watermark."
+ },
+ {
+  "out": "modern-2",
+  "refs": [
+   "modern.jpg"
+  ],
+  "prompt": "Image 1 shows a product: a minimal pastel sage-green rounded-square pet bowl with a recessed handle slot on the side, removable stainless steel insert. Create a new lifestyle photograph using the EXACT same product from image 1 (identical shape, colours, details and matte 3D-printed texture). It stands on a light oak floor in a bright, calm, modern European apartment; a Siamese cat eating from it.  Soft warm window light with gentle leaf shadows on a warm beige wall, shallow depth of field. Premium editorial photography, photorealistic, natural light, sharp focus, no text, no logos, no watermark."
+ },
+ {
+  "out": "modern-3",
+  "refs": [
+   "modern.jpg"
+  ],
+  "prompt": "Image 1 shows a product: a minimal pastel sage-green rounded-square pet bowl with a recessed handle slot on the side, removable stainless steel insert. Create a close-up detail photograph of the EXACT same product from image 1, seen from slightly above at three-quarter angle, filling most of the frame, empty steel insert without food so the polished steel reflects light. Emphasise the fine matte 3D-printed layer-line texture and soft rounded edges. Warm low sunlight with dappled leaf shadows on an oak table, shallow depth of field. Premium editorial photography, photorealistic, natural light, sharp focus, no text, no logos, no watermark."
+ },
+ {
+  "out": "paw-cloud-1",
+  "refs": [
+   "paw-cloud.jpg"
+  ],
+  "prompt": "Edit this photo: remove ALL text and lettering from the wall so the wall is clean. Keep the product exactly identical: a low cream pet bowl with a soft scalloped cloud or flower outline and a recessed handle slot, removable stainless steel insert. Same shape, colours, fine matte 3D-printed layer-line texture and kibble. Keep the warm sunlit wall with soft dappled leaf shadows and the oak table. Premium editorial photography, photorealistic, natural light, sharp focus, no text, no logos, no watermark."
+ },
+ {
+  "out": "paw-cloud-2",
+  "refs": [
+   "paw-cloud.jpg"
+  ],
+  "prompt": "Image 1 shows a product: a low cream pet bowl with a soft scalloped cloud or flower outline and a recessed handle slot, removable stainless steel insert. Create a new lifestyle photograph using the EXACT same product from image 1 (identical shape, colours, details and matte 3D-printed texture). It stands on a light oak floor in a bright, calm, modern European apartment; a fluffy Pomeranian eating from it.  Soft warm window light with gentle leaf shadows on a warm beige wall, shallow depth of field. Premium editorial photography, photorealistic, natural light, sharp focus, no text, no logos, no watermark."
+ },
+ {
+  "out": "paw-cloud-3",
+  "refs": [
+   "paw-cloud.jpg"
+  ],
+  "prompt": "Image 1 shows a product: a low cream pet bowl with a soft scalloped cloud or flower outline and a recessed handle slot, removable stainless steel insert. Create a close-up detail photograph of the EXACT same product from image 1, seen from slightly above at three-quarter angle, filling most of the frame, empty steel insert without food so the polished steel reflects light. Emphasise the fine matte 3D-printed layer-line texture and soft rounded edges. Warm low sunlight with dappled leaf shadows on an oak table, shallow depth of field. Premium editorial photography, photorealistic, natural light, sharp focus, no text, no logos, no watermark."
+ },
+ {
+  "out": "soft-serve-1",
+  "refs": [
+   "soft-serve.jpg"
+  ],
+  "prompt": "Edit this photo: remove ALL text and lettering from the wall so the wall is clean. Keep the product exactly identical: a cream pet bowl made of three soft stacked rounded rings like soft-serve, removable stainless steel insert. Same shape, colours, fine matte 3D-printed layer-line texture and kibble. Keep the warm sunlit wall with soft dappled leaf shadows and the oak table. Premium editorial photography, photorealistic, natural light, sharp focus, no text, no logos, no watermark."
+ },
+ {
+  "out": "soft-serve-2",
+  "refs": [
+   "soft-serve.jpg"
+  ],
+  "prompt": "Image 1 shows a product: a cream pet bowl made of three soft stacked rounded rings like soft-serve, removable stainless steel insert. Create a new lifestyle photograph using the EXACT same product from image 1 (identical shape, colours, details and matte 3D-printed texture). It stands on a light oak floor in a bright, calm, modern European apartment; a Shiba Inu eating from it.  Soft warm window light with gentle leaf shadows on a warm beige wall, shallow depth of field. Premium editorial photography, photorealistic, natural light, sharp focus, no text, no logos, no watermark."
+ },
+ {
+  "out": "soft-serve-3",
+  "refs": [
+   "soft-serve.jpg"
+  ],
+  "prompt": "Image 1 shows a product: a cream pet bowl made of three soft stacked rounded rings like soft-serve, removable stainless steel insert. Create a close-up detail photograph of the EXACT same product from image 1, seen from slightly above at three-quarter angle, filling most of the frame, empty steel insert without food so the polished steel reflects light. Emphasise the fine matte 3D-printed layer-line texture and soft rounded edges. Warm low sunlight with dappled leaf shadows on an oak table, shallow depth of field. Premium editorial photography, photorealistic, natural light, sharp focus, no text, no logos, no watermark."
+ },
+ {
+  "out": "loop-1",
+  "refs": [
+   "loop.jpg"
+  ],
+  "prompt": "Edit this photo: remove ALL text and lettering from the wall so the wall is clean. Keep the product exactly identical: a deep burgundy pet bowl formed by a soft twisted loop that wraps around itself, removable stainless steel insert. Same shape, colours, fine matte 3D-printed layer-line texture and kibble. Keep the warm sunlit wall with soft dappled leaf shadows and the oak table. Premium editorial photography, photorealistic, natural light, sharp focus, no text, no logos, no watermark."
+ },
+ {
+  "out": "loop-2",
+  "refs": [
+   "loop.jpg"
+  ],
+  "prompt": "Image 1 shows a product: a deep burgundy pet bowl formed by a soft twisted loop that wraps around itself, removable stainless steel insert. Create a new lifestyle photograph using the EXACT same product from image 1 (identical shape, colours, details and matte 3D-printed texture). It stands on a light oak floor in a bright, calm, modern European apartment; a Hungarian vizsla eating from it.  Soft warm window light with gentle leaf shadows on a warm beige wall, shallow depth of field. Premium editorial photography, photorealistic, natural light, sharp focus, no text, no logos, no watermark."
+ },
+ {
+  "out": "loop-3",
+  "refs": [
+   "loop.jpg"
+  ],
+  "prompt": "Image 1 shows a product: a deep burgundy pet bowl formed by a soft twisted loop that wraps around itself, removable stainless steel insert. Create a close-up detail photograph of the EXACT same product from image 1, seen from slightly above at three-quarter angle, filling most of the frame, empty steel insert without food so the polished steel reflects light. Emphasise the fine matte 3D-printed layer-line texture and soft rounded edges. Warm low sunlight with dappled leaf shadows on an oak table, shallow depth of field. Premium editorial photography, photorealistic, natural light, sharp focus, no text, no logos, no watermark."
+ },
+ {
+  "out": "pancake-1",
+  "refs": [
+   "pancake.jpg"
+  ],
+  "prompt": "Edit this photo: remove ALL text and lettering from the wall so the wall is clean. Keep the product exactly identical: a pet bowl shaped like a stack of three honey-coloured pancakes with syrup drips and a small cream butter pat on top, removable stainless steel insert. Same shape, colours, fine matte 3D-printed layer-line texture and kibble. Keep the warm sunlit wall with soft dappled leaf shadows and the oak table. Premium editorial photography, photorealistic, natural light, sharp focus, no text, no logos, no watermark."
+ },
+ {
+  "out": "pancake-2",
+  "refs": [
+   "pancake.jpg"
+  ],
+  "prompt": "Image 1 shows a product: a pet bowl shaped like a stack of three honey-coloured pancakes with syrup drips and a small cream butter pat on top, removable stainless steel insert. Create a new lifestyle photograph using the EXACT same product from image 1 (identical shape, colours, details and matte 3D-printed texture). It stands on a light oak floor in a bright, calm, modern European apartment; a curly cavapoo puppy eating from it.  Soft warm window light with gentle leaf shadows on a warm beige wall, shallow depth of field. Premium editorial photography, photorealistic, natural light, sharp focus, no text, no logos, no watermark."
+ },
+ {
+  "out": "pancake-3",
+  "refs": [
+   "pancake.jpg"
+  ],
+  "prompt": "Image 1 shows a product: a pet bowl shaped like a stack of three honey-coloured pancakes with syrup drips and a small cream butter pat on top, removable stainless steel insert. Create a close-up detail photograph of the EXACT same product from image 1, seen from slightly above at three-quarter angle, filling most of the frame, empty steel insert without food so the polished steel reflects light. Emphasise the fine matte 3D-printed layer-line texture and soft rounded edges. Warm low sunlight with dappled leaf shadows on an oak table, shallow depth of field. Premium editorial photography, photorealistic, natural light, sharp focus, no text, no logos, no watermark."
+ },
+ {
+  "out": "bone-depot-1",
+  "refs": [
+   "bone-depot.jpg"
+  ],
+  "prompt": "Edit this photo: remove ALL text from the wall above the product (keep any lettering that is part of the product itself). Keep the product exactly identical: a bone-shaped wall organiser in warm sand colour with exactly three cream hooks, a cream name plaque reading MILO and a round sand-coloured poop-bag dispenser with a green bag roll. Keep the warm sunlit terracotta wall with soft dappled leaf shadows. Premium editorial photography, photorealistic, natural light, sharp focus, no text, no logos, no watermark."
+ },
+ {
+  "out": "bone-depot-2",
+  "refs": [
+   "bone-depot.jpg"
+  ],
+  "prompt": "Image 1 shows a product: a bone-shaped wall organiser in warm sand colour with exactly three cream hooks, a cream name plaque reading MILO and a round sand-coloured poop-bag dispenser with a green bag roll. Create a new lifestyle photograph with the EXACT same organiser from image 1 (identical shape, colours, number of hooks and lettering) mounted on a warm beige hallway wall next to a front door. A tan leather leash hangs from one hook. On the oak floor below: a golden retriever sitting below looking up expectantly. Soft warm afternoon light with dappled leaf shadows. Premium editorial photography, photorealistic, natural light, sharp focus, no text, no logos, no watermark."
+ },
+ {
+  "out": "bone-depot-3",
+  "refs": [
+   "parts-bone-depot.jpg"
+  ],
+  "prompt": "Edit this photo: remove ALL text, labels and captions so only the product parts remain on the wooden surface. Keep every part exactly identical in shape, colour and position. Keep the warm oak surface and soft leaf shadows. Premium editorial photography, photorealistic, natural light, sharp focus, no text, no logos, no watermark."
+ },
+ {
+  "out": "happy-camper-1",
+  "refs": [
+   "happy-camper.jpg"
+  ],
+  "prompt": "Edit this photo: remove ALL text from the wall above the product (keep any lettering that is part of the product itself). Keep the product exactly identical: a sage-green elongated-octagon wall organiser with a raised cream mountain outline, a winding path, the words LET'S GO, exactly two sage hooks and a round sage poop-bag dispenser with a green roll. Keep the warm sunlit terracotta wall with soft dappled leaf shadows. Premium editorial photography, photorealistic, natural light, sharp focus, no text, no logos, no watermark."
+ },
+ {
+  "out": "happy-camper-2",
+  "refs": [
+   "happy-camper.jpg"
+  ],
+  "prompt": "Image 1 shows a product: a sage-green elongated-octagon wall organiser with a raised cream mountain outline, a winding path, the words LET'S GO, exactly two sage hooks and a round sage poop-bag dispenser with a green roll. Create a new lifestyle photograph with the EXACT same organiser from image 1 (identical shape, colours, number of hooks and lettering) mounted on a warm beige hallway wall next to a front door. A green leash and a small hiking backpack hang from the hooks. On the oak floor below: a fluffy cream mixed-breed dog sitting below, ready for a hike. Soft warm afternoon light with dappled leaf shadows. Premium editorial photography, photorealistic, natural light, sharp focus, no text, no logos, no watermark."
+ },
+ {
+  "out": "happy-camper-3",
+  "refs": [
+   "parts-happy-camper.jpg"
+  ],
+  "prompt": "Edit this photo: remove ALL text, labels and captions so only the product parts remain on the wooden surface. Keep every part exactly identical in shape, colour and position. Keep the warm oak surface and soft leaf shadows. Premium editorial photography, photorealistic, natural light, sharp focus, no text, no logos, no watermark."
+ },
+ {
+  "out": "walk-club-1",
+  "refs": [
+   "walk-club.jpg"
+  ],
+  "prompt": "Edit this photo: remove ALL text from the wall above the product (keep any lettering that is part of the product itself). Keep the product exactly identical: a cream rounded-rectangle wall organiser with raised terracotta letters WALK CLUB, exactly three cream hooks and a square cream poop-bag dispenser with a green roll. Keep the warm sunlit terracotta wall with soft dappled leaf shadows. Premium editorial photography, photorealistic, natural light, sharp focus, no text, no logos, no watermark."
+ },
+ {
+  "out": "walk-club-2",
+  "refs": [
+   "walk-club.jpg"
+  ],
+  "prompt": "Image 1 shows a product: a cream rounded-rectangle wall organiser with raised terracotta letters WALK CLUB, exactly three cream hooks and a square cream poop-bag dispenser with a green roll. Create a new lifestyle photograph with the EXACT same organiser from image 1 (identical shape, colours, number of hooks and lettering) mounted on a warm beige hallway wall next to a front door. A beige woven leash hangs from one hook. On the oak floor below: a black Labrador sitting below wagging its tail. Soft warm afternoon light with dappled leaf shadows. Premium editorial photography, photorealistic, natural light, sharp focus, no text, no logos, no watermark."
+ },
+ {
+  "out": "walk-club-3",
+  "refs": [
+   "parts-walk-club.jpg"
+  ],
+  "prompt": "Edit this photo: remove ALL text, labels and captions so only the product parts remain on the wooden surface. Keep every part exactly identical in shape, colour and position. Keep the warm oak surface and soft leaf shadows. Premium editorial photography, photorealistic, natural light, sharp focus, no text, no logos, no watermark."
+ },
+ {
+  "out": "tail-trail-1",
+  "refs": [
+   "tail-trail.jpg"
+  ],
+  "prompt": "Edit this photo: remove ALL text from the wall above the product (keep any lettering that is part of the product itself). Keep the product exactly identical: a sage-green pill-shaped wall organiser with exactly two cream hooks shaped like walking dogs with curled-up tails and a square sage poop-bag dispenser with a green roll. Keep the warm sunlit terracotta wall with soft dappled leaf shadows. Premium editorial photography, photorealistic, natural light, sharp focus, no text, no logos, no watermark."
+ },
+ {
+  "out": "tail-trail-2",
+  "refs": [
+   "tail-trail.jpg"
+  ],
+  "prompt": "Image 1 shows a product: a sage-green pill-shaped wall organiser with exactly two cream hooks shaped like walking dogs with curled-up tails and a square sage poop-bag dispenser with a green roll. Create a new lifestyle photograph with the EXACT same organiser from image 1 (identical shape, colours, number of hooks and lettering) mounted on a warm beige hallway wall next to a front door. A red leash hangs from one dog-shaped hook. On the oak floor below: a small brown mixed-breed terrier sitting below. Soft warm afternoon light with dappled leaf shadows. Premium editorial photography, photorealistic, natural light, sharp focus, no text, no logos, no watermark."
+ },
+ {
+  "out": "tail-trail-3",
+  "refs": [
+   "parts-tail-trail.jpg"
+  ],
+  "prompt": "Edit this photo: remove ALL text, labels and captions so only the product parts remain on the wooden surface. Keep every part exactly identical in shape, colour and position. Keep the warm oak surface and soft leaf shadows. Premium editorial photography, photorealistic, natural light, sharp focus, no text, no logos, no watermark."
+ },
+ {
+  "out": "scene-lineup",
+  "size": "2560x1440",
+  "refs": [
+   "braid.jpg",
+   "heart-hug.jpg",
+   "pudding.jpg",
+   "puffy.jpg"
+  ],
+  "prompt": "Create one wide photograph showing the four EXACT pet bowls from images 1-4 (sage braided bowl, cream bowl with red heart, cream scalloped pudding bowl with caramel drips, coral puffy bowl) standing in a relaxed row on a long oak table against a warm sunlit terracotta wall with soft dappled leaf shadows. Plenty of empty wall space on the left third for a headline. Premium editorial photography, photorealistic, natural light, sharp focus, no text, no logos, no watermark."
+ },
+ {
+  "out": "scene-holiday",
+  "size": "2560x1440",
+  "refs": [
+   "snowy-log.jpg",
+   "gingerbread.jpg",
+   "chimney.jpg",
+   "gift-sack.jpg"
+  ],
+  "prompt": "Create one wide festive photograph showing the four EXACT pet bowls from images 1-4 (snowy tree-log bowl, gingerbread house bowl, red brick chimney bowl with snow top, red Santa gift sack bowl) arranged on an oak table, a few pine branches and warm fairy lights softly blurred behind, warm cosy evening light. Empty space on the left third for a headline. Premium editorial photography, photorealistic, natural light, sharp focus, no text, no logos, no watermark."
+ },
+ {
+  "out": "scene-making",
+  "size": "2560x1440",
+  "prompt": "A clean modern 3D printer in a bright small Bulgarian design studio printing a sage-green rounded pet bowl, the nozzle mid-layer, visible fine layer lines, a finished cream bowl and a spool of sage filament beside it, warm late-afternoon sunlight with leaf shadows on a pale wall. Premium editorial photography, photorealistic, natural light, sharp focus, no text, no logos, no watermark."
+ }
+]

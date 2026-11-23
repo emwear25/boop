@@ -1,0 +1,10 @@
+.env
+node_modules
+.nuxt
+.output
+.data
+dist
+.DS_Store
+.vercel
+# Original generated photos (689 MB) stay on disk only; the site uses the optimised copies in public/img
+tools/images/out/

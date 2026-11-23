@@ -1,0 +1,25 @@
+ok   name-wave-1 {"input_images":1,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   name-ribbed-1 {"input_images":1,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   name-ribbed-3 {"input_images":1,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   name-ribbed-2 {"input_images":1,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   name-raised-1 {"input_images":1,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   name-wave-3 {"input_images":1,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   name-wave-2 {"input_images":1,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   name-raised-2 {"input_images":1,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   name-rings-1 {"input_images":0,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   name-rings-2 {"input_images":0,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   name-raised-3 {"input_images":1,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   name-rings-3 {"input_images":0,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   name-cone-1 {"input_images":0,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   name-cone-3 {"input_images":0,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   name-cone-2 {"input_images":0,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   food-water-1 {"input_images":0,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   food-water-2 {"input_images":0,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   food-water-3 {"input_images":0,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   name-twist-1 {"input_images":0,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   name-twist-3 {"input_images":0,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   name-twist-2 {"input_images":0,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   name-tag-1 {"input_images":0,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   name-tag-3 {"input_images":0,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   name-tag-2 {"input_images":0,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+Ledger: 91 images, est. max $3.85 of $12 cap

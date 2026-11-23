@@ -1,0 +1,82 @@
+/* boop.bg design tokens
+   mist  – page ground, a cool foil to the amber light in every product photo
+   moss  – ink, logo, primary actions
+   cherry – the heart that recurs on the bowls; used only for small signals */
+:root {
+  --moss: #23301f;
+  --moss-2: #3d4b36;
+  --moss-3: #6b7863;
+  --sage: #8c9e7a;
+  --mist: #e9ebdf;
+  --mist-2: #dfe3d2;
+  --paper: #f8f7f1;
+  --amber: #e2a564;
+  --cherry: #c7383b;
+  --line: rgba(35, 48, 31, .14);
+  --serif: 'Cormorant Garamond', Georgia, serif;
+  --sans: 'Jost Variable', 'Jost', system-ui, sans-serif;
+  --gutter: clamp(16px, 4vw, 48px);
+  --max: 1360px;
+  --ease: cubic-bezier(.2, .7, .1, 1);
+  --shadow-warm: 0 40px 80px -40px rgba(120, 70, 20, .45);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; padding: 0; }
+html { -webkit-text-size-adjust: 100%; }
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+body {
+  background: var(--mist);
+  color: var(--moss);
+  font: 400 16px/1.6 var(--sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+img { display: block; max-width: 100%; height: auto; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+input, textarea, select { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--moss); outline-offset: 3px; border-radius: 6px; }
+::selection { background: var(--sage); color: var(--paper); }
+
+.wrap { max-width: var(--max); margin-inline: auto; padding-inline: var(--gutter); }
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* Type scale (Cormorant for display, Jost for everything else) */
+.display { font: 500 clamp(46px, 6.6vw, 104px)/.96 var(--serif); letter-spacing: -.018em; text-wrap: balance; }
+.h2 { font: 500 clamp(36px, 4.2vw, 60px)/1.02 var(--serif); letter-spacing: -.01em; text-wrap: balance; }
+.h3 { font: 500 clamp(26px, 2.4vw, 34px)/1.1 var(--serif); }
+.lead { font-size: clamp(17px, 1.35vw, 19px); color: var(--moss-2); max-width: 32em; text-wrap: pretty; }
+.poster { font: 500 13px/1.2 var(--sans); letter-spacing: .34em; } /* product names, echoing the posters */
+.muted { color: var(--moss-3); }
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  height: 54px; padding: 0 30px; border-radius: 999px; font: 500 16px var(--sans);
+  transition: background .25s var(--ease), transform .25s var(--ease), color .25s;
+}
+.btn-solid { background: var(--moss); color: var(--paper); }
+.btn-solid:hover { background: var(--moss-2); }
+.btn-solid:active { transform: scale(.98); }
+.btn-light { background: var(--paper); color: var(--moss); }
+.btn-link { height: auto; padding: 6px 2px; text-decoration: underline; text-underline-offset: 6px; text-decoration-thickness: 1px; }
+.btn-link:hover { text-decoration-thickness: 2px; }
+.btn[disabled] { opacity: .45; pointer-events: none; }
+
+.chip {
+  white-space: nowrap; padding: 9px 18px; border-radius: 999px; border: 1px solid var(--line);
+  font-size: 14px; transition: background .2s, color .2s, border-color .2s;
+}
+.chip:hover { border-color: var(--moss); }
+.chip.is-on { background: var(--moss); color: var(--paper); border-color: var(--moss); }
+
+/* Page transition */
+.page-enter-active, .page-leave-active { transition: opacity .35s var(--ease), transform .35s var(--ease); }
+.page-enter-from { opacity: 0; transform: translateY(12px); }
+.page-leave-to { opacity: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}

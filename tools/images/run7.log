@@ -1,0 +1,7 @@
+ok   tag-heart {"input_images":0,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   tag-cloud {"input_images":0,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   tag-paw {"input_images":0,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   tag-cat {"input_images":0,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   tag-bone {"input_images":0,"generated_images":1,"output_tokens":12288,"total_tokens":12288}
+ok   tag-all {"input_images":0,"generated_images":1,"output_tokens":14400,"total_tokens":14400}
+Ledger: 150 images, est. max $6.31 of $12 cap
