@@ -12,7 +12,8 @@ export function useApi() {
   const { apiBase, storeId } = useRuntimeConfig().public
 
   return $fetch.create({
-    baseURL: apiBase,
+    // tolerate typos in the env value such as a trailing dot or slash ("https://api.emwear.bg.")
+    baseURL: String(apiBase).trim().replace(/[./]+$/, ''),
     headers: { 'X-Store': storeId },
     credentials: 'include',
   })

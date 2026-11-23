@@ -72,6 +72,7 @@ onBeforeUnmount(() => { if (import.meta.client) { document.documentElement.style
           <li><NuxtLink to="/products">Всички продукти</NuxtLink></li>
           <li><NuxtLink to="/about">За нас</NuxtLink></li>
           <li><NuxtLink to="/about#delivery">Доставка и плащане</NuxtLink></li>
+          <li><NuxtLink to="/track">Проследи поръчка</NuxtLink></li>
           <li><NuxtLink to="/about#sizes">Кой размер да избера</NuxtLink></li>
         </ul>
         <div class="foot">

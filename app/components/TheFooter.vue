@@ -18,6 +18,7 @@
     <div>
       <h2>Помощ</h2>
       <ul>
+        <li><NuxtLink to="/track">Проследи поръчка</NuxtLink></li>
         <li><NuxtLink to="/about#delivery">Доставка и плащане</NuxtLink></li>
         <li><NuxtLink to="/about#sizes">Кой размер да избера</NuxtLink></li>
         <li><NuxtLink to="/about#care">Грижа за купичката</NuxtLink></li>

@@ -1,25 +1,12 @@
 <script setup lang="ts">
 import { useCart } from '~/stores/cart'
+import type { CustomerOrder as Order } from '~/components/OrderSummary.vue'
 
 /**
  * Order confirmation. Reached with ?token= (cash on delivery, also the link in the
  * confirmation email) or ?orderId=<Stripe session>&stripe=true (card payment).
  */
 useHead({ title: 'Поръчката е приета' })
-
-interface Order {
-  orderNumber: string
-  items: { _id: string; name: string; price: number; quantity: number; size?: string | null; color?: string | null; customization?: string | null }[]
-  total: number
-  shippingCost?: number
-  paymentMethod: string
-  paymentStatus: string
-  deliveryProvider: 'econt' | 'speedy'
-  deliveryMethod: string
-  econtOfficeName?: string | null
-  speedyOfficeName?: string | null
-  shippingAddress: { firstName: string; email: string; street: string; city: string }
-}
 
 const route = useRoute()
 const api = useApi()
@@ -50,13 +37,6 @@ watch(awaitingPayment, (waiting) => {
 }, { immediate: true })
 onBeforeUnmount(() => clearInterval(timer))
 
-const delivery = computed(() => {
-  const o = order.value
-  if (!o) return ''
-  const courier = o.deliveryProvider === 'speedy' ? 'Спиди' : 'Еконт'
-  if (o.deliveryMethod === 'courier_address') return `${courier}, до адрес: ${o.shippingAddress.street}, ${o.shippingAddress.city}`
-  return `${courier}, ${o.econtOfficeName || o.speedyOfficeName || o.shippingAddress.street}`
-})
 </script>
 
 <template>
@@ -69,26 +49,14 @@ const delivery = computed(() => {
       </p>
       <p v-if="awaitingPayment" class="muted" role="status">Чакаме потвърждение на плащането от банката…</p>
 
-      <div class="card">
-        <ul>
-          <li v-for="i in order.items" :key="i._id">
-            <div>
-              <b>{{ i.name }}</b>
-              <small class="muted">{{ [i.size !== 'Стандартен' && i.size, i.color, i.customization].filter(Boolean).join(', ') }} × {{ i.quantity }}</small>
-            </div>
-            <span>{{ euro(i.price * i.quantity) }}</span>
-          </li>
-        </ul>
-        <div class="row"><span>Доставка</span><span>{{ delivery }}</span></div>
-        <div class="row"><span>Плащане</span><span>{{ order.paymentMethod === 'stripe_card' ? (awaitingPayment ? 'С карта, обработва се' : 'С карта, платено') : 'При получаване' }}</span></div>
-        <div class="row total"><span>Общо</span><span>{{ euro(order.total) }}</span></div>
-      </div>
+      <OrderSummary :order="order" />
+      <p class="muted">Можеш да провериш поръчката и по-късно на <NuxtLink :to="{ path: '/track', query: { n: order.orderNumber } }">boop.bg/track</NuxtLink> с номера и имейла си.</p>
       <NuxtLink to="/" class="btn btn-solid">Към началото</NuxtLink>
     </div>
 
     <div v-else-if="error || (!token && !sessionId)" class="ok">
       <h1 class="display">Не намираме тази поръчка.</h1>
-      <p class="lead">Ако току-що поръча, провери имейла си за потвърждение или ни пиши на <a href="mailto:info@boop.bg">info@boop.bg</a>.</p>
+      <p class="lead">Провери поръчката с номера и имейла си на <NuxtLink to="/track">страницата за проследяване</NuxtLink> или ни пиши на <a href="mailto:info@boop.bg">info@boop.bg</a>.</p>
       <NuxtLink to="/" class="btn btn-solid">Към началото</NuxtLink>
     </div>
 
@@ -100,11 +68,4 @@ const delivery = computed(() => {
 .page { padding-top: clamp(24px, 4vw, 56px); }
 .ok { display: grid; gap: 24px; justify-items: start; max-width: 760px; }
 .ok a:not(.btn) { text-decoration: underline; }
-.card { width: 100%; background: var(--paper); border-radius: 24px; padding: 24px; }
-.card ul { list-style: none; }
-.card li { display: flex; justify-content: space-between; gap: 16px; padding-bottom: 14px; margin-bottom: 14px; border-bottom: 1px solid var(--line); }
-.card li small { display: block; }
-.row { display: flex; justify-content: space-between; gap: 16px; padding: 6px 0; }
-.row span:last-child { text-align: right; }
-.total { font-size: 19px; font-weight: 500; border-top: 1px solid var(--line); margin-top: 8px; padding-top: 14px; }
 </style>
