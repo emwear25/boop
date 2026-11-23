@@ -33,11 +33,13 @@ const configLink = computed(() => ({ path: '/personalize', query: { name: name.v
 watch(name, v => bowl?.set({ name: v.trim() || DEMO }))
 watch(colour, i => bowl?.set({ colours: COLOURS[i]!.c }))
 
+// Start downloading three.js + GSAP during hydration instead of after mount
+const libs = import.meta.client
+  ? Promise.all([import('~/utils/bowl3d'), import('gsap'), import('gsap/ScrollTrigger')])
+  : null
+
 onMounted(async () => {
-  const [{ BowlScene }, { gsap }, { ScrollTrigger }] = await Promise.all([
-    import('~/utils/bowl3d'), import('gsap'), import('gsap/ScrollTrigger'),
-  ])
-  await document.fonts?.ready
+  const [{ BowlScene }, { gsap }, { ScrollTrigger }] = await libs!
   bowl = new BowlScene(stage.value!, { colours: COLOURS[0]!.c, name: DEMO, shape: 'wave' })
   const { $reducedMotion } = useNuxtApp()
   const apply = () => {
@@ -48,11 +50,12 @@ onMounted(async () => {
   else {
     gsap.registerPlugin(ScrollTrigger)
     st = ScrollTrigger.create({
-      trigger: section.value!, start: 'top top', end: 'bottom bottom', scrub: 0.6,
+      trigger: section.value!, start: 'top top', end: 'bottom bottom', scrub: 0.15,
       onUpdate: self => { p.value = self.progress; apply() },
     })
     apply()
   }
+  document.fonts?.ready.then(() => bowl?.set({}))
   io = new IntersectionObserver(([e]) => bowl?.setVisible(!!e?.isIntersecting))
   io.observe(section.value!)
   requestAnimationFrame(() => { ready.value = true })
@@ -102,7 +105,7 @@ onBeforeUnmount(() => { st?.kill(); io?.disconnect(); bowl?.dispose(); bowl = nu
 </template>
 
 <style scoped>
-.pour { height: 420vh; position: relative; }
+.pour { height: 260vh; position: relative; }
 .sticky { position: sticky; top: 0; height: 100vh; height: 100svh; padding: 12px; }
 .wall {
   position: relative; height: 100%; border-radius: 32px; overflow: hidden; isolation: isolate;
@@ -112,7 +115,7 @@ onBeforeUnmount(() => { st?.kill(); io?.disconnect(); bowl?.dispose(); bowl = nu
     radial-gradient(90% 60% at 62% 78%, rgba(255, 222, 180, .35), transparent 70%),
     linear-gradient(180deg, #cf9469 0%, #c58659 55%, #b77548 100%);
 }
-.stage { position: absolute; inset: 0; opacity: 0; transition: opacity 1.2s var(--ease); }
+.stage { position: absolute; inset: 0; opacity: 0; transition: opacity .35s ease-out; }
 .stage.ready { opacity: 1; }
 .stage :deep(canvas) { width: 100% !important; height: 100% !important; display: block; }
 .captions { position: absolute; inset: 0; pointer-events: none; color: #fff8ee; }
