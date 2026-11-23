@@ -22,7 +22,7 @@ export default defineNuxtConfig({
         { name: 'viewport', content: 'width=device-width, initial-scale=1, viewport-fit=cover' },
         { name: 'robots', content: 'noindex, nofollow' },
         { name: 'theme-color', content: '#23301f' },
-        { name: 'description', content: 'Купички и закачалки за кучета и котки, отпечатани в 3D в България.' },
+        { name: 'description', content: 'Купички, лъжички и медальони с името на любимеца. Изработени в България.' },
       ],
       link: [{ rel: 'icon', type: 'image/png', href: '/favicon.png' }],
     },
