@@ -37,7 +37,7 @@ export interface Product {
   /** Optional name printed on the product (e.g. the Кокалче plaque, engraved bowls). */
   personalise?: { label: string; max: number; placeholder: string; required?: boolean; hint?: string }
   /** Colour choices; the photos show the first one. */
-  colours?: { name: string; hex: string; hex2?: string }[]
+  colours?: { name: string; hex: string; hex2?: string; /** Photo of this colour (replaces the first photo). */ img?: string }[]
   /** Mounting guide image for wall organisers. */
   mount?: string
   details: string[]
@@ -46,7 +46,7 @@ export interface Product {
 export const categories: Category[] = [
   { id: 'kupichki-za-kucheta-i-kotki', name: 'Купички', title: 'Купички за всеки ден', intro: 'Меки форми и иноксова купа, която се вади и мие в съдомиялна.' },
   { id: 'kupichki-s-ime', name: 'С име', title: 'С името на любимеца', intro: 'Купички, повдигнати стойки и медальони с гравирано име. Пишем го на кирилица или латиница.' },
-  { id: 'medalyoni-s-ime', name: 'Медальони', title: 'Медальони с име', intro: 'Десет форми, много цветове и името на любимеца. Отпечатани на един или няколко цвята.' },
+  { id: 'medalyoni-s-ime', name: 'Медальони', title: 'Медальони с име', intro: 'Десет форми, много цветове и името на любимеца. В един или няколко цвята.' },
   { id: 'lazhichki-za-granuli', name: 'Лъжички', title: 'Лъжички за гранули с име', intro: 'Мерителна лъжичка с името на любимеца. Около една чаша гранули, винаги една и съща порция.' },
   { id: 'zakachalki-za-povod', name: 'За разходка', title: 'Закачалки за разходка', intro: 'Повод, нагръдник и торбички на едно място до вратата.' },
   { id: 'koledni-kupichki', name: 'Коледа', title: 'Коледна колекция', intro: 'Празнични купички, които стоят добре и под елхата.' },
@@ -82,19 +82,19 @@ const nameField = (max: number, placeholder: string) => ({ label: 'Име за �
 const bowlDetails = [
   'Иноксова купа, която се вади и мие в съдомиялна',
   'Неплъзгаща се основа',
-  'Отпечатана в 3D в България от PLA',
+  'Изработена в България',
   'Обвивката се избърсва с влажна кърпа',
 ]
 const nameDetails = [
   'Името е гравирано в самата купичка, не е стикер',
   'Иноксова купа, която се вади и мие в съдомиялна',
-  'Отпечатана в 3D в България от PLA',
+  'Изработена в България',
   'Персонализираните продукти не подлежат на връщане',
 ]
 const scoopDetails = [
   'Три размера: ½ чаша (120 мл), 1 чаша (240 мл) и 2 чаши (480 мл)',
   'Една чаша е мярката от таблицата на повечето торби с храна',
-  'Отпечатана в 3D в България от PLA',
+  'Изработена в България',
   'Мие се на ръка с топла вода, не в съдомиялна',
   'Персонализираните продукти не подлежат на връщане',
 ]
@@ -107,7 +107,7 @@ const raisedDetails = [
 const wallDetails = [
   'Монтира се на скрита планка с два винта',
   'Диспенсър за стандартна ролка торбички',
-  'Отпечатана в 3D в България от PLA',
+  'Изработена в България',
   'Винтовете и дюбелите не са включени',
 ]
 
@@ -216,9 +216,9 @@ export const products: Product[] = [
 
 // Medallions: one product per design (see tagDesigns.ts)
 const tagDetails = (multi: boolean) => [
-  multi ? 'Многоцветен печат: всеки цвят е отделен слой, не боя' : 'Цветна основа и бели изпъкнали букви',
+  multi ? 'Няколко цвята, вградени в самия медальон, не боя' : 'Цветна основа и бели изпъкнали букви',
   'Стоманена халка в комплекта',
-  'Отпечатан в 3D в България от PETG, лек и здрав',
+  'Изработен в България от PETG, лек и здрав',
   'Около 4 до 6 см според формата и името',
 ]
 for (const d of tagDesigns) {
@@ -229,6 +229,12 @@ for (const d of tagDesigns) {
     personalise: nameField(8, `напр. ${d.demo}`),
     description: d.description, details: tagDetails(d.kind === 'rainbow' || (d.layers.length > 1)),
   })
+}
+
+// Scoops: every colour has its own main photo (scoop-<key>-c<i>.jpg, same shot recoloured)
+for (const p of products) {
+  const key = p.slug.startsWith('lazhichka-za-granuli-s-ime-') ? p.slug.slice('lazhichka-za-granuli-s-ime-'.length) : null
+  if (key && p.colours) p.colours = p.colours.map((c, i) => (i ? { ...c, img: `scoop-${key}-c${i}` } : c))
 }
 
 /** Image folder slug on disk (generated assets are named after the source designs). */
@@ -243,10 +249,15 @@ const imageKey: Record<string, string> = {
   'zakachalka-za-povod-s-ime-kokalche': 'bone-depot', 'zakachalka-za-povod-kam-planinata': 'happy-camper', 'zakachalka-za-povod-klub-razhodka': 'walk-club', 'zakachalka-za-povod-opashchitsi': 'tail-trail',
 }
 
-export const productImages = (p: Product) => {
+export const productImages = (p: Product, colourIndex = 0) => {
   const k = imageKey[p.slug] ?? tagBySlug(p.slug)?.photos
-  return [1, 2, 3, 4].map(n => ({ src: `/img/p/${k}-${n}.webp`, sm: `/img/p/${k}-${n}-sm.webp` }))
+  const list = [1, 2, 3, 4].map(n => ({ src: `/img/p/${k}-${n}.webp`, sm: `/img/p/${k}-${n}-sm.webp` }))
+  const own = p.colours?.[colourIndex]?.img
+  if (own) list[0] = { src: `/img/p/${own}.webp`, sm: `/img/p/${own}-sm.webp` }
+  return list
 }
+/** Index of a colour by name (cart lines store the name). */
+export const colourIndex = (p: Product, name?: string) => Math.max(0, p.colours?.findIndex(c => c.name === name) ?? 0)
 
 /** Size as shown to people: "16 см" for bowls, "1 чаша · 240 мл" for scoops. */
 export const sizeLabel = (p: Product, cm?: number) => (cm ? p.sizes?.find(s => s.cm === cm)?.label ?? `${cm} см` : '')

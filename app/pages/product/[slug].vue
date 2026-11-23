@@ -8,7 +8,7 @@ const product = computed(() => findProduct(route.params.slug as string))
 if (!product.value) throw createError({ statusCode: 404, statusMessage: 'Няма такъв продукт', fatal: true })
 
 const p = computed(() => product.value!)
-const imgs = computed(() => productImages(p.value))
+const imgs = computed(() => productImages(p.value, colour.value))
 const isTag = computed(() => !!p.value.tagDesign)
 const active = ref(isTag.value ? -1 : 0)
 const forma: Record<string, string> = { 'kupichka-s-ime-valna': 'wave', 'povdignata-kupichka-s-ime-visoka-valna': 'raised', 'povdignata-kupichka-s-ime-prasteni': 'rings' }
@@ -105,7 +105,7 @@ useHead(() => ({ title: p.value.name, meta: [{ name: 'description', content: `${
           </div>
           <p v-if="noteError" class="error" role="alert">{{ noteError }}</p>
           <p v-if="p.personalise.hint" class="hint muted">{{ p.personalise.hint }}</p>
-          <NuxtLink v-if="forma[p.slug]" :to="{ path: '/personalize', query: { shape: forma[p.slug], name: note || undefined } }" class="see3d">Виж името си върху купичката в 3D</NuxtLink>
+          <NuxtLink v-if="forma[p.slug]" :to="{ path: '/personalize', query: { shape: forma[p.slug], name: note || undefined } }" class="see3d">Виж името си върху купичката</NuxtLink>
         </div>
 
         <div class="opt">
@@ -117,9 +117,9 @@ useHead(() => ({ title: p.value.name, meta: [{ name: 'description', content: `${
           </div>
           <div v-else class="sws" role="radiogroup" aria-label="Цвят">
             <button v-for="(c, i) in colours" :key="c.name" role="radio" :aria-checked="colour === i" :aria-label="c.name" :title="c.name"
-              class="sw" :class="{ on: colour === i }" :style="{ background: swatch(c) }" @click="colour = i" />
+              class="sw" :class="{ on: colour === i }" :style="{ background: swatch(c) }" @click="colour = i; active = 0" />
           </div>
-          <p v-if="p.colours && !isTag" class="hint muted">Снимките показват {{ colours[0]!.name.toLowerCase() }}.</p>
+          <p v-if="p.colours && !isTag" class="hint muted">{{ p.colours?.[1]?.img ? 'Първата снимка показва избрания цвят.' : `Снимките показват ${colours[0]!.name.toLowerCase()}.` }}</p>
         </div>
 
         <div class="buy">

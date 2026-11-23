@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useCart } from '~/stores/cart'
-import { productImages, sizeLabel } from '~/data/catalog'
+import { productImages, sizeLabel, colourIndex } from '~/data/catalog'
 import { tagDesign } from '~/data/tagDesigns'
 
 const cart = useCart()
@@ -39,7 +39,7 @@ watch(() => cart.open, o => {
           </div>
           <ul class="lines">
             <li v-for="i in cart.items" :key="i.id">
-              <img :src="productImages(i.product)[0]!.sm" alt="" width="80" height="106">
+              <img :src="productImages(i.product, colourIndex(i.product, i.colour))[0]!.sm" alt="" width="80" height="106">
               <div>
                 <NuxtLink :to="`/product/${i.product.slug}`" class="nm" @click="close">{{ i.product.name }}</NuxtLink>
                 <div class="meta">

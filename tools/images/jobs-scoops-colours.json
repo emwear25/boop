@@ -1,0 +1,142 @@
+[
+ {
+  "out": "scoop-plitka-c1",
+  "refs": [
+   "scoop-plitka-hero.jpg"
+  ],
+  "prompt": "Edit this photo. Recolour ONLY the coloured strand of the twisted handle (now terracotta) to dark graphite grey (#45484a); the cream parts stay cream. Keep EVERYTHING else exactly identical: the scoop shape, the raised name ЧАРЛИ on the handle, the kibble, the oak table, the terracotta wall with leaf shadows, the light, framing and camera angle. Matte 3D printed PLA with fine layer lines. No other changes, no text added."
+ },
+ {
+  "out": "scoop-plitka-c2",
+  "refs": [
+   "scoop-plitka-hero.jpg"
+  ],
+  "prompt": "Edit this photo. Recolour ONLY the coloured strand of the twisted handle (now terracotta) to sage green (#8c9e7a); the cream parts stay cream. Keep EVERYTHING else exactly identical: the scoop shape, the raised name ЧАРЛИ on the handle, the kibble, the oak table, the terracotta wall with leaf shadows, the light, framing and camera angle. Matte 3D printed PLA with fine layer lines. No other changes, no text added."
+ },
+ {
+  "out": "scoop-plitka-c3",
+  "refs": [
+   "scoop-plitka-hero.jpg"
+  ],
+  "prompt": "Edit this photo. Recolour ONLY the coloured strand of the twisted handle (now terracotta) to soft dusty pink (#e8b9b4); the cream parts stay cream. Keep EVERYTHING else exactly identical: the scoop shape, the raised name ЧАРЛИ on the handle, the kibble, the oak table, the terracotta wall with leaf shadows, the light, framing and camera angle. Matte 3D printed PLA with fine layer lines. No other changes, no text added."
+ },
+ {
+  "out": "scoop-plitka-c4",
+  "refs": [
+   "scoop-plitka-hero.jpg"
+  ],
+  "prompt": "Edit this photo. Recolour ONLY the coloured strand of the twisted handle (now terracotta) to cocoa brown (#6e4630); the cream parts stay cream. Keep EVERYTHING else exactly identical: the scoop shape, the raised name ЧАРЛИ on the handle, the kibble, the oak table, the terracotta wall with leaf shadows, the light, framing and camera angle. Matte 3D printed PLA with fine layer lines. No other changes, no text added."
+ },
+ {
+  "out": "scoop-valna-c1",
+  "refs": [
+   "scoop-valna-hero.jpg"
+  ],
+  "prompt": "Edit this photo. Recolour ONLY the ribbed lower part of the cup (now sage green) to dark graphite grey (#45484a); the cream parts stay cream. Keep EVERYTHING else exactly identical: the scoop shape, the raised name МАКС on the handle, the kibble, the oak table, the terracotta wall with leaf shadows, the light, framing and camera angle. Matte 3D printed PLA with fine layer lines. No other changes, no text added."
+ },
+ {
+  "out": "scoop-valna-c2",
+  "refs": [
+   "scoop-valna-hero.jpg"
+  ],
+  "prompt": "Edit this photo. Recolour ONLY the ribbed lower part of the cup (now sage green) to soft dusty pink (#e8b9b4); the cream parts stay cream. Keep EVERYTHING else exactly identical: the scoop shape, the raised name МАКС on the handle, the kibble, the oak table, the terracotta wall with leaf shadows, the light, framing and camera angle. Matte 3D printed PLA with fine layer lines. No other changes, no text added."
+ },
+ {
+  "out": "scoop-valna-c3",
+  "refs": [
+   "scoop-valna-hero.jpg"
+  ],
+  "prompt": "Edit this photo. Recolour ONLY the ribbed lower part of the cup (now sage green) to cocoa brown (#6e4630); the cream parts stay cream. Keep EVERYTHING else exactly identical: the scoop shape, the raised name МАКС on the handle, the kibble, the oak table, the terracotta wall with leaf shadows, the light, framing and camera angle. Matte 3D printed PLA with fine layer lines. No other changes, no text added."
+ },
+ {
+  "out": "scoop-valna-c4",
+  "refs": [
+   "scoop-valna-hero.jpg"
+  ],
+  "prompt": "Edit this photo. Recolour ONLY the ribbed lower part of the cup (now sage green) to terracotta (#c4704f); the cream parts stay cream. Keep EVERYTHING else exactly identical: the scoop shape, the raised name МАКС on the handle, the kibble, the oak table, the terracotta wall with leaf shadows, the light, framing and camera angle. Matte 3D printed PLA with fine layer lines. No other changes, no text added."
+ },
+ {
+  "out": "scoop-kokalche-c1",
+  "refs": [
+   "scoop-kokalche-hero.jpg"
+  ],
+  "prompt": "Edit this photo. Recolour ONLY the whole scoop (now sand beige) to sage green (#8c9e7a), a single matte colour. Keep EVERYTHING else exactly identical: the scoop shape, the raised name РОКИ on the handle, the kibble, the oak table, the terracotta wall with leaf shadows, the light, framing and camera angle. Matte 3D printed PLA with fine layer lines. No other changes, no text added."
+ },
+ {
+  "out": "scoop-kokalche-c2",
+  "refs": [
+   "scoop-kokalche-hero.jpg"
+  ],
+  "prompt": "Edit this photo. Recolour ONLY the whole scoop (now sand beige) to terracotta (#c4704f), a single matte colour. Keep EVERYTHING else exactly identical: the scoop shape, the raised name РОКИ on the handle, the kibble, the oak table, the terracotta wall with leaf shadows, the light, framing and camera angle. Matte 3D printed PLA with fine layer lines. No other changes, no text added."
+ },
+ {
+  "out": "scoop-kokalche-c3",
+  "refs": [
+   "scoop-kokalche-hero.jpg"
+  ],
+  "prompt": "Edit this photo. Recolour ONLY the whole scoop (now sand beige) to milky cream (#efe6d6), a single matte colour. Keep EVERYTHING else exactly identical: the scoop shape, the raised name РОКИ on the handle, the kibble, the oak table, the terracotta wall with leaf shadows, the light, framing and camera angle. Matte 3D printed PLA with fine layer lines. No other changes, no text added."
+ },
+ {
+  "out": "scoop-kokalche-c4",
+  "refs": [
+   "scoop-kokalche-hero.jpg"
+  ],
+  "prompt": "Edit this photo. Recolour ONLY the whole scoop (now sand beige) to dark graphite grey (#45484a), a single matte colour. Keep EVERYTHING else exactly identical: the scoop shape, the raised name РОКИ on the handle, the kibble, the oak table, the terracotta wall with leaf shadows, the light, framing and camera angle. Matte 3D printed PLA with fine layer lines. No other changes, no text added."
+ },
+ {
+  "out": "scoop-lapichka-c1",
+  "refs": [
+   "scoop-lapichka-hero.jpg"
+  ],
+  "prompt": "Edit this photo. Recolour ONLY the whole scoop (now terracotta) to warm sand beige (#d9b892), a single matte colour. Keep EVERYTHING else exactly identical: the scoop shape, the raised name БОНИ on the handle, the kibble, the oak table, the terracotta wall with leaf shadows, the light, framing and camera angle. Matte 3D printed PLA with fine layer lines. No other changes, no text added."
+ },
+ {
+  "out": "scoop-lapichka-c2",
+  "refs": [
+   "scoop-lapichka-hero.jpg"
+  ],
+  "prompt": "Edit this photo. Recolour ONLY the whole scoop (now terracotta) to sage green (#8c9e7a), a single matte colour. Keep EVERYTHING else exactly identical: the scoop shape, the raised name БОНИ on the handle, the kibble, the oak table, the terracotta wall with leaf shadows, the light, framing and camera angle. Matte 3D printed PLA with fine layer lines. No other changes, no text added."
+ },
+ {
+  "out": "scoop-lapichka-c3",
+  "refs": [
+   "scoop-lapichka-hero.jpg"
+  ],
+  "prompt": "Edit this photo. Recolour ONLY the whole scoop (now terracotta) to soft dusty pink (#e8b9b4), a single matte colour. Keep EVERYTHING else exactly identical: the scoop shape, the raised name БОНИ on the handle, the kibble, the oak table, the terracotta wall with leaf shadows, the light, framing and camera angle. Matte 3D printed PLA with fine layer lines. No other changes, no text added."
+ },
+ {
+  "out": "scoop-lapichka-c4",
+  "refs": [
+   "scoop-lapichka-hero.jpg"
+  ],
+  "prompt": "Edit this photo. Recolour ONLY the whole scoop (now terracotta) to dark graphite grey (#45484a), a single matte colour. Keep EVERYTHING else exactly identical: the scoop shape, the raised name БОНИ on the handle, the kibble, the oak table, the terracotta wall with leaf shadows, the light, framing and camera angle. Matte 3D printed PLA with fine layer lines. No other changes, no text added."
+ },
+ {
+  "out": "scoop-lapa-c1",
+  "refs": [
+   "scoop-lapa-hero.jpg"
+  ],
+  "prompt": "Edit this photo. Recolour the scoop: its smooth upper part and the handle become warm sand beige (#d9b892), and the vertically ribbed lower part of the cup becomes cocoa brown (#6e4630). Keep EVERYTHING else exactly identical: the scoop shape, the wave line, the small paw icon and the raised name РИЧИ on the handle, the kibble, the oak table, the terracotta wall with leaf shadows, the light, framing and camera angle. Matte 3D printed PLA. No other changes, no text added."
+ },
+ {
+  "out": "scoop-lapa-c2",
+  "refs": [
+   "scoop-lapa-hero.jpg"
+  ],
+  "prompt": "Edit this photo. Recolour the scoop: its smooth upper part and the handle become milky cream (#efe6d6), and the vertically ribbed lower part of the cup becomes sage green (#8c9e7a). Keep EVERYTHING else exactly identical: the scoop shape, the wave line, the small paw icon and the raised name РИЧИ on the handle, the kibble, the oak table, the terracotta wall with leaf shadows, the light, framing and camera angle. Matte 3D printed PLA. No other changes, no text added."
+ },
+ {
+  "out": "scoop-lapa-c3",
+  "refs": [
+   "scoop-lapa-hero.jpg"
+  ],
+  "prompt": "Edit this photo. Recolour the scoop: its smooth upper part and the handle become milky cream (#efe6d6), and the vertically ribbed lower part of the cup becomes pale mint green (#9fd3c0). Keep EVERYTHING else exactly identical: the scoop shape, the wave line, the small paw icon and the raised name РИЧИ on the handle, the kibble, the oak table, the terracotta wall with leaf shadows, the light, framing and camera angle. Matte 3D printed PLA. No other changes, no text added."
+ },
+ {
+  "out": "scoop-lapa-c4",
+  "refs": [
+   "scoop-lapa-hero.jpg"
+  ],
+  "prompt": "Edit this photo. Recolour the scoop: its smooth upper part and the handle become warm sand beige (#d9b892), and the vertically ribbed lower part of the cup becomes soft peach (#f0a58c). Keep EVERYTHING else exactly identical: the scoop shape, the wave line, the small paw icon and the raised name РИЧИ on the handle, the kibble, the oak table, the terracotta wall with leaf shadows, the light, framing and camera angle. Matte 3D printed PLA. No other changes, no text added."
+ }
+]

@@ -1,4 +1,4 @@
-// Procedural 3D bowl for boop: lathe-built shell with 3D-print layer lines,
+// Procedural 3D bowl for boop: lathe-built shell with fine layer lines, a scoop that pours,
 // a polished steel insert, instanced kibble that pours in, and a name that is
 // engraved into the shell (canvas bump + colour map). Client-only.
 import * as THREE from 'three'
@@ -36,6 +36,13 @@ const SHAPES: Record<ShapeId, Shape> = {
 }
 
 const ease = (t: number) => t * t * (3 - 2 * t)
+// Scoop rest position (relative to the bowl centre) and pour angle; LIP = where its rim
+// edge ends up when tilted, i.e. where the kibble leaves it.
+const SCOOP_X = 0.62, SCOOP_Y = 1.45, SCOOP_Z = 0.2, SCOOP_TILT = 1.75
+const LIP = (() => {
+  const x = -0.42, y = 0.44, c = Math.cos(SCOOP_TILT), s = Math.sin(SCOOP_TILT)
+  return { x: SCOOP_X + x * c - y * s, y: SCOOP_Y + x * s + y * c, z: SCOOP_Z }
+})()
 const clamp = (v: number, a = 0, b = 1) => Math.min(b, Math.max(a, v))
 
 /** [top, bottom] colours; bottom is used below the wave line on two-tone shapes. */
@@ -50,6 +57,11 @@ export class BowlScene {
   private shell!: THREE.Mesh
   private insert!: THREE.Mesh
   private kibble!: THREE.InstancedMesh
+  /** The scoop that pours the kibble in (follows the bowl, not its spin). */
+  private scoop = new THREE.Group()
+  private scoopBand!: THREE.MeshPhysicalMaterial
+  private scoopCream!: THREE.MeshPhysicalMaterial
+  private scoopMound!: THREE.InstancedMesh
   private shellMat: THREE.MeshPhysicalMaterial
   private canvas = document.createElement('canvas')
   private bumpCanvas = document.createElement('canvas')
@@ -128,6 +140,7 @@ export class BowlScene {
     this.scene.add(this.group)
     this.buildBowl()
     this.buildKibble()
+    this.buildScoop()
     this.drawSurface()
 
     this.camera.position.set(0, 2.2, 5)
@@ -194,7 +207,7 @@ export class BowlScene {
     }
     rest.sort((a, b) => a.y - b.y)
     this.rest = rest
-    this.start = rest.map(() => new THREE.Vector3((rnd() - 0.5) * 0.28, 3.2 + rnd() * 1.6, (rnd() - 0.5) * 0.28 + 0.1))
+    this.start = rest.map(() => new THREE.Vector3((rnd() - 0.5) * 0.12, rnd() * 0.08, (rnd() - 0.5) * 0.14)) // jitter around the scoop lip
     this.spin = rest.map(() => new THREE.Euler(rnd() * 6, rnd() * 6, rnd() * 6))
     this.scale = rest.map(() => 0.8 + rnd() * 0.45)
     for (let i = 0; i < n; i++) this.kibble.setColorAt(i, browns[i % browns.length]!)
@@ -202,15 +215,71 @@ export class BowlScene {
     this.updateKibble()
   }
 
+  private buildScoop() {
+    const mat = (c: string) => new THREE.MeshPhysicalMaterial({ color: c, roughness: 0.78, sheen: 0.3, sheenRoughness: 0.8, side: THREE.DoubleSide })
+    this.scoopCream = mat(this.opts.colours[0]); this.scoopBand = mat(this.opts.colours[1])
+    // cup: about half the bowl's width, closed bottom, rounded lip
+    const prof = [[0, 0], [0.36, 0], [0.42, 0.05], [0.43, 0.42], [0.415, 0.44], [0.395, 0.42], [0.385, 0.08], [0.33, 0.035], [0, 0.035]]
+      .map(([r, y]) => new THREE.Vector2(r!, y!))
+    const cup = new THREE.Mesh(new THREE.LatheGeometry(prof, 72), this.scoopCream)
+    // two-tone ribbed band at the bottom, like the bowls
+    const band = new THREE.Mesh(new THREE.CylinderGeometry(0.436, 0.426, 0.19, 72, 1, true), this.scoopBand)
+    band.position.y = 0.1
+    // flat handle with a rounded end, leaving the rim on the +x side
+    const handle = new THREE.Mesh(new THREE.BoxGeometry(0.82, 0.05, 0.17), this.scoopCream)
+    handle.position.set(0.41 + 0.41, 0.405, 0)
+    const end = new THREE.Mesh(new THREE.CylinderGeometry(0.085, 0.085, 0.05, 32), this.scoopCream)
+    end.position.set(0.41 + 0.82, 0.405, 0)
+    // kibble heaped in the cup; it empties as the pour goes on
+    const n = 34
+    this.scoopMound = new THREE.InstancedMesh(this.kibble.geometry, this.kibble.material as THREE.Material, n)
+    const rnd = mulberry(11)
+    const browns = ['#6b3a1a', '#7a4420', '#5c3015', '#8a5026'].map(c => new THREE.Color(c))
+    for (let i = 0; i < n; i++) {
+      const r = Math.sqrt(rnd()) * 0.3, a = rnd() * Math.PI * 2
+      this.dummy.position.set(Math.cos(a) * r, 0.3 + rnd() * 0.12 + (0.3 - r) * 0.25, Math.sin(a) * r)
+      this.dummy.rotation.set(rnd() * 6, rnd() * 6, rnd() * 6); this.dummy.scale.setScalar(0.8 + rnd() * 0.4)
+      this.dummy.updateMatrix(); this.scoopMound.setMatrixAt(i, this.dummy.matrix); this.scoopMound.setColorAt(i, browns[i % browns.length]!)
+    }
+    for (const m of [cup, band, handle, end]) { m.castShadow = true; m.receiveShadow = true }
+    this.scoop.add(cup, band, handle, end, this.scoopMound)
+    this.scene.add(this.scoop)
+    this.updateScoop()
+  }
+
+  /** Scoop pose for the current pour/engrave progress. */
+  private updateScoop() {
+    const inK = ease(clamp(this.pour / 0.12))
+    const tilt = ease(clamp((this.pour - 0.06) / 0.2)) * SCOOP_TILT
+    const outK = ease(clamp(this.engrave / 0.6))
+    const g = this.group.position
+    this.scoop.visible = this.pour > 0.001 && outK < 0.999
+    this.scoop.position.set(g.x + SCOOP_X + (1 - inK) * 2.4 + outK * 2.6, g.y + SCOOP_Y + (1 - inK) * 0.4 + outK * 1.0, SCOOP_Z)
+    this.scoop.rotation.set(0, 0, tilt)
+    // the heap empties while the kibble falls
+    const n = this.scoopMound.count
+    for (let i = 0; i < n; i++) {
+      this.scoopMound.getMatrixAt(i, this.dummy.matrix)
+      this.dummy.matrix.decompose(this.dummy.position, this.dummy.quaternion, this.dummy.scale)
+      const keep = this.pour < 0.14 + (1 - i / n) * 0.6
+      this.dummy.scale.setScalar(keep ? 0.8 + (i % 5) * 0.09 : 0)
+      this.dummy.updateMatrix(); this.scoopMound.setMatrixAt(i, this.dummy.matrix)
+    }
+    this.scoopMound.instanceMatrix.needsUpdate = true
+  }
+
   private updateKibble() {
     const n = this.rest.length
     for (let i = 0; i < n; i++) {
-      const delay = (i / n) * 0.72
-      const t = clamp((this.pour - delay) / 0.28)
+      const delay = 0.18 + (i / n) * 0.62
+      const t = clamp((this.pour - delay) / 0.2)
       const d = this.dummy
       if (t <= 0) { d.scale.setScalar(0); d.position.set(0, -10, 0) }
       else {
-        const s = this.start[i]!, r = this.rest[i]!
+        // start at the scoop lip (world), expressed in the spinning bowl's local frame
+        const j = this.start[i]!, r = this.rest[i]!
+        const wx = LIP.x + j.x, wz = LIP.z + j.z, cos = Math.cos(-this.group.rotation.y), sin = Math.sin(-this.group.rotation.y)
+        const s = new THREE.Vector3(wx * cos + wz * sin, LIP.y + j.y, -wx * sin + wz * cos)
         const fall = t * t // gravity
         const bounce = t > 0.86 ? Math.sin((t - 0.86) / 0.14 * Math.PI) * 0.05 : 0
         d.position.set(s.x + (r.x - s.x) * ease(t), s.y + (r.y - s.y) * fall + bounce, s.z + (r.z - s.z) * ease(t))
@@ -296,7 +365,7 @@ export class BowlScene {
   }
 
   set({ colours, name, shape }: Partial<BowlOptions>) {
-    if (colours) this.opts.colours = colours
+    if (colours) { this.opts.colours = colours; this.scoopCream?.color.set(colours[0]); this.scoopBand?.color.set(colours[1]) }
     if (name !== undefined) this.opts.name = name
     if (shape && shape !== this.opts.shape) {
       this.opts.shape = shape; this.shape = SHAPES[shape]
@@ -309,6 +378,7 @@ export class BowlScene {
     const nameChanged = Math.round((this.opts.name || '').length * clamp(engrave)) !== Math.round((this.opts.name || '').length * clamp(this.engrave))
     this.pour = pour; this.engrave = engrave; this.rotation = rotation
     this.updateKibble()
+    this.updateScoop()
     if (nameChanged) this.drawSurface()
     // camera glides closer and lower as the bowl fills
     const k = ease(clamp(cam))
@@ -330,6 +400,7 @@ export class BowlScene {
     this.group.position.x = w / h > 1.15 ? this.offsetX : 0
     this.group.position.y = w / h < 0.8 ? -0.35 : 0
     this.camera.updateProjectionMatrix()
+    this.updateScoop()
     this.dirty = true
   }
 
@@ -338,7 +409,7 @@ export class BowlScene {
     if (!this.visible) return
     const target = this.rotation
     const cur = this.group.rotation.y
-    if (Math.abs(target - cur) > 0.0005) { this.group.rotation.y += (target - cur) * 0.12; this.dirty = true }
+    if (Math.abs(target - cur) > 0.0005) { this.group.rotation.y += (target - cur) * 0.12; if (this.pour > 0 && this.pour < 1) this.updateKibble(); this.dirty = true }
     if (this.dirty) { this.renderer.render(this.scene, this.camera); this.dirty = false }
   }
 

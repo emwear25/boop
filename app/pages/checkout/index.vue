@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useCart } from '~/stores/cart'
-import { productImages, sizeLabel, type Product } from '~/data/catalog'
+import { productImages, sizeLabel, colourIndex, type Product } from '~/data/catalog'
 import { tagDesign } from '~/data/tagDesigns'
 import type { Courier, CourierOffice } from '~/composables/useCourier'
 
@@ -246,7 +246,7 @@ function focusField(k: string) { document.getElementById(`f-${k}`)?.focus() }
         <aside class="summary">
           <ul>
             <li v-for="i in cart.items" :key="i.id">
-              <img :src="productImages(i.product)[0]!.sm" alt="" width="64" height="85">
+              <img :src="productImages(i.product, colourIndex(i.product, i.colour))[0]!.sm" alt="" width="64" height="85">
               <div><b>{{ i.product.name }}</b><small class="muted">{{ lineDetails(i) }} × {{ i.qty }}</small></div>
               <span>{{ euro(i.total) }}</span>
             </li>

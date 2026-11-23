@@ -65,7 +65,7 @@ onBeforeUnmount(() => { if (import.meta.client) { document.documentElement.style
           </li>
         </ul>
         <NuxtLink to="/personalize" class="make-cta">
-          <span><b>Създай купичка с име</b><small>Виж името на любимеца в 3D</small></span>
+          <span><b>Създай купичка с име</b><small>Виж името на любимеца върху купичката</small></span>
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
         </NuxtLink>
         <ul class="more">

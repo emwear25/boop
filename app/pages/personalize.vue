@@ -84,7 +84,7 @@ function add() {
   <div class="wrap page">
     <section class="cfg">
       <div class="stage-wrap">
-        <div ref="stage" class="stage" aria-label="3D преглед на купичката. Влачи, за да я завъртиш." role="img"
+        <div ref="stage" class="stage" aria-label="Преглед на купичката. Влачи, за да я завъртиш." role="img"
           @pointerdown="down" @pointermove="move" @pointerup="up" @pointercancel="up" />
         <LeafLight :strength=".16" />
         <p class="drag" aria-hidden="true">Влачи, за да завъртиш</p>

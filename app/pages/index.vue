@@ -82,7 +82,7 @@ onBeforeUnmount(() => { ctx?.revert(); ScrollTrigger.refresh() })
       <div class="names-top">
         <div>
           <h2 class="h2">С неговото име.</h2>
-          <p class="lead">Гравираме името в купичката или го отпечатваме като медальон в десет форми и много цветове.</p>
+          <p class="lead">Гравираме името в купичката или го изписваме върху медальон в десет форми и много цветове.</p>
         </div>
         <div class="cta-row">
           <NuxtLink to="/personalize" class="btn btn-solid">Създай купичка с име</NuxtLink>
@@ -104,12 +104,12 @@ onBeforeUnmount(() => { ctx?.revert(); ScrollTrigger.refresh() })
     <section class="steel">
       <div class="steel-copy">
         <h2 class="h2">Инокс отвътре. Мекота отвън.</h2>
-        <p>Храната докосва само иноксова купа, която се вади с едно движение. Отпечатаната обвивка пази пода и стои стабилно, дори когато някой яде прекалено ентусиазирано.</p>
+        <p>Храната докосва само иноксова купа, която се вади с едно движение. Обвивката пази пода и стои стабилно, дори когато някой яде прекалено ентусиазирано.</p>
         <dl class="facts">
           <div><dt>Иноксова купа</dt><dd>Мие се в съдомиялна</dd></div>
           <div><dt>Основа</dt><dd>Неплъзгаща се</dd></div>
           <div><dt>Размери</dt><dd>13, 16 и 20 см</dd></div>
-          <div><dt>Изработка</dt><dd>3D печат в България, 3 до 5 дни</dd></div>
+          <div><dt>Изработка</dt><dd>В България, за 3 до 5 работни дни</dd></div>
         </dl>
       </div>
       <div class="steel-img"><img src="/img/p/pudding-2.webp" alt="Бигъл яде от купичка Пудинг" loading="lazy"></div>
@@ -164,12 +164,12 @@ onBeforeUnmount(() => { ctx?.revert(); ScrollTrigger.refresh() })
 
     <!-- Process: a real sequence, so it is numbered -->
     <section class="sec wrap make">
-      <div class="make-img"><img src="/img/scene-making.webp" alt="3D принтер отпечатва купичка в цвят салвия" loading="lazy"></div>
+      <div class="make-img"><img src="/img/scene-lineup.webp" alt="Купички boop в различни цветове" loading="lazy"></div>
       <div>
-        <h2 class="h2">Отпечатана след като поръчаш.</h2>
+        <h2 class="h2">Изработена, след като поръчаш.</h2>
         <ol class="steps">
           <li><b>Избираш форма и размер</b><span>Всяка купичка идва с иноксова купа в съответния размер.</span></li>
-          <li><b>Отпечатваме я в 3D</b><span>Слой по слой, в нашето студио в България. Отнема 3 до 5 работни дни.</span></li>
+          <li><b>Изработваме я специално за теб</b><span>В нашето студио в България, за 3 до 5 работни дни.</span></li>
           <li><b>Изпращаме с Еконт или Спиди</b><span>Плащаш с карта или при получаване. Безплатно до офис над 60&nbsp;€.</span></li>
         </ol>
       </div>

@@ -7,10 +7,10 @@ const size = ref(16)
   <div class="wrap page">
     <header class="top">
       <h1 class="display">Правим неща, които искаш да оставиш на пода.</h1>
-      <p class="lead">boop е малко българско студио за купички и закачалки за кучета и котки. Проектираме всяка форма сами и я отпечатваме в 3D, едва когато някой я поръча. Така няма склад, няма излишни бройки и всяка купичка е нова.</p>
+      <p class="lead">boop е малко българско студио за купички и закачалки за кучета и котки. Проектираме всяка форма сами и я изработваме едва когато някой я поръча. Така няма склад, няма излишни бройки и всяка купичка е нова.</p>
     </header>
 
-    <div class="hero-img"><img src="/img/scene-making.webp" alt="3D принтер отпечатва купичка" loading="lazy"></div>
+    <div class="hero-img"><img src="/img/scene-lineup.webp" alt="Купички boop в различни цветове" loading="lazy"></div>
 
     <section id="sizes" class="block">
       <h2 class="h2">Кой размер да избера</h2>
@@ -36,7 +36,7 @@ const size = ref(16)
       <dl class="facts">
         <div><dt>Иноксовата купа</dt><dd>Мие се в съдомиялна</dd></div>
         <div><dt>Обвивката</dt><dd>Влажна кърпа и малко препарат, вода до 50°C</dd></div>
-        <div><dt>Материал</dt><dd>PLA, отпечатан слой по слой</dd></div>
+        <div><dt>Материал</dt><dd>PLA, растителна пластмаса</dd></div>
       </dl>
     </section>
 

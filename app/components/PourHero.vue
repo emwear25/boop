@@ -70,7 +70,7 @@ onBeforeUnmount(() => { st?.kill(); io?.disconnect(); bowl?.dispose(); bowl = nu
         <div class="captions">
           <div class="cap first" :style="{ opacity: 1 - step(0.06, 0.16), transform: `translateY(${-step(0.06, 0.16) * 30}px)` }">
             <h1 class="display">Звукът, който всяко куче познава.</h1>
-            <p class="lead">Купички, отпечатани в 3D в България. Скролни и ги напълни.</p>
+            <p class="lead">Купички и лъжички с името на любимеца, изработени в България. Скролни и ги напълни.</p>
           </div>
           <div class="cap" :style="{ opacity: show(0.2, 0.28, 0.48, 0.56) }">
             <h2 class="h2">Инокс отвътре.<br>Мекота отвън.</h2>
