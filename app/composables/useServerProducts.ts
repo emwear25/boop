@@ -19,5 +19,7 @@ export function useServerProducts() {
   return { load }
 }
 
-/** Variant size name on the backend (bowls are sold in 13/16/20 cm, the rest in one size). */
-export const serverSize = (cm?: number) => (cm ? `${cm} см` : 'Стандартен')
+import { sizeLabel, type Product } from '~/data/catalog'
+
+/** Variant size name on the backend: the size label ("16 см", "1 чаша · 240 мл") or "Стандартен". */
+export const serverSize = (p: Product, cm?: number) => (cm ? sizeLabel(p, cm) : 'Стандартен')

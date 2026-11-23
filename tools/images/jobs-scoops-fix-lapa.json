@@ -1,0 +1,18 @@
+[
+ {
+  "out": "scoop-lapa-2",
+  "refs": [
+   "scoop-lapa-ref.jpg",
+   "real-lapa.jpg"
+  ],
+  "prompt": "Bright modern living room with light oak floor and a soft sofa in the background. On the floor stands the bowl from image 2, filled with kibble, and right next to it lies the scoop from image 1, also filled with kibble. a beagle sits behind them looking happily at the bowl. SCALE IS CRITICAL: the bowl is about 20 cm wide and 12 cm tall; the scoop is clearly SMALLER: its round cup is only about 9 cm wide, less than half the width of the bowl, and the whole scoop including handle is about 18 cm long. The dog is much bigger than both. Image 1 is the kibble scoop and image 2 is the pet bowl, both our products: keep both EXACTLY as in their reference images (same shapes, same colours, matte 3D printed finish). The scoop handle shows the raised name РИЧИ; the bowl shows the same name РИЧИ instead of any other name. No other text, no logos. Vertical 3:4 photo, warm natural sunlight, premium lifestyle photography. The bowl and the scoop have the SAME colours: cream top and dark graphite grey ribbed base."
+ },
+ {
+  "out": "scoop-lapa-3",
+  "refs": [
+   "scoop-lapa-ref.jpg",
+   "real-lapa.jpg"
+  ],
+  "prompt": "Close-up in a bright kitchen on a light oak floor: a hand holds the scoop from image 1 by its handle and pours dry kibble into the bowl from image 2; kibble falling in mid air; the name РИЧИ on the scoop handle readable. SCALE IS CRITICAL: the bowl is about 20 cm wide and 12 cm tall; the scoop is clearly SMALLER: its round cup is only about 9 cm wide, less than half the width of the bowl, and the whole scoop including handle is about 18 cm long. The dog is much bigger than both. Image 1 is the kibble scoop and image 2 is the pet bowl, both our products: keep both EXACTLY as in their reference images (same shapes, same colours, matte 3D printed finish). The scoop handle shows the raised name РИЧИ; the bowl shows the same name РИЧИ instead of any other name. No other text, no logos. Vertical 3:4 photo, warm natural sunlight, premium lifestyle photography. The bowl and the scoop have the SAME colours: cream top and dark graphite grey ribbed base."
+ }
+]

@@ -10,6 +10,7 @@
       <ul>
         <li><NuxtLink :to="'/category/kupichki-za-kucheta-i-kotki'">Купички</NuxtLink></li>
         <li><NuxtLink :to="'/category/kupichki-s-ime'">С име</NuxtLink></li>
+        <li><NuxtLink :to="'/category/lazhichki-za-granuli'">Лъжички с име</NuxtLink></li>
         <li><NuxtLink :to="'/category/zakachalki-za-povod'">Закачалки за разходка</NuxtLink></li>
         <li><NuxtLink :to="'/category/koledni-kupichki'">Коледна колекция</NuxtLink></li>
       </ul>

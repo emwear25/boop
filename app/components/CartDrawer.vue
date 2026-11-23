@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useCart } from '~/stores/cart'
-import { productImages } from '~/data/catalog'
+import { productImages, sizeLabel } from '~/data/catalog'
 import { tagDesign } from '~/data/tagDesigns'
 
 const cart = useCart()
@@ -43,7 +43,7 @@ watch(() => cart.open, o => {
               <div>
                 <NuxtLink :to="`/product/${i.product.slug}`" class="nm" @click="close">{{ i.product.name }}</NuxtLink>
                 <div class="meta">
-                  <span v-if="i.size">{{ i.size }} см</span>
+                  <span v-if="i.size">{{ sizeLabel(i.product, i.size) }}</span>
                   <span v-if="i.design">{{ tagDesign(i.design).name }}</span>
                   <span v-if="i.colour">{{ i.colour }}</span>
                   <span v-if="i.note">Надпис: {{ i.note }}</span>

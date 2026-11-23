@@ -3,7 +3,7 @@ import { tagDesigns, tagBySlug, type TagDesignId } from './tagDesigns'
 // Local catalogue for the visual build. Shaped so it can later be served by the
 // shared backend as store "boop" (Product.storefront) without changing components.
 
-export type CategoryId = 'kupichki-za-kucheta-i-kotki' | 'kupichki-s-ime' | 'medalyoni-s-ime' | 'zakachalki-za-povod' | 'koledni-kupichki'
+export type CategoryId = 'kupichki-za-kucheta-i-kotki' | 'kupichki-s-ime' | 'medalyoni-s-ime' | 'lazhichki-za-granuli' | 'zakachalki-za-povod' | 'koledni-kupichki'
 
 export interface Category {
   id: CategoryId
@@ -13,7 +13,10 @@ export interface Category {
 }
 
 export interface SizeOption {
-  cm: 13 | 16 | 20
+  /** Size id: bowl insert in cm (13/16/20) or scoop volume in ml (120/240/480). */
+  cm: number
+  /** Shown instead of "<cm> см" when set. */
+  label?: string
   fits: string
   price: number
 }
@@ -44,6 +47,7 @@ export const categories: Category[] = [
   { id: 'kupichki-za-kucheta-i-kotki', name: 'Купички', title: 'Купички за всеки ден', intro: 'Меки форми и иноксова купа, която се вади и мие в съдомиялна.' },
   { id: 'kupichki-s-ime', name: 'С име', title: 'С името на любимеца', intro: 'Купички, повдигнати стойки и медальони с гравирано име. Пишем го на кирилица или латиница.' },
   { id: 'medalyoni-s-ime', name: 'Медальони', title: 'Медальони с име', intro: 'Десет форми, много цветове и името на любимеца. Отпечатани на един или няколко цвята.' },
+  { id: 'lazhichki-za-granuli', name: 'Лъжички', title: 'Лъжички за гранули с име', intro: 'Мерителна лъжичка с името на любимеца. Около една чаша гранули, винаги една и съща порция.' },
   { id: 'zakachalki-za-povod', name: 'За разходка', title: 'Закачалки за разходка', intro: 'Повод, нагръдник и торбички на едно място до вратата.' },
   { id: 'koledni-kupichki', name: 'Коледа', title: 'Коледна колекция', intro: 'Празнични купички, които стоят добре и под елхата.' },
 ]
@@ -55,6 +59,20 @@ const sizes = (a: number, b: number, c: number): SizeOption[] => [
   { cm: 16, fits: 'Малки и средни породи', price: off(b) },
   { cm: 20, fits: 'Средни и големи породи', price: off(c) },
 ]
+// Kibble scoops: the common retail sizes, ½, 1 and 2 cups (a cup is about 240 ml)
+// List price minus 30%, rounded to 10 cents
+const scoopOff = (n: number) => Math.round(n * 0.7 * 10) / 10
+const scoopSizes = (a: number, b: number, c: number): SizeOption[] => [
+  { cm: 120, label: '½ чаша · 120 мл', fits: 'Котки и малки кучета', price: scoopOff(a) },
+  { cm: 240, label: '1 чаша · 240 мл', fits: 'Малки и средни породи', price: scoopOff(b) },
+  { cm: 480, label: '2 чаши · 480 мл', fits: 'Големи породи', price: scoopOff(c) },
+]
+// Scoop colours: two-tone like the bowls they go with, or one colour for the shaped handles
+const M = '#efe6d6'
+const twoTone = (first: [string, string]) => [first, ['графит', '#45484a'], ['салвия', '#8c9e7a'], ['розово', '#e8b9b4'], ['какао', '#6e4630'], ['теракота', '#c4704f']]
+  .filter((c, i, all) => all.findIndex(x => x[0] === c[0]) === i).slice(0, 5)
+  .map(([n, h]) => ({ name: `Мляко и ${n}`, hex: M, hex2: h }))
+const solid = (list: [string, string][]) => list.map(([name, hex]) => ({ name, hex }))
 const everyday = sizes(24.9, 29.9, 34.9)
 const special = sizes(29.9, 34.9, 39.9)
 const holiday = sizes(27.9, 32.9, 37.9)
@@ -71,6 +89,13 @@ const nameDetails = [
   'Името е гравирано в самата купичка, не е стикер',
   'Иноксова купа, която се вади и мие в съдомиялна',
   'Отпечатана в 3D в България от PLA',
+  'Персонализираните продукти не подлежат на връщане',
+]
+const scoopDetails = [
+  'Три размера: ½ чаша (120 мл), 1 чаша (240 мл) и 2 чаши (480 мл)',
+  'Една чаша е мярката от таблицата на повечето торби с храна',
+  'Отпечатана в 3D в България от PLA',
+  'Мие се на ръка с топла вода, не в съдомиялна',
   'Персонализираните продукти не подлежат на връщане',
 ]
 const raisedDetails = [
@@ -166,6 +191,27 @@ export const products: Product[] = [
     description: 'Три куки, квадратен диспенсър за торбички и надпис Walk Club в теракота.', details: wallDetails },
   { slug: 'zakachalka-za-povod-opashchitsi', name: 'Опашчици', tagline: 'Хубавите разходки започват тук.', category: 'zakachalki-za-povod', colour: { name: 'Салвия и мляко', hex: '#a9b79a' }, badge: 'Ново', price: 34.9,
     description: 'Две кученца с вдигнати опашки, на които закачаш повода. Диспенсърът за торбички е до тях.', details: wallDetails },
+  // Kibble scoops: one price, name required
+  { slug: 'lazhichka-za-granuli-s-ime-plitka', name: 'Лъжичка Плитка', tagline: 'Хранене с усукана дръжка.', category: 'lazhichki-za-granuli', colour: { name: 'Мляко и теракота', hex: '#efe6d6' }, badge: 'Ново', sizes: scoopSizes(24.9, 29.9, 36.9),
+    colours: twoTone(['теракота', '#b5513f']),
+    personalise: nameField(8, 'напр. Чарли'),
+    description: 'Кремава лъжичка с плътна дръжка, усукана в теракота и мляко. Името е на гладката лента отгоре и се хваща удобно с цяла ръка.', details: scoopDetails },
+  { slug: 'lazhichka-za-granuli-s-ime-lapa', name: 'Лъжичка Лапа', tagline: 'В комплект с купичката Лапа.', category: 'lazhichki-za-granuli', colour: { name: 'Мляко и графит', hex: '#efe6d6' }, badge: 'Ново', sizes: scoopSizes(19.9, 24.9, 31.9),
+    colours: [{ name: 'Мляко и графит', hex: '#efe6d6', hex2: '#45484a' }, { name: 'Пясък и какао', hex: '#d9b892', hex2: '#6e4630' }, { name: 'Мляко и салвия', hex: '#efe6d6', hex2: '#8c9e7a' }, { name: 'Мляко и мента', hex: '#efe6d6', hex2: '#9fd3c0' }, { name: 'Пясък и праскова', hex: '#d9b892', hex2: '#f0a58c' }],
+    personalise: nameField(8, 'напр. Ричи'),
+    description: 'Същата мека вълна и набраздена основа като купичката Лапа, с малка лапичка и името на дръжката. Двете стоят чудесно една до друга.', details: scoopDetails },
+  { slug: 'lazhichka-za-granuli-s-ime-valna', name: 'Лъжичка Вълна', tagline: 'Два цвята и едно име.', category: 'lazhichki-za-granuli', colour: { name: 'Мляко и салвия', hex: '#efe6d6' }, badge: 'С име', sizes: scoopSizes(17.9, 22.9, 28.9),
+    colours: twoTone(['салвия', '#8c9e7a']),
+    personalise: nameField(8, 'напр. Макс'),
+    description: 'Кремава горна част, салвиена набраздена основа и права дръжка с името. Пасва на купичката Вълна с име.', details: scoopDetails },
+  { slug: 'lazhichka-za-granuli-s-ime-kokalche', name: 'Лъжичка Кокалче', tagline: 'Дръжка с форма на кокал.', category: 'lazhichki-za-granuli', colour: { name: 'Пясък', hex: '#d9b892' }, badge: 'С име', sizes: scoopSizes(17.9, 22.9, 28.9),
+    colours: solid([['Пясък', '#d9b892'], ['Салвия', '#8c9e7a'], ['Теракота', '#c4704f'], ['Мляко', '#efe6d6'], ['Графит', '#45484a']]),
+    personalise: nameField(8, 'напр. Роки'),
+    description: 'Лъжичка в цвят пясък, чиято дръжка завършва с кокалче. Името е релефно по дължината ѝ.', details: scoopDetails },
+  { slug: 'lazhichka-za-granuli-s-ime-lapichka', name: 'Лъжичка Лапичка', tagline: 'Отпечатък от лапа накрая.', category: 'lazhichki-za-granuli', colour: { name: 'Теракота', hex: '#c4704f' }, badge: 'С име', sizes: scoopSizes(17.9, 22.9, 28.9),
+    colours: solid([['Теракота', '#c4704f'], ['Пясък', '#d9b892'], ['Салвия', '#8c9e7a'], ['Розово', '#e8b9b4'], ['Графит', '#45484a']]),
+    personalise: nameField(8, 'напр. Бони'),
+    description: 'Лъжичка в теракота с отпечатък от лапа в края на дръжката и името над него.', details: scoopDetails },
 ]
 
 // Medallions: one product per design (see tagDesigns.ts)
@@ -192,6 +238,8 @@ const imageKey: Record<string, string> = {
   'koledna-kupichka-snezhen-pan': 'snowy-log', 'koledna-kupichka-medenka': 'gingerbread', 'koledna-kupichka-komin': 'chimney', 'koledna-kupichka-torbata-na-dyado-koleda': 'gift-sack', 'koledna-kupichka-podarak': 'wrapped-present',
   'povdignata-kupichka-s-ime-lapa': 'lapa', 'kupichka-s-ime-raie': 'name-ribbed', 'kupichka-s-ime-valna': 'name-wave', 'povdignata-kupichka-s-ime-visoka-valna': 'name-raised', 'povdignata-kupichka-s-ime-prasteni': 'name-rings',
   'povdignata-kupichka-s-ime-konus': 'name-cone', 'dve-kupichki-s-ime-hrana-i-voda': 'food-water', 'kupichka-s-ime-gevrek': 'name-twist',
+  'lazhichka-za-granuli-s-ime-plitka': 'scoop-plitka', 'lazhichka-za-granuli-s-ime-lapa': 'scoop-lapa', 'lazhichka-za-granuli-s-ime-valna': 'scoop-valna',
+  'lazhichka-za-granuli-s-ime-kokalche': 'scoop-kokalche', 'lazhichka-za-granuli-s-ime-lapichka': 'scoop-lapichka',
   'zakachalka-za-povod-s-ime-kokalche': 'bone-depot', 'zakachalka-za-povod-kam-planinata': 'happy-camper', 'zakachalka-za-povod-klub-razhodka': 'walk-club', 'zakachalka-za-povod-opashchitsi': 'tail-trail',
 }
 
@@ -200,6 +248,10 @@ export const productImages = (p: Product) => {
   return [1, 2, 3, 4].map(n => ({ src: `/img/p/${k}-${n}.webp`, sm: `/img/p/${k}-${n}-sm.webp` }))
 }
 
+/** Size as shown to people: "16 см" for bowls, "1 чаша · 240 мл" for scoops. */
+export const sizeLabel = (p: Product, cm?: number) => (cm ? p.sizes?.find(s => s.cm === cm)?.label ?? `${cm} см` : '')
+/** Default size: the middle one. */
+export const defaultSize = (p: Product) => p.sizes?.[1]?.cm ?? p.sizes?.[0]?.cm ?? 16
 export const fromPrice = (p: Product) => p.price ?? Math.min(...(p.sizes ?? []).map(s => s.price))
 export const findProduct = (slug: string) => products.find(p => p.slug === slug)
 export const categoryOf = (id: CategoryId) => categories.find(c => c.id === id)!

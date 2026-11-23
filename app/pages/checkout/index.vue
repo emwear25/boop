@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useCart } from '~/stores/cart'
-import { productImages, type Product } from '~/data/catalog'
+import { productImages, sizeLabel, type Product } from '~/data/catalog'
 import { tagDesign } from '~/data/tagDesigns'
 import type { Courier, CourierOffice } from '~/composables/useCourier'
 
@@ -56,7 +56,7 @@ watch(estimateKey, () => {
       city: form.city.trim(), postCode: form.postcode.trim(), street: form.address.trim(),
       receiverName: form.name.trim(), receiverPhone: form.phone.trim(),
       codEur: form.payment === 'cod' ? cart.subtotal : 0,
-      weightKg: Math.max(0.5, cart.items.reduce((n, i) => n + (i.product.category === 'medalyoni-s-ime' ? 0.05 : 0.6) * i.qty, 0)),
+      weightKg: Math.max(0.5, cart.items.reduce((n, i) => n + (i.product.category === 'medalyoni-s-ime' ? 0.05 : i.product.category === 'lazhichki-za-granuli' ? 0.2 : 0.6) * i.qty, 0)),
     })
     shipping.loading = false
   }, 500)
@@ -71,7 +71,7 @@ const errorList = computed(() => Object.entries(errors.value))
 const summaryEl = ref<HTMLElement | null>(null)
 
 const lineDetails = (i: { size?: number; design?: string; colour?: string; note?: string; product: Product }) =>
-  [i.size && `${i.size} см`, i.design && tagDesign(i.design).name, i.colour ?? i.product.colour.name, i.note && `„${i.note}“`].filter(Boolean).join(', ')
+  [i.size && sizeLabel(i.product, i.size), i.design && tagDesign(i.design).name, i.colour ?? i.product.colour.name, i.note && `„${i.note}“`].filter(Boolean).join(', ')
 
 async function orderItems() {
   const byName = await serverProducts.load()
@@ -86,7 +86,7 @@ async function orderItems() {
       colour !== wanted && `Цвят: ${wanted}`,
       i.design && `Форма: ${tagDesign(i.design).name}`,
     ].filter(Boolean).join(' · ')
-    return { product: server._id, quantity: i.qty, size: serverSize(i.size), color: colour, customization: custom || null }
+    return { product: server._id, quantity: i.qty, size: serverSize(i.product, i.size), color: colour, customization: custom || null }
   })
 }
 

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { findProduct, productImages, products, categoryOf, fromPrice } from '~/data/catalog'
+import { findProduct, productImages, products, categoryOf, fromPrice, defaultSize } from '~/data/catalog'
 import { useCart } from '~/stores/cart'
 import { tagDesigns, tagDesign } from '~/data/tagDesigns'
 
@@ -12,12 +12,12 @@ const imgs = computed(() => productImages(p.value))
 const isTag = computed(() => !!p.value.tagDesign)
 const active = ref(isTag.value ? -1 : 0)
 const forma: Record<string, string> = { 'kupichka-s-ime-valna': 'wave', 'povdignata-kupichka-s-ime-visoka-valna': 'raised', 'povdignata-kupichka-s-ime-prasteni': 'rings' }
-const size = ref<number>(16)
+const size = ref<number>(defaultSize(product.value!))
 const qty = ref(1)
 const note = ref(String(route.query.name ?? '').slice(0, 10))
 const noteError = ref('')
 const colour = ref(0)
-watch(() => route.params.slug, () => { colour.value = 0; note.value = String(route.query.name ?? '').slice(0, 10); noteError.value = ''; active.value = isTag.value ? -1 : 0 })
+watch(() => route.params.slug, () => { size.value = defaultSize(p.value); colour.value = 0; note.value = String(route.query.name ?? '').slice(0, 10); noteError.value = ''; active.value = isTag.value ? -1 : 0 })
 const colours = computed(() => p.value.colours ?? [p.value.colour])
 const swatch = (c: { hex: string; hex2?: string }) => c.hex2 ? `linear-gradient(135deg, ${c.hex} 50%, ${c.hex2} 50%)` : c.hex
 const cart = useCart()
@@ -89,10 +89,10 @@ useHead(() => ({ title: p.value.name, meta: [{ name: 'description', content: `${
         <p class="desc">{{ p.description }}</p>
 
         <div v-if="p.sizes" class="opt">
-          <div class="lbl">Размер <span class="muted">на иноксовата купа</span></div>
+          <div class="lbl">Размер <span class="muted">{{ p.sizes[0]?.label ? 'колко гранули побира' : 'на иноксовата купа' }}</span></div>
           <div class="sizes" role="radiogroup" aria-label="Размер">
             <button v-for="s in p.sizes" :key="s.cm" role="radio" :aria-checked="size === s.cm" :class="{ on: size === s.cm }" @click="size = s.cm">
-              <b>{{ s.cm }} см</b><small>{{ s.fits }}</small><em>{{ euro(s.price) }}</em>
+              <b>{{ s.label?.split(' · ')[0] ?? `${s.cm} см` }}<i v-if="s.label">{{ s.label.split(' · ')[1] }}</i></b><small>{{ s.fits }}</small><em>{{ euro(s.price) }}</em>
             </button>
           </div>
         </div>
@@ -212,7 +212,8 @@ useHead(() => ({ title: p.value.name, meta: [{ name: 'description', content: `${
 .sizes button { text-align: left; border: 1px solid var(--line); border-radius: 16px; padding: 14px 14px 12px; background: var(--paper); transition: border-color .2s, box-shadow .2s; }
 .sizes button:hover { border-color: var(--moss-3); }
 .sizes button.on { border: 1.5px solid var(--moss); box-shadow: 0 0 0 3px rgba(35,48,31,.08); }
-.sizes b { display: block; font: 500 20px var(--sans); }
+.sizes b { display: block; font: 500 20px var(--sans); white-space: nowrap; }
+.sizes b i { display: block; font: 400 13px/1.4 var(--sans); font-style: normal; color: var(--moss-3); }
 .sizes small { display: block; color: var(--moss-2); font-size: 13px; line-height: 1.35; margin-top: 2px; }
 .sizes em { display: block; font-style: normal; font-size: 14px; margin-top: 8px; }
 .field { display: flex; align-items: center; border: 1px solid var(--line); border-radius: 14px; background: var(--paper); padding: 0 16px; }

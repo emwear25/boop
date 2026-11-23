@@ -1,0 +1,11 @@
+[{
+ "out": "scoop-charli-views",
+ "size": "2048x1536",
+ "refs": ["scoop-charli-ref.jpg"],
+ "prompt": "Product design reference sheet of exactly the scoop in the reference photo (same shape, same proportions, same colours: cream body, terracotta twisted strand, the raised name ЧАРЛИ in cream on the cream strap). Six orthographic views of the SAME object arranged in a clean 3 by 2 grid, each view isolated and centred in its cell, all at the same scale: top row: front view, back view, top view (looking straight down, name readable); bottom row: left side view (looking into the end of the handle), right side view (looking at the cup side), bottom view (looking straight up at the underside). Pure flat white background #FFFFFF, soft even studio light, no shadows on the background, no floor, no props, no kibble, no labels, no arrows, no numbers, no text except the name ЧАРЛИ on the handle. Realistic matte 3D-printed PLA with fine layer lines."
+},{
+ "out": "scoop-charli-parts",
+ "size": "2048x1536",
+ "refs": ["scoop-charli-ref.jpg"],
+ "prompt": "Exploded product design reference sheet of the scoop in the reference photo, showing each part separately, same colours and proportions as the reference, arranged in a clean 2 by 2 grid, each part isolated and centred in its cell, 3/4 view from above: 1) the cream cup alone with its rounded rim and the short neck where the handle starts; 2) the flat cream strap alone, the part of the handle that carries the raised name ЧАРЛИ and wraps over the rounded tip; 3) the thin cream strand alone, twisted like a spiral; 4) the thick terracotta strand alone, twisted like a spiral. Pure flat white background #FFFFFF, soft even studio light, no shadows on the background, no floor, no props, no labels, no numbers, no arrows, no text except ЧАРЛИ on the strap. Realistic matte 3D-printed PLA."
+}]

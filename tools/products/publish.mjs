@@ -4,7 +4,7 @@
  *   ADMIN_USERNAME=… ADMIN_PASSWORD=… node tools/products/publish.mjs [--apply] [--update] [--only=slug,slug]
  *
  * Dry run by default. For every product in the local catalogue it:
- *   - creates the category if it is missing (kupichki-za-kucheta-i-kotki, kupichki-s-ime, medalyoni-s-ime, zakachalki-za-povod, koledni-kupichki)
+ *   - creates the category if it is missing (kupichki-za-kucheta-i-kotki, kupichki-s-ime, medalyoni-s-ime, lazhichki-za-granuli, zakachalki-za-povod, koledni-kupichki)
  *   - creates the product with its 4 photos (uploaded to Cloudinary, boop/products)
  *   - creates one variant per size × colour, with the size price and made-to-order stock
  * Products are matched by name, which is also how the storefront finds them at checkout.
@@ -57,7 +57,7 @@ function uploadCopy(file) {
 }
 
 const describe = (p) => `${p.description}\n\n${p.details.map((d) => `- ${d}`).join('\n')}`
-const sizesOf = (p) => (p.sizes ? p.sizes.map((s) => ({ name: sizeName(s.cm), price: s.price })) : [{ name: STANDARD, price: p.price }])
+const sizesOf = (p) => (p.sizes ? p.sizes.map((s) => ({ name: s.label ?? sizeName(s.cm), price: s.price })) : [{ name: STANDARD, price: p.price }])
 const coloursOf = (p) => (p.colours ?? [p.colour]).map(({ name, hex }) => ({ name, hex }))
 
 const selected = products.filter((p) => !ONLY || ONLY.includes(p.slug))
@@ -80,8 +80,9 @@ async function ensureCategory(id) {
       name: id,
       displayName: c.name,
       description: c.intro,
-      sizes: id === 'medalyoni-s-ime' || id === 'zakachalki-za-povod' ? [STANDARD] : ['13 см', '16 см', '20 см'],
-      defaultWeight: id === 'medalyoni-s-ime' ? 0.05 : 0.6,
+      sizes: id === 'lazhichki-za-granuli' ? ['½ чаша · 120 мл', '1 чаша · 240 мл', '2 чаши · 480 мл']
+        : id === 'medalyoni-s-ime' || id === 'zakachalki-za-povod' ? [STANDARD] : ['13 см', '16 см', '20 см'],
+      defaultWeight: id === 'medalyoni-s-ime' ? 0.05 : id === 'lazhichki-za-granuli' ? 0.2 : 0.6,
       defaultDimensions: id === 'medalyoni-s-ime' ? { length: 10, width: 8, height: 2 } : { length: 30, width: 30, height: 15 },
     },
   })
