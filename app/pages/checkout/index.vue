@@ -37,10 +37,31 @@ const errors = computed<Record<string, string>>(() => {
   return e
 })
 
+// Coupon: created per store in the admin dashboard; checked here, applied again by the server on the order
+const coupon = reactive({ input: '', code: '', percent: 0, error: '', checking: false, open: false })
+const discount = computed(() => Math.round(cart.subtotal * coupon.percent) / 100)
+const total = computed(() => Math.max(0, Math.round((cart.subtotal - discount.value) * 100) / 100))
+async function applyCoupon() {
+  const code = coupon.input.trim().toUpperCase()
+  coupon.error = ''
+  if (!code) { coupon.error = 'Напиши кода на купона.'; return }
+  coupon.checking = true
+  try {
+    const res = await api<{ data: { code: string; discountPercentage: number } }>(`/api/coupons/validate/${encodeURIComponent(code)}`)
+    coupon.code = res.data.code
+    coupon.percent = res.data.discountPercentage
+    coupon.input = ''
+  } catch (err) {
+    const status = (err as { statusCode?: number }).statusCode
+    coupon.error = status === 404 ? 'Няма такъв купон. Провери как е написан.' : status === 400 ? 'Този купон е изтекъл или вече не е активен.' : 'Не успяхме да проверим купона. Опитай пак.'
+  } finally { coupon.checking = false }
+}
+function removeCoupon() { coupon.code = ''; coupon.percent = 0; coupon.error = '' }
+
 // Courier fee: estimated by Econt/Speedy, paid to the courier on delivery; free to an office over the threshold
-const freeShipping = computed(() => form.delivery === 'office' && cart.subtotal >= FREE_SHIPPING_FROM)
+const freeShipping = computed(() => form.delivery === 'office' && total.value >= FREE_SHIPPING_FROM)
 const shipping = reactive({ eur: null as number | null, loading: false })
-const estimateKey = computed(() => JSON.stringify([form.courier, form.delivery, form.office?.id, form.city, form.postcode, form.address, form.payment, cart.subtotal]))
+const estimateKey = computed(() => JSON.stringify([form.courier, form.delivery, form.office?.id, form.city, form.postcode, form.address, form.payment, total.value]))
 let timer: ReturnType<typeof setTimeout> | undefined
 watch(estimateKey, () => {
   clearTimeout(timer)
@@ -55,7 +76,7 @@ watch(estimateKey, () => {
       office: form.delivery === 'office' ? form.office : null,
       city: form.city.trim(), postCode: form.postcode.trim(), street: form.address.trim(),
       receiverName: form.name.trim(), receiverPhone: form.phone.trim(),
-      codEur: form.payment === 'cod' ? cart.subtotal : 0,
+      codEur: form.payment === 'cod' ? total.value : 0,
       weightKg: Math.max(0.5, cart.items.reduce((n, i) => n + (i.product.category === 'medalyoni-s-ime' ? 0.05 : i.product.category === 'lazhichki-za-granuli' ? 0.2 : 0.6) * i.qty, 0)),
     })
     shipping.loading = false
@@ -118,6 +139,7 @@ async function payload() {
     speedyOfficeId: office && form.courier === 'speedy' ? office.id : null,
     speedyOfficeName: office && form.courier === 'speedy' ? office.name : null,
     paymentMethod: form.payment === 'card' ? 'stripe_card' : 'cash_on_delivery',
+    couponCode: coupon.code || null,
     shippingCost: freeShipping.value ? 0 : (shipping.eur ?? undefined),
     notes: form.note.trim() || null,
   }
@@ -239,7 +261,7 @@ function focusField(k: string) { document.getElementById(`f-${k}`)?.focus() }
           <p v-if="show('terms')" class="err">{{ errors.terms }}</p>
 
           <button class="btn btn-solid submit" type="submit" :disabled="sending">
-            {{ sending ? 'Изпращаме…' : form.payment === 'card' ? `Плати ${euro(cart.subtotal)}` : `Поръчай за ${euro(cart.subtotal)}` }}
+            {{ sending ? 'Изпращаме…' : form.payment === 'card' ? `Плати ${euro(total)}` : `Поръчай за ${euro(total)}` }}
           </button>
         </form>
 
@@ -252,6 +274,19 @@ function focusField(k: string) { document.getElementById(`f-${k}`)?.focus() }
             </li>
           </ul>
           <div class="row"><span>Продукти</span><span>{{ euro(cart.subtotal) }}</span></div>
+          <div v-if="coupon.code" class="row disc">
+            <span>Купон {{ coupon.code }} (−{{ coupon.percent }}%) <button type="button" class="link" @click="removeCoupon">махни</button></span>
+            <span>−{{ euro(discount) }}</span>
+          </div>
+          <div v-else class="coupon">
+            <button v-if="!coupon.open" type="button" class="link" @click="coupon.open = true">Имаш код за отстъпка?</button>
+            <form v-else class="coupon-form" novalidate @submit.prevent="applyCoupon">
+              <label class="sr" for="f-coupon">Код за отстъпка</label>
+              <input id="f-coupon" v-model="coupon.input" placeholder="Код за отстъпка" autocomplete="off" autocapitalize="characters" :aria-invalid="!!coupon.error" :aria-describedby="coupon.error ? 'coupon-err' : undefined">
+              <button class="btn btn-light" :disabled="coupon.checking">{{ coupon.checking ? '…' : 'Приложи' }}</button>
+            </form>
+            <p v-if="coupon.error" id="coupon-err" class="err" role="alert">{{ coupon.error }}</p>
+          </div>
           <div class="row">
             <span>Доставка</span>
             <span v-if="freeShipping">Безплатна</span>
@@ -259,7 +294,7 @@ function focusField(k: string) { document.getElementById(`f-${k}`)?.focus() }
             <span v-else-if="shipping.eur !== null">≈ {{ euro(shipping.eur) }}</span>
             <span v-else class="muted">според куриера</span>
           </div>
-          <div class="row total"><span>Общо</span><span>{{ euro(cart.subtotal) }}</span></div>
+          <div class="row total"><span>Общо</span><span>{{ euro(total) }}</span></div>
           <p class="muted note">
             <template v-if="freeShipping">Доставката до офис е безплатна при поръчка над {{ euro(FREE_SHIPPING_FROM) }}.</template>
             <template v-else>Доставката се плаща на куриера при получаване. До офис е безплатна при поръчка над {{ euro(FREE_SHIPPING_FROM) }}.</template>
@@ -303,6 +338,15 @@ input[aria-invalid="true"] { border-color: var(--cherry); }
 .summary img { border-radius: 10px; aspect-ratio: 3/4; object-fit: cover; }
 .summary li small { display: block; }
 .row { display: flex; justify-content: space-between; gap: 12px; padding: 6px 0; }
+.disc { color: var(--moss); }
+.link { background: none; border: 0; padding: 0; font: inherit; font-size: 14px; color: var(--moss-2); text-decoration: underline; text-underline-offset: 4px; cursor: pointer; }
+.link:hover { color: var(--moss); }
+.coupon { margin: 4px 0 10px; }
+.coupon-form { display: grid; grid-template-columns: 1fr auto; gap: 8px; }
+.coupon-form input { height: 44px; border: 1px solid var(--line); border-radius: 12px; background: var(--paper); padding: 0 14px; font-size: 16px; text-transform: uppercase; letter-spacing: .04em; }
+.coupon-form input:focus { outline: 2px solid var(--moss); outline-offset: 1px; }
+.coupon-form .btn { height: 44px; border: 1px solid var(--line); }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .total { font-size: 19px; font-weight: 500; border-top: 1px solid var(--line); margin-top: 8px; padding-top: 14px; }
 .note { font-size: 13px; margin-top: 10px; }
 @media (max-width: 860px) { .co { grid-template-columns: 1fr; } .summary { position: static; order: -1; } }
