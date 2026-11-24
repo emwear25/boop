@@ -394,11 +394,14 @@ export class BowlScene {
     if (!w || !h) return
     this.renderer.setSize(w, h, false)
     this.camera.aspect = w / h
-    // keep the bowl framed on narrow screens
-    this.camera.fov = w / h < 0.8 ? 46 : 32
-    // leave room for copy: bowl sits right on wide screens, lower on tall ones
-    this.group.position.x = w / h > 1.15 ? this.offsetX : 0
-    this.group.position.y = w / h < 0.8 ? -0.35 : 0
+    // Wide screens: copy on the left, bowl on the right. Squarer and tall screens: copy above,
+    // form below, so the bowl is smaller and sits just under the middle.
+    const a = w / h
+    this.camera.fov = a < 0.8 ? 56 : a <= 1.15 ? 40 : 32
+    this.group.position.x = a > 1.15 ? this.offsetX : 0
+    this.group.position.y = 0
+    if (a <= 1.15) this.camera.setViewOffset(w, h, 0, h * (a < 0.8 ? 0.1 : 0.06), w, h)
+    else this.camera.clearViewOffset()
     this.camera.updateProjectionMatrix()
     this.updateScoop()
     this.dirty = true
