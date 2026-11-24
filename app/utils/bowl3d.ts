@@ -31,17 +31,22 @@ interface Shape {
 }
 
 const SHAPES: Record<ShapeId, Shape> = {
+  // "Вълна с име" (kupichka-s-ime-valna): low bell shape, cream top over a ribbed flared base
   wave: {
-    profile: [[0, 0], [0.6, 0], [0.93, 0.02], [1.07, 0.12], [1.13, 0.3], [1.11, 0.48], [1.04, 0.62], [0.96, 0.7], [0.87, 0.72], [0.82, 0.66]],
-    rim: 0.69, nameY: 0.47, nameSize: 0.15, nameR: 1.1, waveY: 0.29,
+    profile: [[0, 0], [0.8, 0], [1.16, 0.01], [1.19, 0.05], [1.13, 0.22], [1.04, 0.45], [0.985, 0.72], [0.97, 0.92], [0.945, 0.97], [0.88, 0.97], [0.84, 0.93]],
+    rim: 0.95, nameY: 0.66, nameSize: 0.16, nameR: 1.0, waveY: 0.42,
+    wave: { periods: 2, amp: 0.07, phase: -Math.PI / 2 }, ribs: 93, frame: { lift: 0.14, dist: 1.05 },
   },
+  // "Пръстени с име" (povdignata-kupichka-s-ime-prasteni): four soft rings stacked, one colour
   rings: {
-    profile: [[0, 0], [0.7, 0], [0.98, 0.02], [1.1, 0.12], [1.04, 0.24], [1.12, 0.36], [1.04, 0.48], [1.12, 0.6], [1.04, 0.72], [1.1, 0.84], [1.0, 0.95], [0.87, 0.97], [0.82, 0.9]],
-    rim: 0.94, nameY: 0.6, nameSize: 0.12, nameR: 1.12, waveY: null,
+    profile: [[0, 0], [0.75, 0], [0.95, 0.01], [1.06, 0.08], [1.09, 0.21], [1.06, 0.34], [1.0, 0.42], [1.06, 0.5], [1.09, 0.63], [1.06, 0.76], [1.0, 0.84], [1.06, 0.92], [1.09, 1.05], [1.06, 1.18], [1.0, 1.26], [1.06, 1.34], [1.09, 1.47], [1.05, 1.6], [0.97, 1.67], [0.88, 1.68], [0.84, 1.62]],
+    rim: 1.66, nameY: 1.05, nameSize: 0.15, nameR: 1.09, waveY: null, frame: { lift: 0.5, dist: 1.32 },
   },
+  // "Висока вълна" (povdignata-kupichka-s-ime-visoka-valna): tall smooth cone with a deep wave
   raised: {
-    profile: [[0, 0], [0.8, 0], [1.12, 0.01], [1.17, 0.06], [1.08, 0.5], [0.99, 0.95], [0.95, 1.02], [0.87, 1.03], [0.82, 0.97]],
-    rim: 1.0, nameY: 0.7, nameSize: 0.17, nameR: 1.02, waveY: 0.42,
+    profile: [[0, 0], [0.8, 0], [1.11, 0.006], [1.14, 0.04], [1.07, 0.55], [0.975, 1.3], [0.965, 1.36], [0.94, 1.39], [0.88, 1.39], [0.84, 1.35]],
+    rim: 1.37, nameY: 1.0, nameSize: 0.17, nameR: 1.0, waveY: 0.66,
+    wave: { periods: 2, amp: 0.12, phase: -Math.PI / 2 }, frame: { lift: 0.36, dist: 1.25 },
   },
   // "Лапа" raised bowl: tapered body, cream top with a soft wave, ribbed lower part,
   // a small paw over the name (povdignata-kupichka-s-ime-lapa)
@@ -362,7 +367,8 @@ export class BowlScene {
         for (let x = 0; x <= W; x += 8) ctx.lineTo(x, line(x))
         ctx.lineTo(W, H); ctx.closePath(); ctx.fillStyle = fill; ctx.fill()
       }
-      // vertical ribs on the darker part
+      // vertical ribs on the darker part (only on ribbed shapes)
+      if (this.shape.ribs) {
       b.save()
       b.beginPath(); b.moveTo(0, H); for (let x = 0; x <= W; x += 8) b.lineTo(x, line(x)); b.lineTo(W, H); b.closePath(); b.clip()
       for (let x = 0; x < W; x += 22) {
@@ -371,6 +377,7 @@ export class BowlScene {
         b.fillStyle = g; b.fillRect(x, 0, 22, H)
       }
       b.restore()
+      }
     }
     // 3D-print layer lines: fine horizontal ridges everywhere
     for (let y = 0; y < H; y += 4) { b.fillStyle = 'rgba(255,255,255,.18)'; b.fillRect(0, y, W, 2) }

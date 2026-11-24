@@ -9,7 +9,7 @@ const from = computed(() => (props.product.sizes ? 'от ' : '') + euro(fromPric
 <template>
   <NuxtLink :to="`/product/${product.slug}`" class="card">
     <div class="ph">
-      <img :src="imgs[0]!.sm" :alt="product.name" :loading="eager ? 'eager' : 'lazy'" width="700" height="933">
+      <img :src="imgs[0]!.sm" :alt="productSeoName(product)" :loading="eager ? 'eager' : 'lazy'" width="700" height="933">
       <!-- second photo shows the product in use; revealed on hover/focus -->
       <img class="alt" :src="imgs[1]!.sm" alt="" loading="lazy" width="700" height="933">
       <span v-if="product.badge" class="badge" :class="{ red: product.badge === 'Ново' }">{{ product.badge }}</span>

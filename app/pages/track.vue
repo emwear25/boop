@@ -2,7 +2,8 @@
 import type { CustomerOrder } from '~/components/OrderSummary.vue'
 
 /** Guest order tracking: order number + the email used at checkout. Prefilled from ?n=&e= */
-useSeoMeta({ title: 'Проследи поръчка', description: 'Провери статуса на поръчката си в boop с номера на поръчката и имейла си.' })
+usePageSeo({ title: 'Проследи поръчка', description: 'Провери статуса на поръчката си в boop с номера на поръчката и имейла си.' })
+useHead({ meta: [{ name: 'robots', content: 'noindex, follow' }] })
 
 const route = useRoute()
 const api = useApi()

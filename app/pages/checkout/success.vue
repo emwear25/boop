@@ -6,7 +6,7 @@ import type { CustomerOrder as Order } from '~/components/OrderSummary.vue'
  * Order confirmation. Reached with ?token= (cash on delivery, also the link in the
  * confirmation email) or ?orderId=<Stripe session>&stripe=true (card payment).
  */
-useHead({ title: 'Поръчката е приета' })
+useHead({ title: 'Поръчката е приета', meta: [{ name: 'robots', content: 'noindex, nofollow' }] })
 
 const route = useRoute()
 const api = useApi()

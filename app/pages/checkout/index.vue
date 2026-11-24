@@ -4,7 +4,7 @@ import { productImages, sizeLabel, colourIndex, type Product } from '~/data/cata
 import { tagDesign } from '~/data/tagDesigns'
 import type { Courier, CourierOffice } from '~/composables/useCourier'
 
-useHead({ title: 'Поръчка' })
+useHead({ title: 'Поръчка', meta: [{ name: 'robots', content: 'noindex, nofollow' }] })
 const cart = useCart()
 const api = useApi()
 const { estimate } = useCourier()

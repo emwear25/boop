@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { company } from '~/data/company'
 const props = defineProps<{ title: string; lead: string }>()
-useHead({ title: props.title })
+usePageSeo({ title: props.title, description: props.lead })
 </script>
 
 <template>

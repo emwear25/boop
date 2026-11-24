@@ -1,5 +1,5 @@
 <script setup lang="ts">
-useHead({ title: 'Плащането е прекъснато' })
+useHead({ title: 'Плащането е прекъснато', meta: [{ name: 'robots', content: 'noindex, nofollow' }] })
 </script>
 
 <template>

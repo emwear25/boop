@@ -1,40 +1,50 @@
 <script setup lang="ts">
 import type { BowlScene, ShapeId, Colours } from '~/utils/bowl3d'
 import { findProduct } from '~/data/catalog'
+import { tagDesigns } from '~/data/tagDesigns'
 import { useCart } from '~/stores/cart'
 
-useHead({ title: 'Създай купичка с име' })
+usePageSeo({ title: 'Създай купичка с име онлайн', description: 'Напиши името на кучето или котката, избери форма и цвят и виж купичката в 3D, преди да поръчаш. Изработваме я в България за 3 до 5 работни дни.' })
 const route = useRoute()
 const cart = useCart()
 
+// The four named bowls we sell, each drawn in 3D as the real product
 const SHAPES: { id: ShapeId; label: string; slug: string; note: string }[] = [
+  { id: 'lapa', label: 'Лапа', slug: 'povdignata-kupichka-s-ime-lapa', note: 'Повдигната, с лапичка' },
   { id: 'wave', label: 'Вълна', slug: 'kupichka-s-ime-valna', note: 'Ниска, в два цвята' },
-  { id: 'raised', label: 'Конус', slug: 'povdignata-kupichka-s-ime-visoka-valna', note: 'Повдигната, в два цвята' },
+  { id: 'raised', label: 'Висока вълна', slug: 'povdignata-kupichka-s-ime-visoka-valna', note: 'Повдигната, в два цвята' },
   { id: 'rings', label: 'Пръстени', slug: 'povdignata-kupichka-s-ime-prasteni', note: 'Повдигната, един цвят' },
 ]
-const COLOURS: { name: string; c: Colours; mono: string; tag: string }[] = [
-  { name: 'Салвия', c: ['#efe6d6', '#8fa27c'], mono: '#93a581', tag: '#7f9a72' },
-  { name: 'Розово', c: ['#efe6d6', '#e3a9a3'], mono: '#e7b3ae', tag: '#e7a3b4' },
-  { name: 'Теракота', c: ['#efe6d6', '#c4704f'], mono: '#c9714d', tag: '#c4603f' },
-  { name: 'Графит', c: ['#efe6d6', '#45484a'], mono: '#4a4d50', tag: '#4a4d50' },
-  { name: 'Какао', c: ['#efe6d6', '#6e4630'], mono: '#7a5038', tag: '#6e4630' },
-  { name: 'Масло', c: ['#efe6d6', '#e4c063'], mono: '#ecd38a', tag: '#ecc85a' },
-]
+// Medallion colours (Балонче), matched to the bowl's main colour
+const TAG_COLOURS = tagDesigns.find(d => d.id === 'balonche')!.colourways.map(c => ({ name: c.name, hex: c.c.a }))
+const hexRgb = (h: string): [number, number, number] => [parseInt(h.slice(1, 3), 16), parseInt(h.slice(3, 5), 16), parseInt(h.slice(5, 7), 16)]
+const nearestTag = (hex: string) => {
+  const [r, g, b] = hexRgb(hex)
+  return TAG_COLOURS.reduce((best, t) => {
+    const [r2, g2, b2] = hexRgb(t.hex), d = (r - r2) ** 2 + (g - g2) ** 2 + (b - b2) ** 2
+    return d < best.d ? { t, d } : best
+  }, { t: TAG_COLOURS[0]!, d: Infinity }).t
+}
+// the light washes dark graphite out in 3D, so draw it a little deeper
+const in3d = (hex: string) => (hex.toLowerCase() === '#45484a' ? '#292b2d' : hex)
 
 const shapeI = ref(Math.max(0, SHAPES.findIndex(s => s.id === route.query.shape)))
-const colourI = ref(Math.min(COLOURS.length - 1, Number(route.query.color) || 0))
+const colourI = ref(Math.max(0, Number(route.query.color) || 0))
 const name = ref(String(route.query.name ?? '').slice(0, 8))
 const size = ref(16)
 const withTag = ref(false)
 const error = ref('')
 
 const shape = computed(() => SHAPES[shapeI.value]!)
-const colour = computed(() => COLOURS[colourI.value]!)
 const product = computed(() => findProduct(shape.value.slug)!)
+const colours = computed<{ name: string; hex: string; hex2?: string }[]>(() => product.value.colours ?? [product.value.colour])
+const colour = computed(() => colours.value[Math.min(colourI.value, colours.value.length - 1)]!)
+const tagColour = computed(() => nearestTag(colour.value.hex2 ?? colour.value.hex))
+watch(shapeI, () => { if (colourI.value >= colours.value.length) colourI.value = 0 })
 const unit = computed(() => product.value.sizes!.find(s => s.cm === size.value)!.price)
 const tag = findProduct('medalyon-s-ime-balonche')!
 const total = computed(() => unit.value + (withTag.value ? tag.price! : 0))
-const bowlColours = computed<Colours>(() => shape.value.id === 'rings' ? [colour.value.mono, colour.value.mono] : colour.value.c)
+const bowlColours = computed<Colours>(() => [in3d(colour.value.hex), in3d(colour.value.hex2 ?? colour.value.hex)])
 
 const stage = ref<HTMLElement>()
 let bowl: BowlScene | null = null
@@ -74,9 +84,8 @@ function add() {
   if (!v) { error.value = 'Напиши името, което да гравираме.'; return }
   if (!/^[\p{L}\p{N} .'-]+$/u.test(v)) { error.value = 'Използвай само букви, цифри и интервал.'; return }
   error.value = ''
-  const colourName = shape.value.id === 'rings' ? colour.value.name : `Мляко и ${colour.value.name.toLowerCase()}`
-  cart.add(product.value.slug, { size: size.value, colour: colourName, note: v })
-  if (withTag.value) cart.add(tag.slug, { colour: colour.value.name, note: v })
+  cart.add(product.value.slug, { size: size.value, colour: colour.value.name, note: v })
+  if (withTag.value) cart.add(tag.slug, { colour: tagColour.value.name, note: v })
 }
 </script>
 
@@ -88,11 +97,11 @@ function add() {
           @pointerdown="down" @pointermove="move" @pointerup="up" @pointercancel="up" />
         <LeafLight :strength=".16" />
         <p class="drag" aria-hidden="true">Влачи, за да завъртиш</p>
-        <div v-if="withTag" class="tag-float"><NameTagPreview :name="name" :colour="colour.tag" :size="90" /></div>
+        <div v-if="withTag" class="tag-float"><NameTagPreview :name="name" :colour="tagColour.hex" :size="90" /></div>
       </div>
 
       <div class="panel">
-        <h1 class="h2">Купичка с неговото име</h1>
+        <h1 class="h2">Създай купичка с име</h1>
         <p class="lead">Избери форма и цвят и напиши името. Виждаш го точно така, както ще го гравираме.</p>
 
         <div class="opt">
@@ -117,9 +126,9 @@ function add() {
         <div class="opt">
           <div class="lbl">Цвят: <span class="muted">{{ colour.name }}</span></div>
           <div class="sws" role="radiogroup" aria-label="Цвят">
-            <button v-for="(c, i) in COLOURS" :key="c.name" role="radio" :aria-checked="colourI === i" :aria-label="c.name" :title="c.name"
-              :class="{ on: colourI === i }"
-              :style="{ background: shape.id === 'rings' ? c.mono : `linear-gradient(135deg, ${c.c[0]} 50%, ${c.c[1]} 50%)` }" @click="colourI = i" />
+            <button v-for="(c, i) in colours" :key="c.name" role="radio" :aria-checked="colour.name === c.name" :aria-label="c.name" :title="c.name"
+              :class="{ on: colour.name === c.name }"
+              :style="{ background: c.hex2 ? `linear-gradient(135deg, ${c.hex} 50%, ${c.hex2} 50%)` : c.hex }" @click="colourI = i" />
           </div>
         </div>
 
@@ -135,7 +144,7 @@ function add() {
         <label class="addon">
           <input v-model="withTag" type="checkbox">
           <span class="box" aria-hidden="true" />
-          <span><b>Добави медальон със същото име</b><small class="muted">+ {{ euro(tag.price!) }}, в същия цвят</small></span>
+          <span><b>Добави медальон със същото име</b><small class="muted">+ {{ euro(tag.price!) }}, в цвят {{ tagColour.name.toLowerCase() }}</small></span>
         </label>
 
         <div class="buy">
@@ -168,6 +177,7 @@ function add() {
 .lbl .muted { font-weight: 400; }
 .req { color: var(--cherry); }
 .shapes, .sizes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.shapes { grid-template-columns: repeat(2, 1fr); }
 .shapes button, .sizes button { text-align: left; border: 1px solid var(--line); border-radius: 16px; padding: 12px 14px; background: var(--paper); transition: border-color .2s, box-shadow .2s; }
 .shapes button:hover, .sizes button:hover { border-color: var(--moss-3); }
 .shapes button.on, .sizes button.on { border: 1.5px solid var(--moss); box-shadow: 0 0 0 3px rgba(35,48,31,.08); }

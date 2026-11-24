@@ -4,7 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { products, categories, type CategoryId } from '~/data/catalog'
 import { tagDesigns } from '~/data/tagDesigns'
 
-useHead({ title: 'Купички и закачалки за домашни любимци' })
+usePageSeo({ title: 'Купички за кучета и котки с име', description: 'Купички, повдигнати стойки, лъжички и медальони с името на кучето или котката. Иноксова купа, изработени в България. Доставка с Еконт и Спиди.' })
 
 const filter = ref<CategoryId | 'all'>('all')
 const favourites = ['povdignata-kupichka-s-ime-lapa', 'kupichka-za-kuche-pregradka', 'kupichka-s-ime-valna', 'kupichka-za-kuche-plitka', 'kupichka-za-kuche-puding', 'povdignata-kupichka-s-ime-visoka-valna', 'kupichka-za-kuche-puhche', 'koledna-kupichka-snezhen-pan', 'povdignata-kupichka-s-ime-prasteni', 'koledna-kupichka-medenka', 'zakachalka-za-povod-s-ime-kokalche', 'medalyon-s-ime-lapichka', 'medalyon-s-ime-gabka', 'kupichka-za-kuche-sladoled', 'kupichka-za-kuche-vazel', 'dvoyna-kupichka-za-kuche-pleteno-sartse', 'kupichka-za-kuche-glazura', 'zakachalka-za-povod-opashchitsi', 'povdignata-kupichka-s-ime-konus', 'koledna-kupichka-komin']
@@ -46,15 +46,15 @@ onBeforeUnmount(() => { ctx?.revert(); ScrollTrigger.refresh() })
     <!-- Categories -->
     <section class="cats wrap" aria-label="Категории">
       <NuxtLink :to="'/category/kupichki-za-kucheta-i-kotki'" class="cat big">
-        <img src="/img/scene-lineup.webp" alt="" loading="lazy">
+        <img src="/img/scene-lineup.webp" alt="Купички за кучета и котки boop в различни форми и цветове" loading="lazy">
         <span class="label"><b class="h3">Купички</b><small>{{ products.filter(p => p.category === 'kupichki-za-kucheta-i-kotki').length }} форми, 3 размера</small></span>
       </NuxtLink>
       <NuxtLink :to="'/category/zakachalki-za-povod'" class="cat">
-        <img src="/img/p/walk-club-2-sm.webp" alt="" loading="lazy">
+        <img src="/img/p/walk-club-2-sm.webp" alt="Закачалка за повод и торбички до входната врата" loading="lazy">
         <span class="label"><b class="h3">За разходка</b><small>Закачалки с диспенсър</small></span>
       </NuxtLink>
       <NuxtLink :to="'/category/koledni-kupichki'" class="cat">
-        <img src="/img/p/gingerbread-2-sm.webp" alt="" loading="lazy">
+        <img src="/img/p/gingerbread-2-sm.webp" alt="Коледна купичка за куче Меденка" loading="lazy">
         <span class="label"><b class="h3">Коледа</b><small>Празнична колекция</small></span>
       </NuxtLink>
     </section>
@@ -132,7 +132,7 @@ onBeforeUnmount(() => { ctx?.revert(); ScrollTrigger.refresh() })
         <p class="lead">Закачалките се монтират на скрита планка и се свалят за секунда. Има място за повод, нагръдник и ролка торбички, които се дърпат с една ръка.</p>
         <div class="minis">
           <NuxtLink v-for="m in [['zakachalka-za-povod-s-ime-kokalche','bone-depot','Кокалче'],['zakachalka-za-povod-kam-planinata','happy-camper','Към планината'],['zakachalka-za-povod-opashchitsi','tail-trail','Опашчици']]" :key="m[0]" :to="`/product/${m[0]}`">
-            <img :src="`/img/p/${m[1]}-1-sm.webp`" alt="" loading="lazy">
+            <img :src="`/img/p/${m[1]}-1-sm.webp`" :alt="`Закачалка за повод ${m[2]}`" loading="lazy">
             <small class="poster">{{ m[2]!.toUpperCase() }}</small>
           </NuxtLink>
         </div>

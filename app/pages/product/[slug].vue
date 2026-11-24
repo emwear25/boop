@@ -11,7 +11,7 @@ const p = computed(() => product.value!)
 const imgs = computed(() => productImages(p.value, colour.value))
 const isTag = computed(() => !!p.value.tagDesign)
 const active = ref(isTag.value ? -1 : 0)
-const forma: Record<string, string> = { 'kupichka-s-ime-valna': 'wave', 'povdignata-kupichka-s-ime-visoka-valna': 'raised', 'povdignata-kupichka-s-ime-prasteni': 'rings' }
+const forma: Record<string, string> = { 'povdignata-kupichka-s-ime-lapa': 'lapa', 'kupichka-s-ime-valna': 'wave', 'povdignata-kupichka-s-ime-visoka-valna': 'raised', 'povdignata-kupichka-s-ime-prasteni': 'rings' }
 const size = ref<number>(defaultSize(product.value!))
 const qty = ref(1)
 const note = ref(String(route.query.name ?? '').slice(0, 10))
@@ -48,7 +48,18 @@ function add() {
   qty.value = 1
 }
 
-useHead(() => ({ title: p.value.name, meta: [{ name: 'description', content: `${p.value.name}. ${p.value.tagline} ${p.value.description}` }] }))
+usePageSeo({
+  title: () => productSeoTitle(p.value),
+  description: () => productSeoDescription(p.value),
+  image: () => productImageUrls(p.value)[0],
+  type: 'product',
+})
+useHead(() => ({
+  script: [
+    ldScript(productJsonLd(p.value), 'ld-product'),
+    ldScript(breadcrumbJsonLd([{ name: 'Начало', path: '/' }, { name: categoryOf(p.value.category).title, path: `/category/${p.value.category}` }, { name: p.value.name, path: `/product/${p.value.slug}` }]), 'ld-crumbs'),
+  ],
+}))
 </script>
 
 <template>
@@ -82,8 +93,7 @@ useHead(() => ({ title: p.value.name, meta: [{ name: 'description', content: `${
       </div>
 
       <div class="info">
-        <div class="poster muted">{{ p.name.toUpperCase() }}</div>
-        <h1 class="name">{{ p.name }}</h1>
+        <h1><span class="poster muted kind">{{ productKind(p) }}</span> <span class="name">{{ productShortName(p.name) }}</span></h1>
         <p class="tl">{{ p.tagline }}</p>
         <div class="price">{{ euro(price) }}</div>
         <div class="vat muted">Цената включва ДДС.</div>
@@ -201,7 +211,8 @@ useHead(() => ({ title: p.value.name, meta: [{ name: 'description', content: `${
 .xfade-enter-active, .xfade-leave-active { transition: opacity .5s var(--ease); }
 .xfade-enter-from, .xfade-leave-to { opacity: 0; }
 
-.name { font: 500 clamp(48px, 5vw, 72px)/1 var(--serif); margin: 10px 0 8px; text-wrap: balance; }
+.kind { display: block; letter-spacing: .06em; font-size: 14px; }
+.name { display: block; font: 500 clamp(48px, 5vw, 72px)/1 var(--serif); margin: 10px 0 8px; text-wrap: balance; }
 .tl { font: italic 400 24px var(--serif); color: var(--moss-2); }
 .price { font: 500 34px var(--sans); margin-top: 28px; letter-spacing: -.01em; }
 .vat { font-size: 13px; }

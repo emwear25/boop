@@ -9,7 +9,9 @@
       <h2>Магазин</h2>
       <ul>
         <li><NuxtLink :to="'/category/kupichki-za-kucheta-i-kotki'">Купички</NuxtLink></li>
-        <li><NuxtLink :to="'/category/kupichki-s-ime'">С име</NuxtLink></li>
+        <li><NuxtLink :to="'/category/kupichki-s-ime'">Купички с име</NuxtLink></li>
+        <li><NuxtLink :to="'/category/medalyoni-s-ime'">Медальони с име</NuxtLink></li>
+        <li><NuxtLink to="/personalize">Създай купичка с име</NuxtLink></li>
         <li><NuxtLink :to="'/category/lazhichki-za-granuli'">Лъжички с име</NuxtLink></li>
         <li><NuxtLink :to="'/category/zakachalki-za-povod'">Закачалки за разходка</NuxtLink></li>
         <li><NuxtLink :to="'/category/koledni-kupichki'">Коледна колекция</NuxtLink></li>
@@ -22,6 +24,7 @@
         <li><NuxtLink to="/about#delivery">Доставка и плащане</NuxtLink></li>
         <li><NuxtLink to="/about#sizes">Кой размер да избера</NuxtLink></li>
         <li><NuxtLink to="/about#care">Грижа за купичката</NuxtLink></li>
+        <li><NuxtLink to="/saveti/visochina-na-kupata-za-kuche">Височина на купата</NuxtLink></li>
         <li><NuxtLink to="/terms">Общи условия</NuxtLink></li>
         <li><NuxtLink to="/privacy">Поверителност</NuxtLink></li>
       </ul>
@@ -30,6 +33,7 @@
       <h2>boop.bg</h2>
       <ul>
         <li><NuxtLink to="/about">За нас</NuxtLink></li>
+        <li><NuxtLink to="/saveti">Съвети</NuxtLink></li>
         <li><a href="https://www.instagram.com/boop_bg/" target="_blank" rel="noopener">Instagram</a></li>
         <li><a href="https://www.facebook.com/profile.php?id=61596606881457" target="_blank" rel="noopener">Facebook</a></li>
         <li><a href="mailto:info@boop.bg">info@boop.bg</a></li>
