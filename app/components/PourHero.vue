@@ -41,6 +41,7 @@ const libs = import.meta.client
 onMounted(async () => {
   const [{ BowlScene }, { gsap }, { ScrollTrigger }] = await libs!
   bowl = new BowlScene(stage.value!, { colours: COLOURS[0]!.c, name: DEMO, shape: 'wave' })
+  if (import.meta.dev) (window as unknown as { __bowl: unknown }).__bowl = bowl // dev only: poster capture
   const { $reducedMotion } = useNuxtApp()
   const apply = () => {
     const v = p.value
@@ -68,6 +69,13 @@ onBeforeUnmount(() => { st?.kill(); io?.disconnect(); bowl?.dispose(); bowl = nu
     <div class="sticky">
       <div class="wall">
         <LeafLight :strength=".2" />
+        <!-- First frame of the 3D scene as an image, shown instantly; the canvas fades in over it
+             (rendered from the scene at the same framing: wide / square-ish / tall screens) -->
+        <picture class="poster" :class="{ gone: ready }" aria-hidden="true">
+          <source media="(min-aspect-ratio: 23/20)" srcset="/img/hero/bowl-wide.webp">
+          <source media="(min-aspect-ratio: 4/5)" srcset="/img/hero/bowl-mid.webp">
+          <img src="/img/hero/bowl-tall.webp" alt="" fetchpriority="high" decoding="async">
+        </picture>
         <div ref="stage" class="stage" :class="{ ready }" aria-hidden="true" />
 
         <div class="captions">
@@ -116,6 +124,9 @@ onBeforeUnmount(() => { st?.kill(); io?.disconnect(); bowl?.dispose(); bowl = nu
     linear-gradient(180deg, #cf9469 0%, #c58659 55%, #b77548 100%);
 }
 .stage { position: absolute; inset: 0; opacity: 0; transition: opacity .35s ease-out; }
+.poster { position: absolute; inset: 0; transition: opacity .35s ease-out .1s; }
+.poster img { width: 100%; height: 100%; object-fit: cover; }
+.poster.gone { opacity: 0; }
 .stage.ready { opacity: 1; }
 .stage :deep(canvas) { width: 100% !important; height: 100% !important; display: block; }
 .captions { position: absolute; inset: 0; pointer-events: none; color: #fff8ee; }
