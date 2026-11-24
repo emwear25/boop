@@ -4,7 +4,7 @@
 import * as THREE from 'three'
 import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js'
 
-export type ShapeId = 'wave' | 'rings' | 'raised'
+export type ShapeId = 'wave' | 'rings' | 'raised' | 'lapa'
 
 interface Shape {
   /** Outer profile (radius, height), bottom centre to inner rim. */
@@ -18,6 +18,16 @@ interface Shape {
   nameR: number
   /** Two-tone wave line height on the outer wall (null = single colour). */
   waveY: number | null
+  /** Wave: periods around the bowl and height of the swing (default 3, 0.055). */
+  wave?: { periods: number; amp: number; phase?: number }
+  /** Small engraved paw above the name: height and size. */
+  paw?: { y: number; size: number }
+  /** Raised vertical ribs below the wave (count around the bowl), modelled in the geometry. */
+  ribs?: number
+  /** Name lettering weight (default 600). */
+  nameWeight?: number
+  /** Taller bowls: lift the camera target and pull back a little. */
+  frame?: { lift: number; dist: number }
 }
 
 const SHAPES: Record<ShapeId, Shape> = {
@@ -33,21 +43,29 @@ const SHAPES: Record<ShapeId, Shape> = {
     profile: [[0, 0], [0.8, 0], [1.12, 0.01], [1.17, 0.06], [1.08, 0.5], [0.99, 0.95], [0.95, 1.02], [0.87, 1.03], [0.82, 0.97]],
     rim: 1.0, nameY: 0.7, nameSize: 0.17, nameR: 1.02, waveY: 0.42,
   },
+  // "Лапа" raised bowl: tapered body, cream top with a soft wave, ribbed lower part,
+  // a small paw over the name (povdignata-kupichka-s-ime-lapa)
+  lapa: {
+    profile: [[0, 0], [0.8, 0], [1.09, 0.004], [1.12, 0.03], [1.1, 0.25], [1.03, 0.85], [0.97, 1.36], [0.965, 1.42], [0.94, 1.45], [0.88, 1.45], [0.84, 1.41]],
+    rim: 1.43, nameY: 1.02, nameSize: 0.17, nameR: 1.02, waveY: 0.74,
+    wave: { periods: 2, amp: 0.075, phase: -Math.PI / 2 }, paw: { y: 1.25, size: 0.11 }, nameWeight: 400, ribs: 93, frame: { lift: 0.4, dist: 1.28 },
+  },
 }
 
 const ease = (t: number) => t * t * (3 - 2 * t)
 // Scoop rest position (relative to the bowl centre) and pour angle; LIP = where its rim
 // edge ends up when tilted, i.e. where the kibble leaves it.
-const SCOOP_X = 0.62, SCOOP_Y = 1.45, SCOOP_Z = 0.2, SCOOP_TILT = 1.75
-const LIP = (() => {
+// SCOOP_Y is above the bowl's rim (the wave bowl's rim is at 0.69).
+const SCOOP_X = 0.62, SCOOP_Y = 0.76, SCOOP_Z = 0.2, SCOOP_TILT = 1.75
+const lip = (rim: number) => {
   const x = -0.42, y = 0.44, c = Math.cos(SCOOP_TILT), s = Math.sin(SCOOP_TILT)
-  return { x: SCOOP_X + x * c - y * s, y: SCOOP_Y + x * s + y * c, z: SCOOP_Z }
-})()
+  return { x: SCOOP_X + x * c - y * s, y: rim + SCOOP_Y + x * s + y * c, z: SCOOP_Z }
+}
 const clamp = (v: number, a = 0, b = 1) => Math.min(b, Math.max(a, v))
 
 /** [top, bottom] colours; bottom is used below the wave line on two-tone shapes. */
 export type Colours = [string, string]
-export interface BowlOptions { colours: Colours; name: string; shape: ShapeId; kibble?: number }
+export interface BowlOptions { colours: Colours; name: string; shape: ShapeId; kibble?: number; hero?: boolean }
 
 export class BowlScene {
   renderer: THREE.WebGLRenderer
@@ -79,7 +97,9 @@ export class BowlScene {
   engrave = 1
   rotation = 0
   /** Horizontal offset of the bowl on wide screens. */
-  offsetX = 0.85
+  offsetX = 0.75
+  /** Homepage hero framing (see resize); set before the first resize via the options. */
+  heroLayout = false
   private raf = 0
   private visible = true
   private dirty = true
@@ -87,6 +107,7 @@ export class BowlScene {
 
   constructor(private host: HTMLElement, opts: BowlOptions) {
     this.opts = { kibble: 320, ...opts }
+    this.heroLayout = !!opts.hero
     this.shape = SHAPES[opts.shape]
     this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' })
     this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
@@ -106,13 +127,13 @@ export class BowlScene {
     sun.position.set(-3, 5, 3)
     sun.castShadow = true
     sun.shadow.mapSize.set(1024, 1024)
-    sun.shadow.camera.left = -2; sun.shadow.camera.right = 2; sun.shadow.camera.top = 2; sun.shadow.camera.bottom = -2
+    sun.shadow.camera.left = -3; sun.shadow.camera.right = 3; sun.shadow.camera.top = 3; sun.shadow.camera.bottom = -3
     sun.shadow.radius = 6
     sun.shadow.bias = -0.0015
     this.scene.add(sun, new THREE.HemisphereLight(0xfff1de, 0x8a5a3c, 0.55))
 
     // Soft contact shadow on the floor
-    const floor = new THREE.Mesh(new THREE.PlaneGeometry(8, 8), new THREE.ShadowMaterial({ opacity: 0.22 }))
+    const floor = new THREE.Mesh(new THREE.PlaneGeometry(8, 8), new THREE.ShadowMaterial({ opacity: 0.17 }))
     floor.rotation.x = -Math.PI / 2
     floor.receiveShadow = true
     this.scene.add(floor)
@@ -133,7 +154,7 @@ export class BowlScene {
     this.bumpTex = new THREE.CanvasTexture(this.bumpCanvas)
     for (const t of [this.mapTex, this.bumpTex]) { t.anisotropy = 8; t.wrapS = THREE.RepeatWrapping }
     this.shellMat = new THREE.MeshPhysicalMaterial({
-      color: '#ffffff', roughness: 0.78, sheen: 0.35, sheenRoughness: 0.8, sheenColor: new THREE.Color('#ffffff'),
+      color: '#ffffff', roughness: 0.78, sheen: 0.12, sheenRoughness: 0.8, sheenColor: new THREE.Color('#ffffff'),
       map: this.mapTex, bumpMap: this.bumpTex, bumpScale: 3,
     })
 
@@ -160,7 +181,23 @@ export class BowlScene {
   private buildBowl() {
     if (this.shell) { this.group.remove(this.shell, this.insert); this.shell.geometry.dispose(); this.insert.geometry.dispose() }
     // phiStart = PI so texture u = 0.5 faces the camera (+z): the name sits front and centre.
-    const shellGeo = new THREE.LatheGeometry(this.profilePoints(), 160, Math.PI)
+    const ribs = this.shape.ribs
+    const shellGeo = new THREE.LatheGeometry(this.profilePoints(), ribs ? ribs * 4 : 160, Math.PI)
+    if (ribs && this.shape.waveY !== null) {
+      // push the outer wall out in soft vertical flutes everywhere below the wave line
+      const pos = shellGeo.attributes.position as THREE.BufferAttribute, uv = shellGeo.attributes.uv as THREE.BufferAttribute
+      const { periods, amp, phase = 0 } = this.shape.wave ?? { periods: 3, amp: 0.055 }
+      for (let i = 0; i < pos.count; i++) {
+        const x = pos.getX(i), y = pos.getY(i), z = pos.getZ(i), r = Math.hypot(x, z), u = uv.getX(i)
+        if (r < 0.9 || y < 0.02) continue
+        const line = this.shape.waveY + amp * Math.sin(u * Math.PI * 2 * periods + phase)
+        const fade = clamp((line - 0.015 - y) / 0.03) * clamp((y - 0.02) / 0.04)
+        if (!fade) continue
+        const k = 1 + (0.022 * (0.5 + 0.5 * Math.cos(u * Math.PI * 2 * ribs)) * fade) / r
+        pos.setXYZ(i, x * k, y, z * k)
+      }
+      shellGeo.computeVertexNormals()
+    }
     this.shell = new THREE.Mesh(shellGeo, this.shellMat)
     this.shell.castShadow = true; this.shell.receiveShadow = true
 
@@ -254,7 +291,7 @@ export class BowlScene {
     const outK = ease(clamp(this.engrave / 0.6))
     const g = this.group.position
     this.scoop.visible = this.pour > 0.001 && outK < 0.999
-    this.scoop.position.set(g.x + SCOOP_X + (1 - inK) * 2.4 + outK * 2.6, g.y + SCOOP_Y + (1 - inK) * 0.4 + outK * 1.0, SCOOP_Z)
+    this.scoop.position.set(g.x + SCOOP_X + (1 - inK) * 2.4 + outK * 2.6, g.y + this.shape.rim + SCOOP_Y + (1 - inK) * 0.4 + outK * 1.0, SCOOP_Z)
     this.scoop.rotation.set(0, 0, tilt)
     // the heap empties while the kibble falls
     const n = this.scoopMound.count
@@ -277,7 +314,7 @@ export class BowlScene {
       if (t <= 0) { d.scale.setScalar(0); d.position.set(0, -10, 0) }
       else {
         // start at the scoop lip (world), expressed in the spinning bowl's local frame
-        const j = this.start[i]!, r = this.rest[i]!
+        const j = this.start[i]!, r = this.rest[i]!, LIP = lip(this.shape.rim)
         const wx = LIP.x + j.x, wz = LIP.z + j.z, cos = Math.cos(-this.group.rotation.y), sin = Math.sin(-this.group.rotation.y)
         const s = new THREE.Vector3(wx * cos + wz * sin, LIP.y + j.y, -wx * sin + wz * cos)
         const fall = t * t // gravity
@@ -318,7 +355,8 @@ export class BowlScene {
     const wave = this.shape.waveY
     if (wave !== null) {
       // soft wave line, three periods around so it tiles seamlessly
-      const line = (x: number) => cy(this.vAt(wave + 0.055 * Math.sin((x / W) * Math.PI * 2 * 3)).v)
+      const { periods, amp, phase = 0 } = this.shape.wave ?? { periods: 3, amp: 0.055 }
+      const line = (x: number) => cy(this.vAt(wave + amp * Math.sin((x / W) * Math.PI * 2 * periods + phase)).v)
       for (const [ctx, fill] of [[m, bottom], [b, '#7a7a7a']] as const) {
         ctx.beginPath(); ctx.moveTo(0, H)
         for (let x = 0; x <= W; x += 8) ctx.lineTo(x, line(x))
@@ -337,6 +375,26 @@ export class BowlScene {
     // 3D-print layer lines: fine horizontal ridges everywhere
     for (let y = 0; y < H; y += 4) { b.fillStyle = 'rgba(255,255,255,.18)'; b.fillRect(0, y, W, 2) }
 
+    // small engraved paw above the name
+    if (this.shape.paw) {
+      const { v, L } = this.vAt(this.shape.paw.y)
+      const hPx = W / (2 * Math.PI * this.shape.nameR), vPx = H / L
+      const u = this.shape.paw.size * vPx // paw height in px
+      const shade = new THREE.Color(top).multiplyScalar(0.55).getStyle()
+      for (const [ctx, fill, blur] of [[m, shade, 0], [b, '#101010', u * 0.04]] as const) {
+        ctx.save()
+        ctx.translate(W / 2, cy(v))
+        ctx.scale(hPx / vPx, 1)
+        ctx.filter = blur ? `blur(${blur}px)` : 'none'
+        ctx.fillStyle = fill
+        ctx.beginPath(); ctx.ellipse(0, u * 0.2, u * 0.3, u * 0.24, 0, 0, Math.PI * 2); ctx.fill()
+        for (const [x, y, r] of [[-0.36, -0.12, 0.12], [-0.13, -0.3, 0.13], [0.13, -0.3, 0.13], [0.36, -0.12, 0.12]]) {
+          ctx.beginPath(); ctx.ellipse(x! * u, y! * u, r! * u, r! * u * 1.15, 0, 0, Math.PI * 2); ctx.fill()
+        }
+        ctx.restore()
+      }
+    }
+
     const name = (this.opts.name || '').toUpperCase().slice(0, 10)
     const shown = name.slice(0, Math.round(name.length * clamp(this.engrave)))
     if (shown) {
@@ -348,7 +406,7 @@ export class BowlScene {
         ctx.save()
         ctx.translate(W / 2, cy(v))
         ctx.scale(hPx / vPx, 1)
-        ctx.font = `600 ${size}px "Jost Variable", Jost, system-ui, sans-serif`
+        ctx.font = `${this.shape.nameWeight ?? 600} ${size}px "Jost Variable", Jost, system-ui, sans-serif`
         ctx.letterSpacing = `${Math.round(size * 0.14)}px`
         ctx.textBaseline = 'middle'
         ctx.textAlign = 'left'
@@ -382,8 +440,9 @@ export class BowlScene {
     if (nameChanged) this.drawSurface()
     // camera glides closer and lower as the bowl fills
     const k = ease(clamp(cam))
-    this.camera.position.set(0, 3.1 - k * 1.25, 6.6 - k * 1.7)
-    this.camera.lookAt(this.group.position.x * 0.35, 0.5 + this.group.position.y * 0.5, 0)
+    const { lift, dist } = this.shape.frame ?? { lift: 0, dist: 1 }
+    this.camera.position.set(0, (3.1 - k * 1.25) * dist + lift, (6.6 - k * 1.7) * dist)
+    this.camera.lookAt(this.group.position.x * 0.35, 0.5 + lift + this.group.position.y * 0.5, 0)
     this.dirty = true
   }
 
@@ -394,14 +453,22 @@ export class BowlScene {
     if (!w || !h) return
     this.renderer.setSize(w, h, false)
     this.camera.aspect = w / h
-    // Wide screens: copy on the left, bowl on the right. Squarer and tall screens: copy above,
-    // form below, so the bowl is smaller and sits just under the middle.
     const a = w / h
-    this.camera.fov = a < 0.8 ? 56 : a <= 1.15 ? 40 : 32
-    this.group.position.x = a > 1.15 ? this.offsetX : 0
-    this.group.position.y = 0
-    if (a <= 1.15) this.camera.setViewOffset(w, h, 0, h * (a < 0.8 ? 0.1 : 0.06), w, h)
-    else this.camera.clearViewOffset()
+    if (this.heroLayout) {
+      // Homepage hero. Wide: copy on the left, bowl on the right. Squarer and tall: copy above,
+      // form below, so the bowl is smaller and sits just under the middle.
+      this.camera.fov = a < 0.8 ? 56 : a <= 1.75 ? 44 : 32
+      this.group.position.x = a > 1.75 ? this.offsetX * a : 0
+      this.group.position.y = 0
+      if (a <= 1.75) this.camera.setViewOffset(w, h, 0, h * (a < 0.8 ? 0.1 : 0.13), w, h)
+      else this.camera.clearViewOffset()
+    } else {
+      // Other pages (configurator): keep the bowl framed on narrow screens
+      this.camera.fov = a < 0.8 ? 46 : 32
+      this.group.position.x = a > 1.15 ? this.offsetX : 0
+      this.group.position.y = a < 0.8 ? -0.35 : 0
+      this.camera.clearViewOffset()
+    }
     this.camera.updateProjectionMatrix()
     this.updateScoop()
     this.dirty = true

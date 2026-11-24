@@ -1,0 +1,35 @@
+[
+ {
+  "out": "ig-puzzle-4a",
+  "size": "3024x1344",
+  "refs": [
+   "style-grid1.jpg",
+   "real-lapa.jpg",
+   "scoop-lapa-hero.jpg",
+   "c-name-rings.jpg"
+  ],
+  "prompt": "Image 1 is the STYLE reference: match its warm sunlit terracotta-beige plaster wall with soft dappled leaf shadows, the light-oak floor and the skirting board at the same height, the camera height, lens and warm colour grading exactly, so this looks like the same photoshoot. Image 2 is a raised pet bowl: cream top with a small paw and the name РИЧИ engraved, charcoal ribbed base with a wavy border. Image 3 is a matching kibble scoop: cream and charcoal cup with a cream handle with РИЧИ engraved. Image 4 is a raised pet bowl made of four stacked soft sage-green rings with МИЛА engraved on the front ring. In both bowls a stainless steel bowl sits fully RECESSED inside, only its thin rim visible, filled with kibble. Create ONE very wide photo made to be cut into three equal vertical panels. The UPPER 55% of the frame is calm wall with leaf shadows only, nothing reaching into it. Everything else sits low, inside the LOWER 42% of the frame, on the oak floor. LEFT third, fully inside it and centred in it: the EXACT bowl from image 2 with the name РИЧИ facing the camera, and the EXACT scoop from image 3 lying on the floor in front of it with a few kibbles spilled. MIDDLE third, fully inside it and centred in it: a fawn-and-white young corgi dog and a grey British shorthair cat lying close together on the floor, the cat leaning on the dog, both relaxed and looking at the camera. RIGHT third, fully inside it and centred in it: the EXACT bowl from image 4 with the name МИЛА facing the camera. Nothing crosses the two dividing lines between the thirds; leave a little empty floor at each divide. The bowls are small next to the pets (the corgi is clearly bigger than each bowl). Keep the names exactly РИЧИ and МИЛА, no other text, no logos. Photorealistic, cosy, soft late-afternoon light."
+ },
+ {
+  "out": "ig-puzzle-4b",
+  "size": "3024x1344",
+  "refs": [
+   "style-grid1.jpg",
+   "real-lapa.jpg",
+   "scoop-lapa-hero.jpg",
+   "c-name-rings.jpg"
+  ],
+  "prompt": "Image 1 is the STYLE reference: match its warm sunlit terracotta-beige plaster wall with soft dappled leaf shadows, the light-oak floor and the skirting board at the same height, the camera height, lens and warm colour grading exactly, so this looks like the same photoshoot. Image 2 is a raised pet bowl: cream top with a small paw and the name РИЧИ engraved, charcoal ribbed base with a wavy border. Image 3 is a matching kibble scoop: cream and charcoal cup with a cream handle with РИЧИ engraved. Image 4 is a raised pet bowl made of four stacked soft sage-green rings with МИЛА engraved on the front ring. In both bowls a stainless steel bowl sits fully RECESSED inside, only its thin rim visible, filled with kibble. Create ONE very wide photo made to be cut into three equal vertical panels. The UPPER 55% of the frame is calm wall with leaf shadows only, nothing reaching into it. Everything else sits low, inside the LOWER 42% of the frame, on the oak floor. LEFT third, fully inside it and centred in it: the EXACT bowl from image 2 with the name РИЧИ facing the camera, and the EXACT scoop from image 3 lying on the floor in front of it with a few kibbles spilled. MIDDLE third, fully inside it and centred in it: a fawn-and-white young corgi dog and a grey British shorthair cat lying close together on the floor, the cat leaning on the dog, both relaxed and looking at the camera. RIGHT third, fully inside it and centred in it: the EXACT bowl from image 4 with the name МИЛА facing the camera. Nothing crosses the two dividing lines between the thirds; leave a little empty floor at each divide. The bowls are small next to the pets (the corgi is clearly bigger than each bowl). Keep the names exactly РИЧИ and МИЛА, no other text, no logos. Photorealistic, cosy, soft late-afternoon light."
+ },
+ {
+  "out": "ig-puzzle-4c",
+  "size": "3024x1344",
+  "refs": [
+   "style-grid1.jpg",
+   "real-lapa.jpg",
+   "scoop-lapa-hero.jpg",
+   "c-name-rings.jpg"
+  ],
+  "prompt": "Image 1 is the STYLE reference: match its warm sunlit terracotta-beige plaster wall with soft dappled leaf shadows, the light-oak floor and the skirting board at the same height, the camera height, lens and warm colour grading exactly, so this looks like the same photoshoot. Image 2 is a raised pet bowl: cream top with a small paw and the name РИЧИ engraved, charcoal ribbed base with a wavy border. Image 3 is a matching kibble scoop: cream and charcoal cup with a cream handle with РИЧИ engraved. Image 4 is a raised pet bowl made of four stacked soft sage-green rings with МИЛА engraved on the front ring. In both bowls a stainless steel bowl sits fully RECESSED inside, only its thin rim visible, filled with kibble. Create ONE very wide photo made to be cut into three equal vertical panels. The UPPER 55% of the frame is calm wall with leaf shadows only, nothing reaching into it. Everything else sits low, inside the LOWER 42% of the frame, on the oak floor. LEFT third, fully inside it and centred in it: the EXACT bowl from image 2 with the name РИЧИ facing the camera, and the EXACT scoop from image 3 lying on the floor in front of it with a few kibbles spilled. MIDDLE third, fully inside it and centred in it: a fawn-and-white young corgi dog and a grey British shorthair cat lying close together on the floor, the cat leaning on the dog, both relaxed and looking at the camera. RIGHT third, fully inside it and centred in it: the EXACT bowl from image 4 with the name МИЛА facing the camera. Nothing crosses the two dividing lines between the thirds; leave a little empty floor at each divide. The bowls are small next to the pets (the corgi is clearly bigger than each bowl). Keep the names exactly РИЧИ and МИЛА, no other text, no logos. Photorealistic, cosy, soft late-afternoon light."
+ }
+]

@@ -5,12 +5,14 @@
 import type { BowlScene } from '~/utils/bowl3d'
 import { canRun3D } from '~/utils/heroMode'
 
+// The bowl is the "Лапа" raised bowl (povdignata-kupichka-s-ime-lapa), in its five colours
+const PRODUCT = 'povdignata-kupichka-s-ime-lapa'
 const COLOURS: { name: string; key: string; c: [string, string] }[] = [
-  { name: 'Мляко и салвия', key: 'salvia', c: ['#efe6d6', '#8fa27c'] },
-  { name: 'Мляко и розово', key: 'rozovo', c: ['#efe6d6', '#e3a9a3'] },
-  { name: 'Мляко и теракота', key: 'terakota', c: ['#efe6d6', '#c4704f'] },
-  { name: 'Мляко и графит', key: 'grafit', c: ['#efe6d6', '#45484a'] },
-  { name: 'Мляко и какао', key: 'kakao', c: ['#efe6d6', '#6e4630'] },
+  { name: 'Мляко и графит', key: 'grafit', c: ['#efe6d6', '#292b2d'] }, // deeper in 3D: the light washes it out
+  { name: 'Пясък и какао', key: 'kakao', c: ['#d9b892', '#6e4630'] },
+  { name: 'Мляко и салвия', key: 'salvia', c: ['#efe6d6', '#8c9e7a'] },
+  { name: 'Мляко и мента', key: 'menta', c: ['#efe6d6', '#9fd3c0'] },
+  { name: 'Пясък и праскова', key: 'praskova', c: ['#d9b892', '#f0a58c'] },
 ]
 const DEMO = 'ЛУНА'
 const POUR_MS = 3400
@@ -18,9 +20,9 @@ const POUR_MS = 3400
 // Still pictures (rendered from the 3D scene). `name` is where the name sits on the bowl,
 // in image pixels: centre, available width, letter height.
 const STILLS = {
-  wide: { media: '(min-aspect-ratio: 23/20)', w: 2400, h: 1166, name: { x: 1501, y: 730, w: 233, size: 76 } },
-  mid: { media: '(min-aspect-ratio: 4/5)', w: 1125, h: 1075, name: { x: 558, y: 584, w: 173, size: 57 } },
-  tall: { media: '', w: 750, h: 1360, name: { x: 370, y: 640, w: 149, size: 49 } },
+  wide: { media: '(min-aspect-ratio: 3/2)', w: 2400, h: 1166, name: { x: 1412, y: 632, w: 176, size: 61 } },
+  mid: { media: '(min-aspect-ratio: 7/10)', w: 1522, h: 875, name: { x: 758, y: 351, w: 94, size: 34 } },
+  tall: { media: '', w: 876, h: 1120, name: { x: 435, y: 474, w: 92, size: 33 } },
 } as const
 type StillKey = keyof typeof STILLS
 
@@ -35,7 +37,7 @@ let bowl: BowlScene | null = null
 let io: IntersectionObserver | null = null
 let raf = 0
 
-const configLink = computed(() => ({ path: '/personalize', query: { name: name.value.trim() || undefined, color: colour.value || undefined } }))
+const configLink = computed(() => ({ path: `/product/${PRODUCT}`, query: { name: name.value.trim() || undefined, color: colour.value || undefined } }))
 
 watch(shownName, v => bowl?.set({ name: v }))
 watch(colour, i => bowl?.set({ colours: COLOURS[i]!.c }))
@@ -62,7 +64,7 @@ function measure() {
   box.value = { w: el.clientWidth, h: el.clientHeight }
   // same thresholds the 3D scene uses to frame the bowl
   const a = el.clientWidth / el.clientHeight
-  still.value = a > 1.15 ? 'wide' : a >= 0.8 ? 'mid' : 'tall'
+  still.value = a > 1.75 ? 'wide' : a >= 0.8 ? 'mid' : 'tall'
 }
 
 function goLite() {
@@ -98,7 +100,7 @@ onMounted(async () => {
   if (!canRun3D()) { lite.value = true; return }
   try {
     const { BowlScene } = await import('~/utils/bowl3d')
-    bowl = new BowlScene(stage.value!, { colours: COLOURS[colour.value]!.c, name: shownName.value, shape: 'wave' })
+    bowl = new BowlScene(stage.value!, { colours: COLOURS[colour.value]!.c, name: shownName.value, shape: 'lapa', hero: true })
   } catch { return goLite() }
   if (import.meta.dev) (window as unknown as { __bowl: unknown }).__bowl = bowl // dev only: still capture
   document.fonts?.ready.then(() => bowl?.set({}))
@@ -150,6 +152,7 @@ onBeforeUnmount(() => { cancelAnimationFrame(raf); ro?.disconnect(); io?.disconn
 .hero { padding: 12px; }
 .wall {
   position: relative; height: calc(100svh - var(--hero-top, 146px)); min-height: 560px; border-radius: 32px; overflow: hidden; isolation: isolate;
+  container: hero / size; /* layout follows the hero's own shape, like the 3D framing */
   /* the warm sunlit plaster wall and oak floor of the product photos */
   background:
     radial-gradient(120% 80% at 15% 10%, rgba(255, 214, 160, .55), transparent 55%),
@@ -165,7 +168,7 @@ onBeforeUnmount(() => { cancelAnimationFrame(raf); ro?.disconnect(); io?.disconn
 /* the name on the still picture, shaded like the 3D engraving */
 .engraved {
   position: absolute; translate: -50% -50%; text-align: center; white-space: nowrap; pointer-events: none;
-  font-family: var(--sans); font-weight: 600; letter-spacing: .14em; line-height: 1; text-indent: .14em;
+  font-family: var(--sans); font-weight: 400; letter-spacing: .14em; line-height: 1; text-indent: .14em;
   color: rgba(140, 124, 102, .4); text-shadow: 0 1px 0 rgba(255, 255, 255, .35), 0 -1px 0 rgba(60, 40, 20, .18);
 }
 
@@ -191,7 +194,7 @@ onBeforeUnmount(() => { cancelAnimationFrame(raf); ro?.disconnect(); io?.disconn
 .make .btn { background: var(--paper); color: var(--moss); }
 
 /* Squarer and tall screens: name at the top, bowl in the middle, form at the bottom */
-@media (max-aspect-ratio: 23/20) {
+@container hero (max-aspect-ratio: 7/4) {
   .copy, .make { right: clamp(20px, 6vw, 96px); max-width: none; }
   .copy { top: clamp(24px, 5%, 64px); }
   .copy .lead { max-width: 460px; }
