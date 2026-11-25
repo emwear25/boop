@@ -90,6 +90,18 @@ useHead(() => ({
           </Transition>
           <LeafLight v-if="active === 0" :strength=".12" />
         </div>
+        <div v-if="colours.length > 1" class="m-colours">
+          <div class="lbl">Цвят: <span class="muted">{{ colours[colour]!.name }}</span></div>
+          <div v-if="isTag" class="ways" role="radiogroup" aria-label="Цветова комбинация">
+            <button v-for="(c, i) in colours" :key="c.name" role="radio" :aria-checked="colour === i" :class="{ on: colour === i }" @click="colour = i; active = -1">
+              <NameTagPreview :name="note" :placeholder="tagDesign(design).demo" :way="i" :size="60" :design="design" />
+            </button>
+          </div>
+          <div v-else class="sws" role="radiogroup" aria-label="Цвят">
+            <button v-for="(c, i) in colours" :key="c.name" role="radio" :aria-checked="colour === i" :aria-label="c.name" :title="c.name"
+              class="sw" :class="{ on: colour === i }" :style="{ background: swatch(c) }" @click="colour = i; active = 0" />
+          </div>
+        </div>
       </div>
 
       <div class="info">
@@ -119,7 +131,7 @@ useHead(() => ({
           <NuxtLink v-if="forma[p.slug]" :to="{ path: '/personalize', query: { shape: forma[p.slug], name: note || undefined } }" class="see3d">Виж името си върху купичката</NuxtLink>
         </div>
 
-        <div class="opt">
+        <div class="opt" :class="{ 'd-colours': colours.length > 1 }">
           <div class="lbl">Цвят: <span class="muted">{{ colours[colour]!.name }}</span></div>
           <div v-if="isTag" class="ways" role="radiogroup" aria-label="Цветова комбинация">
             <button v-for="(c, i) in colours" :key="c.name" role="radio" :aria-checked="colour === i" :class="{ on: colour === i }" @click="colour = i; active = -1">
@@ -238,6 +250,7 @@ useHead(() => ({
 .sw:hover { transform: scale(1.08); }
 .sw.on { outline: 1.5px solid var(--moss); outline-offset: 3px; }
 .req { color: var(--cherry); }
+.m-colours { display: none; }
 .buy { display: flex; gap: 12px; margin-top: 32px; }
 .qty { display: flex; align-items: center; gap: 18px; border: 1px solid var(--line); border-radius: 999px; padding: 0 20px; height: 58px; background: var(--paper); }
 .buy .btn { flex: 1; height: 58px; font-size: 17px; }
@@ -288,6 +301,8 @@ useHead(() => ({
   .gal { position: static; grid-template-columns: 1fr; }
   .thumbs { flex-direction: row; order: 2; }
   .thumbs button { width: 72px; }
+  .m-colours { display: block; order: 1; }
+  .d-colours { display: none; }
   .related .grid { grid-template-columns: 1fr 1fr; gap: 28px 12px; }
 }
 @media (max-width: 480px) { .sizes { grid-template-columns: 1fr; } .sizes button { display: grid; grid-template-columns: auto 1fr auto; gap: 12px; align-items: center; } .sizes small, .sizes em { margin: 0; } }
