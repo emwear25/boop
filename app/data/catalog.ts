@@ -247,6 +247,17 @@ for (const p of products) {
   if (key && p.colours) p.colours = p.colours.map((c, i) => (i ? { ...c, img: `scoop-${key}-c${i}` } : c))
 }
 
+// Bowls with their own main photo per colour (<photos>-c<i>, same shot recoloured; colour 0 uses <photos>-1)
+const colourPhotos: Record<string, string> = {
+  'kupichka-s-ime-raie': 'name-ribbed', 'kupichka-s-ime-valna': 'name-wave', 'povdignata-kupichka-s-ime-visoka-valna': 'name-raised',
+  'povdignata-kupichka-s-ime-lapa': 'lapa', 'povdignata-kupichka-s-ime-prasteni': 'name-rings', 'povdignata-kupichka-s-ime-konus': 'name-cone',
+  'dve-kupichki-s-ime-hrana-i-voda': 'food-water', 'kupichka-s-ime-gevrek': 'name-twist',
+}
+for (const p of products) {
+  const key = colourPhotos[p.slug]
+  if (key && p.colours) p.colours = p.colours.map((c, i) => (i ? { ...c, img: `${key}-c${i}` } : c))
+}
+
 /** Image folder slug on disk (generated assets are named after the source designs). */
 const imageKey: Record<string, string> = {
   'kupichka-za-kuche-pregradka': 'heart-hug', 'kupichka-za-kuche-puhche': 'puffy', 'kupichka-za-kuche-puding': 'pudding', 'kupichka-za-kuche-plitka': 'braid', 'kupichka-za-kuche-glazura': 'dipped', 'kupichka-za-kuche-sladoled': 'soft-serve',
