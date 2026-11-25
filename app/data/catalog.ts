@@ -236,6 +236,7 @@ for (const d of tagDesigns) {
 const EXTRA_OFF = 0.9
 const extra = (n: number) => Math.round(n * EXTRA_OFF * 10) / 10
 for (const p of products) {
+  if (p.category === 'medalyoni-s-ime') continue // priced in tagDesigns.ts (TAG_PRICE)
   if (p.price != null) p.price = extra(p.price)
   if (p.sizes) p.sizes = p.sizes.map(s => ({ ...s, price: extra(s.price) }))
 }

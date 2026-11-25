@@ -229,8 +229,8 @@ onBeforeUnmount(() => { ctx?.revert(); ScrollTrigger.refresh() })
 .names-top { display: flex; justify-content: space-between; align-items: end; gap: 24px 48px; flex-wrap: wrap; margin-bottom: 32px; }
 .names-top .lead { margin-top: 16px; max-width: 30em; }
 .cta-row { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
-.names-hero { display: block; border-radius: 32px; overflow: hidden; aspect-ratio: 16/7; background: #c9a37a; }
-.names-hero img { width: 100%; height: 100%; object-fit: cover; object-position: 70% 50%; transition: transform 1.4s var(--ease); }
+.names-hero { display: block; border-radius: 32px; overflow: hidden; aspect-ratio: 16/9; background: #c9a37a; }
+.names-hero img { width: 100%; height: 100%; object-fit: cover; object-position: 80% 50%; transition: transform 1.4s var(--ease); }
 .names-hero:hover img { transform: scale(1.03); }
 .names-row { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; margin-top: 16px; }
 .medal { border-radius: 20px; overflow: hidden; background: var(--paper); }

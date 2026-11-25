@@ -39,18 +39,21 @@ export interface TagDesign {
   demo: string
 }
 
+/** Medallion price (already includes the extra 10% off of Nov 2026); catalog.ts does not discount it again. */
+export const TAG_PRICE = 4.1
+
 const W = '#fffdf8'
 const single = (pairs: [string, string][]): Colourway[] => pairs.map(([name, a]) => ({ name, c: { a, t: W } }))
 
 export const tagDesigns: TagDesign[] = [
   {
-    id: 'balonche', slug: 'medalyon-s-ime-balonche', name: 'Балонче', kind: 'bubble', price: 4.5, photos: 'name-tag', demo: 'Балкан',
+    id: 'balonche', slug: 'medalyon-s-ime-balonche', name: 'Балонче', kind: 'bubble', price: TAG_PRICE, photos: 'name-tag', demo: 'Балкан',
     tagline: 'Изрязан по самото име.', description: 'Медальон във формата на самото име: дебели заоблени букви в цвят по избор, бели изпъкнали букви отгоре и халка за нашийника.',
     layers: [], hole: [0, 0, 0], text: [0, 0, 0, 0],
     colourways: single([['Салвия', '#7f9a72'], ['Розово', '#e7a3b4'], ['Теракота', '#c4603f'], ['Масло', '#ecc85a'], ['Лавандула', '#a993d6'], ['Мъх', '#4c6a3e'], ['Небе', '#7fb3d9'], ['Бордо', '#8a2a35']]),
   },
   {
-    id: 'dyga', slug: 'medalyon-s-ime-daga', name: 'Дъга', kind: 'rainbow', price: 4.5, badge: 'Многоцветен', photos: 'tag-dyga', demo: 'Луна',
+    id: 'dyga', slug: 'medalyon-s-ime-daga', name: 'Дъга', kind: 'rainbow', price: TAG_PRICE, badge: 'Многоцветен', photos: 'tag-dyga', demo: 'Луна',
     tagline: 'Всяка буква в свой цвят.', description: 'Името е изрязано като балонче с кремав кант, а всяка буква е в различен пастелен цвят. Най-веселият медальон в колекцията.',
     layers: [], hole: [0, 0, 0], text: [0, 0, 0, 0],
     colourways: [
@@ -60,7 +63,7 @@ export const tagDesigns: TagDesign[] = [
     ],
   },
   {
-    id: 'kokalche', slug: 'medalyon-s-ime-kokalche', name: 'Кокалче', kind: 'shape', price: 4.5, photos: 'tag-bone', demo: 'Балкан',
+    id: 'kokalche', slug: 'medalyon-s-ime-kokalche', name: 'Кокалче', kind: 'shape', price: TAG_PRICE, photos: 'tag-bone', demo: 'Балкан',
     tagline: 'Класиката, в два цвята.', description: 'Кокалче с контрастен кант по ръба и бели изпъкнали букви. Изработено в два цвята, така че кантът е част от медальона, а не боя.',
     layers: [
       { slot: 'b', circles: [[78, 92, 56], [78, 188, 56], [322, 92, 56], [322, 188, 56], [200, 64, 26]], rects: [[74, 80, 252, 120, 26]], merge: 10 },
@@ -75,7 +78,7 @@ export const tagDesigns: TagDesign[] = [
     ],
   },
   {
-    id: 'lapichka', slug: 'medalyon-s-ime-lapichka', name: 'Лапичка', kind: 'shape', price: 4.5, photos: 'tag-paw', demo: 'Луна',
+    id: 'lapichka', slug: 'medalyon-s-ime-lapichka', name: 'Лапичка', kind: 'shape', price: TAG_PRICE, photos: 'tag-paw', demo: 'Луна',
     tagline: 'С розови възглавнички.', description: 'Лапа с четири пръстчета и голяма възглавничка, в контрастен цвят върху основата. Името е върху възглавничката.',
     layers: [
       { slot: 'a', circles: [[88, 96, 46], [158, 52, 48], [242, 52, 48], [312, 96, 46], [200, 38, 28]], paths: ['M200 108 C 306 108 358 170 348 218 C 338 268 272 268 200 256 C 128 268 62 268 52 218 C 42 170 94 108 200 108 Z'], merge: 16 },
@@ -90,7 +93,7 @@ export const tagDesigns: TagDesign[] = [
     ],
   },
   {
-    id: 'surce', slug: 'medalyon-s-ime-sartse', name: 'Сърце', kind: 'shape', price: 4.5, photos: 'tag-heart', demo: 'Мила',
+    id: 'surce', slug: 'medalyon-s-ime-sartse', name: 'Сърце', kind: 'shape', price: TAG_PRICE, photos: 'tag-heart', demo: 'Мила',
     tagline: 'Сърце в сърце.', description: 'Пухкаво сърце с кант в друг цвят. Двата цвята са изработени заедно, а белите букви стоят отгоре.',
     layers: [
       { slot: 'b', circles: [[200, 46, 26]], paths: ['M200 268 C 146 230 36 174 36 96 C 36 40 82 10 130 10 C 166 10 188 30 200 54 C 212 30 234 10 270 10 C 318 10 364 40 364 96 C 364 174 254 230 200 268 Z'], merge: 4 },
@@ -105,7 +108,7 @@ export const tagDesigns: TagDesign[] = [
     ],
   },
   {
-    id: 'oblache', slug: 'medalyon-s-ime-oblache', name: 'Облаче', kind: 'shape', price: 4.5, badge: 'Многоцветен', photos: 'tag-cloud', demo: 'Роки',
+    id: 'oblache', slug: 'medalyon-s-ime-oblache', name: 'Облаче', kind: 'shape', price: TAG_PRICE, badge: 'Многоцветен', photos: 'tag-cloud', demo: 'Роки',
     tagline: 'С дъга зад него.', description: 'Пухкаво облаче, зад което надниква дъга в три цвята. Буквите са в цвета на небето.',
     layers: [
       { slot: 'b', paths: ['M44 206 A 156 156 0 0 1 356 206'], line: 28 },
@@ -121,7 +124,7 @@ export const tagDesigns: TagDesign[] = [
     ],
   },
   {
-    id: 'kotence', slug: 'medalyon-s-ime-kotentse', name: 'Котенце', kind: 'shape', price: 4.5, badge: 'Многоцветен', photos: 'tag-cat', demo: 'Мурка',
+    id: 'kotence', slug: 'medalyon-s-ime-kotentse', name: 'Котенце', kind: 'shape', price: TAG_PRICE, badge: 'Многоцветен', photos: 'tag-cat', demo: 'Мурка',
     tagline: 'С розови ушички и носле.', description: 'Котешка главичка с вътрешни ушички и носле в контрастен цвят. Направено за котките, но и кучетата не се оплакват.',
     layers: [
       { slot: 'a', circles: [[200, 168, 108]], paths: ['M104 140 L 98 34 Q 98 20 112 26 L 196 74 Z', 'M296 140 L 302 34 Q 302 20 288 26 L 204 74 Z'], merge: 14 },
@@ -136,7 +139,7 @@ export const tagDesigns: TagDesign[] = [
     ],
   },
   {
-    id: 'ribka', slug: 'medalyon-s-ime-ribka', name: 'Рибка', kind: 'shape', price: 4.5, badge: 'Многоцветен', photos: 'tag-fish', demo: 'Писи',
+    id: 'ribka', slug: 'medalyon-s-ime-ribka', name: 'Рибка', kind: 'shape', price: TAG_PRICE, badge: 'Многоцветен', photos: 'tag-fish', demo: 'Писи',
     tagline: 'Любимото на всяка котка.', description: 'Рибка с ивици, опашка и перка в контрастен цвят и око отпред. Името е по тялото.',
     layers: [
       { slot: 'a', paths: ['M30 140 C 60 60 200 40 300 120 L 372 64 Q 388 56 386 76 L 380 140 L 386 204 Q 388 224 372 216 L 300 160 C 200 240 60 220 30 140 Z'], merge: 10 },
@@ -153,7 +156,7 @@ export const tagDesigns: TagDesign[] = [
     ],
   },
   {
-    id: 'gabka', slug: 'medalyon-s-ime-gabka', name: 'Гъбка', kind: 'shape', price: 4.5, badge: 'Многоцветен', photos: 'tag-mushroom', demo: 'Бони',
+    id: 'gabka', slug: 'medalyon-s-ime-gabka', name: 'Гъбка', kind: 'shape', price: TAG_PRICE, badge: 'Многоцветен', photos: 'tag-mushroom', demo: 'Бони',
     tagline: 'Червена шапка, бели точки.', description: 'Горска гъбка в три цвята: шапка, точки и пънче. Името е изписано върху шапката.',
     layers: [
       { slot: 'b', rects: [[136, 140, 128, 124, 40]], merge: 6 },
@@ -168,7 +171,7 @@ export const tagDesigns: TagDesign[] = [
     ],
   },
   {
-    id: 'yagoda', slug: 'medalyon-s-ime-yagoda', name: 'Ягода', kind: 'shape', price: 4.5, badge: 'Многоцветен', photos: 'tag-berry', demo: 'Бери',
+    id: 'yagoda', slug: 'medalyon-s-ime-yagoda', name: 'Ягода', kind: 'shape', price: TAG_PRICE, badge: 'Многоцветен', photos: 'tag-berry', demo: 'Бери',
     tagline: 'Най-сладкото име вкъщи.', description: 'Ягода със семенца и зелени листенца в три цвята. Халката минава през листата.',
     layers: [
       { slot: 'a', paths: ['M200 272 C 118 244 36 172 42 110 C 48 62 98 44 140 54 C 172 38 228 38 260 54 C 302 44 352 62 358 110 C 364 172 282 244 200 272 Z'], merge: 4 },
