@@ -241,6 +241,19 @@ for (const p of products) {
   if (p.sizes) p.sizes = p.sizes.map(s => ({ ...s, price: extra(s.price) }))
 }
 
+// Second round (2026-11-25): bowls −10%, scoops −15%, walk −15%, on top of the round above
+const SECOND_OFF: Record<string, number> = {
+  'kupichki-za-kucheta-i-kotki': 0.9, 'kupichki-s-ime': 0.9, 'koledni-kupichki': 0.9,
+  'lazhichki-za-granuli': 0.85, 'zakachalki-za-povod': 0.85,
+}
+for (const p of products) {
+  const f = SECOND_OFF[p.category]
+  if (!f) continue
+  const cut = (n: number) => Math.round(n * f * 10) / 10
+  if (p.price != null) p.price = cut(p.price)
+  if (p.sizes) p.sizes = p.sizes.map(s => ({ ...s, price: cut(s.price) }))
+}
+
 // Scoops: every colour has its own main photo (scoop-<key>-c<i>.jpg, same shot recoloured)
 for (const p of products) {
   const key = p.slug.startsWith('lazhichka-za-granuli-s-ime-') ? p.slug.slice('lazhichka-za-granuli-s-ime-'.length) : null
