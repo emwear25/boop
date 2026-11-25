@@ -47,6 +47,7 @@ watch(() => cart.open, o => {
                   <span v-if="i.design">{{ tagDesign(i.design).name }}</span>
                   <span v-if="i.colour">{{ i.colour }}</span>
                   <span v-if="i.note">Надпис: {{ i.note }}</span>
+                  <span v-if="i.back">Гръб: {{ i.back }}</span>
                 </div>
                 <div class="row">
                   <div class="qty">

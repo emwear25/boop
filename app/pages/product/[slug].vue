@@ -16,9 +16,11 @@ const size = ref<number>(defaultSize(product.value!))
 const qty = ref(1)
 const note = ref(String(route.query.name ?? '').slice(0, 10))
 const noteError = ref('')
+const back = ref('')
+const backError = ref('')
 const queryColour = () => Math.min(Math.max(0, Number(route.query.color) || 0), (product.value?.colours?.length ?? 1) - 1)
 const colour = ref(queryColour())
-watch(() => route.params.slug, () => { size.value = defaultSize(p.value); colour.value = queryColour(); note.value = String(route.query.name ?? '').slice(0, 10); noteError.value = ''; active.value = isTag.value ? -1 : 0 })
+watch(() => route.params.slug, () => { size.value = defaultSize(p.value); colour.value = queryColour(); note.value = String(route.query.name ?? '').slice(0, 10); noteError.value = ''; back.value = ''; backError.value = ''; active.value = isTag.value ? -1 : 0 })
 const colours = computed(() => p.value.colours ?? [p.value.colour])
 const swatch = (c: { hex: string; hex2?: string }) => c.hex2 ? `linear-gradient(135deg, ${c.hex} 50%, ${c.hex2} 50%)` : c.hex
 const cart = useCart()
@@ -40,10 +42,14 @@ function add() {
   if (pers?.required && !v) { noteError.value = 'Напиши името, което да гравираме.'; return }
   if (pers && !/^[\p{L}\p{N} .'-]*$/u.test(v)) { noteError.value = 'Използвай само букви, цифри и интервал.'; return }
   noteError.value = ''
+  const b = back.value.trim().replace(/\s+/g, ' ')
+  if (isTag.value && b && !/^\+?[\d ()-]{6,16}$/.test(b)) { backError.value = 'Напиши телефона само с цифри, например 0888 123 456.'; return }
+  backError.value = ''
   cart.add(p.value.slug, {
     size: p.value.sizes ? size.value : undefined,
     colour: p.value.colours ? colours.value[colour.value]!.name : undefined,
     note: v || undefined,
+    back: isTag.value && b ? b : undefined,
   }, qty.value)
   qty.value = 1
 }
@@ -128,6 +134,14 @@ useHead(() => ({
           </div>
           <p v-if="noteError" class="error" role="alert">{{ noteError }}</p>
           <p v-if="p.personalise.hint" class="hint muted">{{ p.personalise.hint }}</p>
+          <template v-if="isTag">
+            <label class="lbl back-lbl" for="back">Телефон на гърба <span class="muted">(по желание, без доплащане)</span></label>
+            <div class="field" :class="{ err: backError }">
+              <input id="back" v-model="back" type="tel" inputmode="tel" maxlength="16" placeholder="напр. 0888 123 456" autocomplete="off">
+            </div>
+            <p v-if="backError" class="error" role="alert">{{ backError }}</p>
+            <p v-else class="hint muted">Гравираме го на гърба. Ако се загуби, който го намери, ще ти се обади.</p>
+          </template>
           <NuxtLink v-if="forma[p.slug]" :to="{ path: '/personalize', query: { shape: forma[p.slug], name: note || undefined } }" class="see3d">Виж името си върху купичката</NuxtLink>
         </div>
 
@@ -250,6 +264,7 @@ useHead(() => ({
 .sw:hover { transform: scale(1.08); }
 .sw.on { outline: 1.5px solid var(--moss); outline-offset: 3px; }
 .req { color: var(--cherry); }
+.back-lbl { margin-top: 20px; }
 .m-colours { display: none; }
 .buy { display: flex; gap: 12px; margin-top: 32px; }
 .qty { display: flex; align-items: center; gap: 18px; border: 1px solid var(--line); border-radius: 999px; padding: 0 20px; height: 58px; background: var(--paper); }

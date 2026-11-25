@@ -9,6 +9,8 @@ export interface CartLine {
   /** Name-tag shape id (medallion only) */
   design?: string
   note?: string
+  /** Phone number engraved on the back (medallion only) */
+  back?: string
   qty: number
 }
 
@@ -32,12 +34,12 @@ export const useCart = defineStore('cart', {
       this.hydrated = true
       this.$subscribe((_, s) => { try { localStorage.setItem(KEY, JSON.stringify(s.lines)) } catch {} })
     },
-    add(slug: string, opts: { size?: number; colour?: string; design?: string; note?: string } = {}, qty = 1) {
-      const { size, colour, design, note } = opts
-      const id = [slug, size ?? '', design ?? '', colour ?? '', note ?? ''].join('|')
+    add(slug: string, opts: { size?: number; colour?: string; design?: string; note?: string; back?: string } = {}, qty = 1) {
+      const { size, colour, design, note, back } = opts
+      const id = [slug, size ?? '', design ?? '', colour ?? '', note ?? '', back ?? ''].join('|')
       const line = this.lines.find(l => l.id === id)
       if (line) line.qty += qty
-      else this.lines.push({ id, slug, size, colour, design, note, qty })
+      else this.lines.push({ id, slug, size, colour, design, note, back, qty })
       this.open = true
     },
     setQty(id: string, qty: number) {

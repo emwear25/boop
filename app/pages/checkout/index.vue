@@ -91,8 +91,8 @@ const show = (k: string) => submitted.value && !!errors.value[k]
 const errorList = computed(() => Object.entries(errors.value))
 const summaryEl = ref<HTMLElement | null>(null)
 
-const lineDetails = (i: { size?: number; design?: string; colour?: string; note?: string; product: Product }) =>
-  [i.size && sizeLabel(i.product, i.size), i.design && tagDesign(i.design).name, i.colour ?? i.product.colour.name, i.note && `„${i.note}“`].filter(Boolean).join(', ')
+const lineDetails = (i: { size?: number; design?: string; colour?: string; note?: string; back?: string; product: Product }) =>
+  [i.size && sizeLabel(i.product, i.size), i.design && tagDesign(i.design).name, i.colour ?? i.product.colour.name, i.note && `„${i.note}“`, i.back && `гръб: ${i.back}`].filter(Boolean).join(', ')
 
 async function orderItems() {
   const byName = await serverProducts.load()
@@ -104,6 +104,7 @@ async function orderItems() {
     const colour = colours.includes(wanted) ? wanted : colours[0]!
     const custom = [
       i.note && (i.product.personalise ? `Име: ${i.note}` : i.note),
+      i.back && `Гръб (телефон): ${i.back}`,
       colour !== wanted && `Цвят: ${wanted}`,
       i.design && `Форма: ${tagDesign(i.design).name}`,
     ].filter(Boolean).join(' · ')
