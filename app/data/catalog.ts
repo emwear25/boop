@@ -231,6 +231,15 @@ for (const d of tagDesigns) {
   })
 }
 
+// Extra 10% off every price (Nov 25 2026), rounded to 10 cents. The backend holds the
+// authoritative prices: after changing this run tools/products/publish.mjs --update --apply.
+const EXTRA_OFF = 0.9
+const extra = (n: number) => Math.round(n * EXTRA_OFF * 10) / 10
+for (const p of products) {
+  if (p.price != null) p.price = extra(p.price)
+  if (p.sizes) p.sizes = p.sizes.map(s => ({ ...s, price: extra(s.price) }))
+}
+
 // Scoops: every colour has its own main photo (scoop-<key>-c<i>.jpg, same shot recoloured)
 for (const p of products) {
   const key = p.slug.startsWith('lazhichka-za-granuli-s-ime-') ? p.slug.slice('lazhichka-za-granuli-s-ime-'.length) : null
