@@ -63,7 +63,16 @@ const coloursOf = (p) => (p.colours ?? [p.colour]).map(({ name, hex }) => ({ nam
 const selected = products.filter((p) => !ONLY || ONLY.includes(p.slug))
 console.log(`${APPLY ? 'PUBLISHING' : 'DRY RUN'} ${selected.length} products → ${API} (store ${STORE})`)
 
-const login = await api('/api/admin/auth/login', { method: 'POST', json: { email: process.env.ADMIN_USERNAME, password: process.env.ADMIN_PASSWORD } })
+// Ask for credentials if they are not in the environment (password typed hidden, never stored)
+async function ask(q, hidden) {
+  const { createInterface } = await import('node:readline')
+  const rl = createInterface({ input: process.stdin, output: process.stdout, terminal: true })
+  if (hidden) rl._writeToOutput = (s) => { if (s.startsWith(q)) process.stdout.write(q) }
+  const a = await new Promise((r) => rl.question(q, r)); rl.close(); if (hidden) process.stdout.write('\n'); return a.trim()
+}
+const email = process.env.ADMIN_USERNAME || await ask('Admin email: ')
+const password = process.env.ADMIN_PASSWORD || await ask('Admin password (hidden): ', true)
+const login = await api('/api/admin/auth/login', { method: 'POST', json: { email, password } })
 const token = login.data.token
 
 const { data: serverCategories } = await api('/api/categories', { token })

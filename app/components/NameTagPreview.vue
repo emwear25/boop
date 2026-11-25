@@ -19,6 +19,8 @@ const isShape = computed(() => d.value.kind === 'shape')
 const svg = ref<SVGSVGElement>()
 const box = ref({ x: 0, y: 0, w: 400, h: 160 })
 const fit = ref(60)
+/** Bubble/rainbow tags: the ring tab sits above the middle of the name. */
+const tab = ref({ x: 0, y: -props.size * 0.95 })
 const id = useId()
 const darker = computed(() => shade(pal.value.a, -0.22))
 
@@ -35,7 +37,9 @@ async function measure() {
     if (!t) return
     const b = t.getBBox()
     const pad = props.size * 0.42
-    box.value = { x: b.x - pad - props.size * 0.6, y: b.y - pad, w: b.width + pad * 2 + props.size * 0.6, h: b.height + pad * 2 }
+    tab.value = { x: b.x + b.width / 2, y: b.y - props.size * 0.02 }
+    const top = tab.value.y - props.size * 0.27 - pad * 0.5
+    box.value = { x: b.x - pad, y: top, w: b.width + pad * 2, h: b.y + b.height + pad - top }
   } else {
     box.value = { x: 0, y: 0, w: 400, h: 280 }
     const t = svg.value?.querySelector<SVGTextElement>('.probe')
@@ -79,10 +83,10 @@ onMounted(async () => { await document.fonts?.ready; measure() })
 
     <!-- Bubble and rainbow: the outline follows the letters -->
     <g v-if="!isShape" :filter="`url(#s${id})`">
-      <circle :cx="-size * 0.42" :cy="-size * 0.55" :r="size * 0.27" :fill="pal.a" />
+      <circle :cx="tab.x" :cy="tab.y" :r="size * 0.27" :fill="pal.a" />
       <text class="base" x="0" y="0" :font-size="size" :fill="pal.a" :stroke="pal.a" :stroke-width="size * 0.5">{{ text }}</text>
       <text x="0" y="0" :font-size="size" :fill="`url(#g${id})`" :stroke="`url(#g${id})`" :stroke-width="size * 0.5">{{ text }}</text>
-      <circle :cx="-size * 0.42" :cy="-size * 0.55" :r="size * 0.11" fill="#f3efe6" stroke="rgba(0,0,0,.15)" :stroke-width="size * 0.02" />
+      <circle :cx="tab.x" :cy="tab.y" :r="size * 0.11" fill="#f3efe6" stroke="rgba(0,0,0,.15)" :stroke-width="size * 0.02" />
       <text v-if="d.kind === 'bubble'" x="0" y="0" :font-size="size" :fill="pal.t" stroke="rgba(0,0,0,.08)" :stroke-width="size * 0.03">{{ text }}</text>
       <text v-else x="0" y="0" :font-size="size" stroke="rgba(0,0,0,.1)" :stroke-width="size * 0.03">
         <tspan v-for="(ch, i) in letters" :key="i" :fill="cw.letters![i % cw.letters!.length]">{{ ch }}</tspan>
