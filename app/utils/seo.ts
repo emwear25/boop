@@ -33,7 +33,7 @@ export function productKind(p: Product) {
     case 'medalyoni-s-ime': return 'Медальон за куче с име'
     case 'lazhichki-za-granuli': return 'Лъжичка за гранули с име'
     case 'zakachalki-za-povod': return p.personalise ? 'Закачалка за повод с име' : 'Закачалка за повод'
-    case 'koledni-kupichki': return 'Коледна купичка за куче'
+    case 'koledni-kupichki': return p.slug.startsWith('koledna-igrachka') ? 'Коледна играчка за елха с име' : 'Коледна купичка за куче'
     default: return p.slug.startsWith('dvoyna-') ? 'Двойна купичка за куче и котка' : 'Купичка за куче и котка'
   }
 }
