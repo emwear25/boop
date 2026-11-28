@@ -49,7 +49,7 @@ export const categories: Category[] = [
   { id: 'medalyoni-s-ime', name: 'Медальони', title: 'Медальони с име', intro: 'Десет форми, много цветове и името на любимеца. В един или няколко цвята.' },
   { id: 'lazhichki-za-granuli', name: 'Лъжички', title: 'Лъжички за гранули с име', intro: 'Мерителна лъжичка с името на любимеца. Около една чаша гранули, винаги една и съща порция.' },
   { id: 'zakachalki-za-povod', name: 'За разходка', title: 'Закачалки за разходка', intro: 'Повод, нагръдник и торбички на едно място до вратата.' },
-  { id: 'koledni-kupichki', name: 'Коледа', title: 'Коледна колекция', intro: 'Празнични купички, които стоят добре и под елхата.' },
+  { id: 'koledni-kupichki', name: 'Коледа', title: 'Коледна колекция', intro: 'Празнични купички и играчки за елхата с името на любимеца.' },
 ]
 
 // Bowl prices: list price minus 10%, rounded to 10 cents (e.g. 24,90 -> 22,40)
@@ -78,6 +78,10 @@ const special = sizes(29.9, 34.9, 39.9)
 const holiday = sizes(27.9, 32.9, 37.9)
 
 const nameField = (max: number, placeholder: string) => ({ label: 'Име за гравиране', max, placeholder, required: true, hint: `До ${max} букви, на кирилица или латиница. Провери правописа: изработваме точно каквото напишеш.` })
+
+const ORN_PRICE = 8.9 // final price; ornaments are kept out of the discount rounds below
+const ornName = { label: 'Име на любимеца', max: 7, placeholder: 'напр. Ричи', required: true, hint: 'До 7 букви, на кирилица или латиница. Изработваме точно каквото напишеш.' }
+const ornDetails = ['Около 8 см, с панделка за закачане', 'Името е релефно, в цвета на рамката', 'Изработена в България', 'Красив подарък за стопаните на куче или котка']
 
 const bowlDetails = [
   'Иноксова купа, която се вади и мие в съдомиялна',
@@ -180,6 +184,18 @@ export const products: Product[] = [
     description: 'Червена торба, вързана с кремав шнур и малко етикетче. Подаръкът, който се пълни всеки ден.', details: bowlDetails },
   { slug: 'koledna-kupichka-podarak', name: 'Подарък', tagline: 'Всяко хранене заслужава панделка.', category: 'koledni-kupichki', colour: { name: 'Ела', hex: '#3e6146' }, badge: 'Коледа', sizes: holiday,
     description: 'Квадратна кутия в тъмнозелено с кремава панделка. Стои под елхата, докато някой не огладнее.', details: bowlDetails },
+  { slug: 'koledna-igrachka-s-ime-podarache', name: 'Подаръче', tagline: 'Неговото име на елхата.', category: 'koledni-kupichki', colour: { name: 'Синьо и крем', hex: '#3C718E' }, badge: 'С име', price: ORN_PRICE,
+    personalise: ornName, description: 'Синя кутийка с кремава панделка и лапичка. Името стои на табелката отдолу.', details: ornDetails },
+  { slug: 'koledna-igrachka-s-ime-rakavichka', name: 'Ръкавичка', tagline: 'Топла лапичка за елхата.', category: 'koledni-kupichki', colour: { name: 'Червено и крем', hex: '#B5303A' }, badge: 'С име', price: ORN_PRICE,
+    personalise: ornName, description: 'Плетена червена ръкавичка с кремава лапичка. Името стои на маншета.', details: ornDetails },
+  { slug: 'koledna-igrachka-s-ime-snezhna-topka', name: 'Снежна топка', tagline: 'Малка зима с лапичка вътре.', category: 'koledni-kupichki', colour: { name: 'Синьо и крем', hex: '#3C718E' }, badge: 'С име', price: ORN_PRICE,
+    personalise: ornName, description: 'Снежна топка със снежинки и лапичка. Името стои на основата.', details: ornDetails },
+  { slug: 'koledna-igrachka-s-ime-sartse-s-kaishka', name: 'Сърце с каишка', tagline: 'Всяка разходка води към дома.', category: 'koledni-kupichki', colour: { name: 'Червено и крем', hex: '#B5303A' }, badge: 'С име', price: ORN_PRICE,
+    personalise: ornName, description: 'Червено сърце от каишка с катарама. Името стои на кокалчето отдолу.', details: ornDetails },
+  { slug: 'koledna-igrachka-s-ime-biskvitka', name: 'Бисквитка', tagline: 'Награда за най-доброто куче.', category: 'koledni-kupichki', colour: { name: 'Меденка и крем', hex: '#B8743E' }, badge: 'С име', price: ORN_PRICE,
+    personalise: ornName, description: 'Бисквитка кокалче с глазура и панделка. Името стои на кремавата лента.', details: ornDetails },
+  { slug: 'koledna-igrachka-s-ime-puloverche', name: 'Пуловерче', tagline: 'Най-уютното място на елхата.', category: 'koledni-kupichki', colour: { name: 'Крем и червено', hex: '#F0E6CF' }, badge: 'С име', price: ORN_PRICE,
+    personalise: ornName, description: 'Плетен пуловер с червено сърце. Името стои отдолу на пуловера.', details: ornDetails },
 
   { slug: 'zakachalka-za-povod-s-ime-kokalche', name: 'Кокалче', tagline: 'Малък дом за нещата за разходка.', category: 'zakachalki-za-povod', colour: { name: 'Пясък', hex: '#e3c18f' }, badge: 'С име', price: 39.9,
     personalise: { label: 'Име на табелката', max: 10, placeholder: 'напр. Балкан', hint: 'Остави празно за табелка без надпис.' },
@@ -236,7 +252,7 @@ for (const d of tagDesigns) {
 const EXTRA_OFF = 0.9
 const extra = (n: number) => Math.round(n * EXTRA_OFF * 10) / 10
 for (const p of products) {
-  if (p.category === 'medalyoni-s-ime') continue // priced in tagDesigns.ts (TAG_PRICE)
+  if (p.category === 'medalyoni-s-ime' || p.slug.startsWith('koledna-igrachka')) continue // fixed prices elsewhere
   if (p.price != null) p.price = extra(p.price)
   if (p.sizes) p.sizes = p.sizes.map(s => ({ ...s, price: extra(s.price) }))
 }
@@ -248,7 +264,7 @@ const SECOND_OFF: Record<string, number> = {
 }
 for (const p of products) {
   const f = SECOND_OFF[p.category]
-  if (!f) continue
+  if (!f || p.slug.startsWith('koledna-igrachka')) continue
   const cut = (n: number) => Math.round(n * f * 10) / 10
   if (p.price != null) p.price = cut(p.price)
   if (p.sizes) p.sizes = p.sizes.map(s => ({ ...s, price: cut(s.price) }))
@@ -276,6 +292,8 @@ const imageKey: Record<string, string> = {
   'kupichka-za-kuche-pregradka': 'heart-hug', 'kupichka-za-kuche-puhche': 'puffy', 'kupichka-za-kuche-puding': 'pudding', 'kupichka-za-kuche-plitka': 'braid', 'kupichka-za-kuche-glazura': 'dipped', 'kupichka-za-kuche-sladoled': 'soft-serve',
   'kupichka-za-kuche-vazel': 'loop', 'kupichka-za-kuche-kalbo': 'yarn', 'kupichka-za-kuche-palachinki': 'pancake', 'kupichka-za-kuche-oblache': 'paw-cloud', 'kupichka-za-kuche-moderna': 'modern', 'dvoyna-kupichka-za-kuche-pleteno-sartse': 'knit-heart',
   'koledna-kupichka-snezhen-pan': 'snowy-log', 'koledna-kupichka-medenka': 'gingerbread', 'koledna-kupichka-komin': 'chimney', 'koledna-kupichka-torbata-na-dyado-koleda': 'gift-sack', 'koledna-kupichka-podarak': 'wrapped-present',
+  'koledna-igrachka-s-ime-podarache': 'orn-present', 'koledna-igrachka-s-ime-rakavichka': 'orn-mitten', 'koledna-igrachka-s-ime-snezhna-topka': 'orn-globe',
+  'koledna-igrachka-s-ime-sartse-s-kaishka': 'orn-heart', 'koledna-igrachka-s-ime-biskvitka': 'orn-biscuit', 'koledna-igrachka-s-ime-puloverche': 'orn-sweater',
   'povdignata-kupichka-s-ime-lapa': 'lapa', 'kupichka-s-ime-raie': 'name-ribbed', 'kupichka-s-ime-valna': 'name-wave', 'povdignata-kupichka-s-ime-visoka-valna': 'name-raised', 'povdignata-kupichka-s-ime-prasteni': 'name-rings',
   'povdignata-kupichka-s-ime-konus': 'name-cone', 'dve-kupichki-s-ime-hrana-i-voda': 'food-water', 'kupichka-s-ime-gevrek': 'name-twist',
   'lazhichka-za-granuli-s-ime-plitka': 'scoop-plitka', 'lazhichka-za-granuli-s-ime-lapa': 'scoop-lapa', 'lazhichka-za-granuli-s-ime-valna': 'scoop-valna',
