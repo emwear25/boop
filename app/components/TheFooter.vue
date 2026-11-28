@@ -27,6 +27,7 @@
         <li><NuxtLink to="/saveti/visochina-na-kupata-za-kuche">Височина на купата</NuxtLink></li>
         <li><NuxtLink to="/terms">Общи условия</NuxtLink></li>
         <li><NuxtLink to="/privacy">Поверителност</NuxtLink></li>
+        <li><button type="button" class="cookie-reset" @click="consent().value = null">Бисквитки</button></li>
       </ul>
     </div>
     <div>
@@ -44,6 +45,7 @@
 </template>
 
 <style scoped>
+.cookie-reset { font: inherit; color: inherit; padding: 0; background: none; text-align: left; }
 .foot { border-top: 1px solid var(--line); margin-top: clamp(64px, 9vw, 120px); padding-block: 56px 36px; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 32px; font-size: 15px; }
 .brand img { width: 96px; height: auto; }
 .brand p { color: var(--moss-2); max-width: 24em; margin-top: 16px; }

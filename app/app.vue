@@ -49,4 +49,5 @@ useSeoMeta({
   <NuxtLayout>
     <NuxtPage />
   </NuxtLayout>
+  <CookieBar />
 </template>

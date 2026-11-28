@@ -37,6 +37,14 @@ watch(awaitingPayment, (waiting) => {
 }, { immediate: true })
 onBeforeUnmount(() => clearInterval(timer))
 
+// Meta Pixel Purchase: once per order, when cash on delivery or the card payment went through
+watch(() => order.value && !awaitingPayment.value ? order.value : null, (o) => {
+  if (!o) return
+  const k = `boop-px-${o.orderNumber}`
+  try { if (localStorage.getItem(k)) return; localStorage.setItem(k, '1') } catch {}
+  track('Purchase', { value: o.total, currency: 'EUR', content_type: 'product', num_items: o.items?.length })
+}, { immediate: true })
+
 </script>
 
 <template>

@@ -36,6 +36,10 @@ const sections = computed<{ t: string; list?: string[]; text?: string }[]>(() =>
   { t: 'Доставка и връщане', text: 'Доставка до офис или адрес с Еконт или Спиди. Безплатна до офис при поръчка над 60 €. Можеш да върнеш неперсонализиран продукт до 14 дни.' },
 ])
 
+const viewContent = () => track('ViewContent', { content_ids: [p.value.slug], content_type: 'product', content_name: p.value.name, value: price.value, currency: 'EUR' })
+onMounted(viewContent)
+watch(() => route.params.slug, viewContent)
+
 function add() {
   const v = note.value.trim()
   const pers = p.value.personalise
@@ -51,6 +55,7 @@ function add() {
     note: v || undefined,
     back: isTag.value && b ? b : undefined,
   }, qty.value)
+  track('AddToCart', { content_ids: [p.value.slug], content_type: 'product', content_name: p.value.name, value: Math.round(price.value * qty.value * 100) / 100, currency: 'EUR' })
   qty.value = 1
 }
 

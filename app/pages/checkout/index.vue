@@ -6,6 +6,7 @@ import type { Courier, CourierOffice } from '~/composables/useCourier'
 
 useHead({ title: 'Поръчка', meta: [{ name: 'robots', content: 'noindex, nofollow' }] })
 const cart = useCart()
+onMounted(() => { if (cart.items.length) track('InitiateCheckout', { value: Math.round(cart.subtotal * 100) / 100, currency: 'EUR', num_items: cart.count }) })
 const api = useApi()
 const { estimate } = useCourier()
 const serverProducts = useServerProducts()
