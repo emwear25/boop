@@ -6,7 +6,7 @@ onMounted(() => { mounted.value = true })
 
 <template>
   <div v-if="mounted && c === null" class="cb" role="dialog" aria-label="Бисквитки">
-    <p>Ползваме бисквитки на Meta, за да виждаме кои реклами водят до поръчки. Само ако ги приемеш. <NuxtLink to="/privacy">Повече</NuxtLink></p>
+    <p>Ползваме бисквитки на Google Analytics и Meta, за да виждаме как се ползва сайтът и кои реклами водят до поръчки. Само ако ги приемеш. <NuxtLink to="/privacy">Повече</NuxtLink></p>
     <div class="bt">
       <button class="btn" @click="setConsent('no')">Само необходимите</button>
       <button class="btn" @click="setConsent('yes')">Приемам</button>

@@ -1,9 +1,10 @@
-/** Meta Pixel, loaded only after the visitor accepts marketing cookies (GDPR). */
+/** Meta Pixel + Google Analytics 4, loaded only after the visitor accepts cookies (GDPR). */
 export const PIXEL_ID = '1807954346989598'
+export const GA_ID = 'G-FSB2QR5QZQ'
 const KEY = 'boop-consent'
 
 type Fbq = ((...a: unknown[]) => void) & { callMethod?: (...a: unknown[]) => void; queue: unknown[]; loaded?: boolean; version?: string; push?: unknown }
-declare global { interface Window { fbq?: Fbq; _fbq?: Fbq } }
+declare global { interface Window { fbq?: Fbq; _fbq?: Fbq; dataLayer?: unknown[]; gtag?: (...a: unknown[]) => void } }
 
 export const consent = () => useState<'yes' | 'no' | null>('consent', () => null)
 
@@ -28,10 +29,30 @@ export function loadPixel() {
   document.head.appendChild(s)
   window.fbq('init', PIXEL_ID)
   window.fbq('track', 'PageView')
+
+  // GA4: page views on SPA navigation come from enhanced measurement (history changes)
+  window.dataLayer = window.dataLayer || []
+  window.gtag = function () { window.dataLayer!.push(arguments) } // eslint-disable-line prefer-rest-params
+  window.gtag('js', new Date())
+  window.gtag('config', GA_ID)
+  const g = document.createElement('script'); g.async = true; g.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`
+  document.head.appendChild(g)
 }
+
+// Meta standard event -> GA4 recommended e-commerce event
+const GA_EVENT: Record<string, string> = { ViewContent: 'view_item', AddToCart: 'add_to_cart', InitiateCheckout: 'begin_checkout', Purchase: 'purchase' }
 
 /** Standard event; no-op without consent. */
 export function track(event: string, params?: Record<string, unknown>) {
-  if (typeof window === 'undefined' || !loaded || !window.fbq) return
-  window.fbq('track', event, params)
+  if (typeof window === 'undefined' || !loaded) return
+  window.fbq?.('track', event, params)
+  const ga = GA_EVENT[event]
+  if (ga && window.gtag) {
+    const ids = (params?.content_ids as string[] | undefined) ?? []
+    window.gtag('event', ga, {
+      currency: params?.currency ?? 'EUR', value: params?.value,
+      ...(params?.transaction_id ? { transaction_id: params.transaction_id } : {}),
+      items: ids.map(id => ({ item_id: id, item_name: params?.content_name ?? id })),
+    })
+  }
 }

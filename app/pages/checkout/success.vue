@@ -42,7 +42,7 @@ watch(() => order.value && !awaitingPayment.value ? order.value : null, (o) => {
   if (!o) return
   const k = `boop-px-${o.orderNumber}`
   try { if (localStorage.getItem(k)) return; localStorage.setItem(k, '1') } catch {}
-  track('Purchase', { value: o.total, currency: 'EUR', content_type: 'product', num_items: o.items?.length })
+  track('Purchase', { value: o.total, currency: 'EUR', content_type: 'product', num_items: o.items?.length, transaction_id: o.orderNumber })
 }, { immediate: true })
 
 </script>
