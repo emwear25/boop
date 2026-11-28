@@ -79,7 +79,7 @@ const holiday = sizes(27.9, 32.9, 37.9)
 
 const nameField = (max: number, placeholder: string) => ({ label: 'Име за гравиране', max, placeholder, required: true, hint: `До ${max} букви, на кирилица или латиница. Провери правописа: изработваме точно каквото напишеш.` })
 
-const ORN_PRICE = 8.9 // final price; ornaments are kept out of the discount rounds below
+const ORN_PRICE = 6.2 // final price; ornaments are kept out of the discount rounds below
 const ornName = { label: 'Име на любимеца', max: 7, placeholder: 'напр. Ричи', required: true, hint: 'До 7 букви, на кирилица или латиница. Изработваме точно каквото напишеш.' }
 const ornDetails = ['Около 8 см, с панделка за закачане', 'Името е релефно, в цвета на рамката', 'Изработена в България', 'Красив подарък за стопаните на куче или котка']
 
