@@ -1,6 +1,10 @@
-/** Meta Pixel + Google Analytics 4, loaded only after the visitor accepts cookies (GDPR). */
+/** Meta Pixel + Google Analytics 4 + PostHog, loaded only after the visitor accepts cookies (GDPR). */
 export const PIXEL_ID = '1807954346989598'
 export const GA_ID = 'G-FSB2QR5QZQ'
+export const POSTHOG_KEY = 'phc_rQ3mYDkujunBdzV27RNBLNtY6waJpYA4kNgPKxMJTfP5' // public project token
+
+type PostHog = typeof import('posthog-js').default
+let ph: PostHog | null = null
 const KEY = 'boop-consent'
 
 type Fbq = ((...a: unknown[]) => void) & { callMethod?: (...a: unknown[]) => void; queue: unknown[]; loaded?: boolean; version?: string; push?: unknown }
@@ -16,6 +20,7 @@ export function setConsent(v: 'yes' | 'no') {
   try { localStorage.setItem(KEY, v) } catch {}
   consent().value = v
   if (v === 'yes') loadPixel()
+  else ph?.opt_out_capturing()
 }
 
 let loaded = false
@@ -37,7 +42,20 @@ export function loadPixel() {
   window.gtag('config', GA_ID)
   const g = document.createElement('script'); g.async = true; g.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`
   document.head.appendChild(g)
+
+  // PostHog: page views on SPA navigation, session replay with every input masked
+  import('posthog-js').then(({ default: posthog }) => {
+    posthog.init(POSTHOG_KEY, {
+      api_host: 'https://us.i.posthog.com',
+      person_profiles: 'identified_only',
+      capture_pageview: 'history_change',
+      session_recording: { maskAllInputs: true },
+    })
+    ph = posthog
+  }).catch(() => {})
 }
+
+const PH_EVENT: Record<string, string> = { ViewContent: 'product_viewed', AddToCart: 'product_added_to_cart', InitiateCheckout: 'checkout_started', Purchase: 'order_completed' }
 
 // Meta standard event -> GA4 recommended e-commerce event
 const GA_EVENT: Record<string, string> = { ViewContent: 'view_item', AddToCart: 'add_to_cart', InitiateCheckout: 'begin_checkout', Purchase: 'purchase' }
@@ -46,6 +64,7 @@ const GA_EVENT: Record<string, string> = { ViewContent: 'view_item', AddToCart: 
 export function track(event: string, params?: Record<string, unknown>) {
   if (typeof window === 'undefined' || !loaded) return
   window.fbq?.('track', event, params)
+  if (ph && PH_EVENT[event]) ph.capture(PH_EVENT[event], params)
   const ga = GA_EVENT[event]
   if (ga && window.gtag) {
     const ids = (params?.content_ids as string[] | undefined) ?? []
